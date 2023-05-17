@@ -12,7 +12,7 @@ services:
     volumes:
         - ./therapy:/app
     environment:
-      DATABASE_URL: postgresql://user-name:password@postgres/therapy
+      DATABASE_URL: postgresql://user-name:password@postgres/test
       WAIT_HOSTS: postgres:5432
 
   postgres:
