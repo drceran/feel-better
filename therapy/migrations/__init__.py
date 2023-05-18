@@ -7,6 +7,7 @@ from pathlib import Path
 from psycopg import AsyncConnection
 from psycopg.rows import class_row
 from pydantic import BaseModel
+from typing import Optional
 
 LATEST = {}
 ZERO = {}
