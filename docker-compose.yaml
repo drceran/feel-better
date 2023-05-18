@@ -5,48 +5,69 @@ volumes:
 services:
   therapy:
     build:
-        context: ./therapy
-        dockerfile: ./Dockerfile.dev
-    ports:
-        - "8080:8000"
-    volumes:
-        - ./therapy:/app
-    environment:
-      DATABASE_URL: postgresql://user-name:password@postgres/test
-      WAIT_HOSTS: postgres:5432
-
-  postgres:
-    build:
-      context: ./relational-data
+      context: ./therapy
       dockerfile: ./Dockerfile.dev
+    # ports:
+    #     - "8080:8000"
+    # volumes:
+    #     - ./therapy:/app
+    environment:
+      DATABASE_URL: postgresql://example:test@db/therapy
+      #postgresql://example(username):test(password)@db(database/section header)/therapy(name of database)
+      WAIT_HOSTS: db:5432
+      PORT: 8000
+    ports:
+     - "8000:8000"
+    volumes:
+     - ./therapy:/app
+  db:
+    image: postgres:14.5-bullseye
+    environment:
+      POSTGRES_PASSWORD: test
+      POSTGRES_USER: example
+      POSTGRES_DB: therapy
+    ports:
+      - "15432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_MULTIPLE_DATABASES=therapy
-      - POSTGRES_PASSWORD=test
-    ports:
-      - 15432:5432
-  fastapi:
-    build:
-      context: sample_service
-      dockerfile: Dockerfile.dev
-    ports:
-      - 8000:8000
-    volumes:
-      - ./sample_service:/app
+    
 
 
-  ghi:
-    image: node:lts-bullseye
-    command: /bin/bash run.sh
-    working_dir: /app
-    volumes:
-      - ./ghi:/app
-    ports:
-      - "3000:3000"
-    environment:
-      HOST_OS: ${OS}
-      NODE_ENV: development
-      HOST: "0.0.0.0"
-      PUBLIC_URL: http://localhost:3000
-      REACT_APP_SAMPLE_SERVICE_API_HOST: ${REACT_APP_SAMPLE_SERVICE_API_HOST}
+
+
+  # postgres:
+  #   build:
+  #     context: ./relational-data
+  #     dockerfile: ./Dockerfile.dev
+  #   volumes:
+  #     - postgres-data:/var/lib/postgresql/data
+  #   environment:
+  #     - POSTGRES_MULTIPLE_DATABASES=therapy
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=test
+  #   ports:
+  #     - 15432:5432
+  # fastapi:
+  #   build:
+  #     context: sample_service
+  #     dockerfile: Dockerfile.dev
+  #   ports:
+  #     - 8000:8000
+  #   volumes:
+  #     - ./sample_service:/app
+
+
+  # ghi:
+  #   image: node:lts-bullseye
+  #   command: /bin/bash run.sh
+  #   working_dir: /app
+  #   volumes:
+  #     - ./ghi:/app
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     HOST_OS: ${OS}
+  #     NODE_ENV: development
+  #     HOST: "0.0.0.0"
+  #     PUBLIC_URL: http://localhost:3000
+  #     REACT_APP_SAMPLE_SERVICE_API_HOST: ${REACT_APP_SAMPLE_SERVICE_API_HOST}

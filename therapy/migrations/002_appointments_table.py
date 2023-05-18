@@ -4,7 +4,7 @@ steps = [
         """
         CREATE TABLE appointments (
             id SERIAL PRIMARY KEY,
-            user_id INTEGER REFERENCES users(id),
+            user_id INTEGER REFERENCES jotters(id),
             therapist VARCHAR(255),
             appointment_date DATE,
             appointment_time TIME,
