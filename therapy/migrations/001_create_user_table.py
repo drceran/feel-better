@@ -1,9 +1,9 @@
 steps = [
     [
-        # "Up" SQL statement
+        #"UP" SQL Statement
         """
         CREATE TYPE user_type AS ENUM ('client', 'therapist');
-        CREATE TABLE people (
+        CREATE TABLE jotters (
             id SERIAL PRIMARY KEY NOT NULL,
             first_name  VARCHAR(1000) NOT NULL,
             last_name VARCHAR(1000) NOT NULL,
@@ -19,9 +19,9 @@ steps = [
             about_me VARCHAR(2000)
         );
         """,
-        # "Down" SQL statement
+        #DOWN SQL Statement
         """
-        DROP TABLE people;
+        DROP TABLE jotters;
         """
     ],
 ]
