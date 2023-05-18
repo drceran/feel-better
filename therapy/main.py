@@ -4,4 +4,4 @@ from routers import appointments
 
 app = FastAPI()
 
-# app.include_router(appointments.router)
+app.include_router(appointments.router)
