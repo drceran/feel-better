@@ -10,3 +10,7 @@ Today we completed our wire frames and have started working on creating issues f
 I did need to rework through the docker-compose file to really understand what was going on there. I did find out how we can host everything on just plain old 8000 instead of the 8080. 
 
 I also found the big mistake I was making with the Beekeeper Studio's default database field. 
+
+## May 18, 2023
+
+merged and pushed to main. studying FastAPI and learning how to create routers and queries. 
