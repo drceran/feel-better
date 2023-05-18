@@ -12,7 +12,7 @@ services:
     volumes:
         - ./therapy:/app
     environment:
-      DATABASE_URL: postgresql://user-name:password@postgres/therapy
+      DATABASE_URL: postgresql://esra:test@postgres/therapy
       WAIT_HOSTS: postgres:5432
 
   postgres:
@@ -23,6 +23,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_MULTIPLE_DATABASES=therapy
+      - POSTGRES_USER=esra
       - POSTGRES_PASSWORD=test
     ports:
       - 15432:5432
