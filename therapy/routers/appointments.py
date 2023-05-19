@@ -25,9 +25,20 @@ def get_all_appointments(
     return repo.get_all_appointments()
 
 
+@router.delete(
+    "/appointments/{appointment_id}",
+    response_model=bool,
+)
+def delete_appointment(
+    appointment_id: int,
+    repo: AppointmentRepository = Depends(),
+) -> bool:
+    return repo.delete_appointment(appointment_id)
+
+
 @router.put(
     "/appointments/{appointment_id}",
-    # response_model=Union[AppointmentOut, Error],
+    response_model=Union[AppointmentOut, Error],
 )
 def update_appointment(
     appointment_id: int,

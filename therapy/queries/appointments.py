@@ -30,6 +30,22 @@ class AppointmentOut(BaseModel):
 
 
 class AppointmentRepository:
+    def delete_appointment(self, appointment_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        DELETE FROM appointments
+                        WHERE id = %s
+                        """,
+                        [appointment_id],
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return False
+
     def update_appointment(
         self, appointment_id: int, appointment: AppointmentIn
     ) -> Union[AppointmentOut, Error]:
