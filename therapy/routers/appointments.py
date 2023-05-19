@@ -36,6 +36,17 @@ def delete_appointment(
     return repo.delete_appointment(appointment_id)
 
 
+@router.get(
+    "/appointments/{appointment_id}",
+    response_model=Union[Error, AppointmentOut],
+)
+def get_one_appointment(
+    appointment_id: int,
+    repo: AppointmentRepository = Depends(),
+) -> Union[AppointmentOut, Error]:
+    return repo.get_one_appointment(appointment_id)
+
+
 @router.put(
     "/appointments/{appointment_id}",
     response_model=Union[AppointmentOut, Error],

@@ -30,6 +30,39 @@ class AppointmentOut(BaseModel):
 
 
 class AppointmentRepository:
+    def get_one_appointment(
+        self, appointment_id: int
+    ) -> Union[Error, AppointmentOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        SELECT * FROM appointments
+                        WHERE id = %s
+                        """,
+                        [appointment_id],
+                    )
+                    record = db.fetchone()
+                    print(record)
+                    if record is None:
+                        return {"message": "No appointment found with this id"}
+                    else:
+                        appointment = AppointmentOut(
+                            id=record[0],
+                            user_id=record[1],
+                            therapist_id=record[2],
+                            appointment_date=record[3],
+                            appointment_time=record[4],
+                            cost=record[5],
+                        )
+                    return appointment
+        except Exception as e:
+            print(e)
+            return {
+                "message": "An error occurred while fetching the appointment"
+            }
+
     def delete_appointment(self, appointment_id: int) -> bool:
         try:
             with pool.connection() as conn:
