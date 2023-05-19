@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from routers import appointments, jotters, resources
 
-
+app = FastAPI()
 
 app.include_router(appointments.router)
 app.include_router(jotters.router)
