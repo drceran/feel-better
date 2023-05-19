@@ -1,6 +1,6 @@
 steps = [
     [
-        #"UP" SQL Statement
+        # "UP" SQL Statement
         """
         CREATE TYPE user_type AS ENUM ('client', 'therapist');
         CREATE TABLE jotters (
@@ -19,9 +19,9 @@ steps = [
             about_me VARCHAR(2000)
         );
         """,
-        #DOWN SQL Statement
+        # DOWN SQL Statement
         """
         DROP TABLE jotters;
-        """
+        """,
     ],
 ]
