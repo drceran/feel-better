@@ -135,5 +135,4 @@ class JottersRepository:
                 )
                 id = result.fetchone()[0]
                 old_data = jotter.dict()
-                # return {"message": "error!!"}
                 return JottersOut(id=id, **old_data)
