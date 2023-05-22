@@ -3,3 +3,4 @@ uvicorn[standard]==0.17.6
 psycopg[binary,pool]==3.0.14
 pydantic[dotenv]==1.8.2
 pytest
+jwtdown-fastapi>=0.2.0
