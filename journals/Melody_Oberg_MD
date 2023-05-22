@@ -1,0 +1,17 @@
+May 16, 2023 Tuesday
+I did try to complete the resources and messages queries, routers, and migrations but cant test it to make sure it is accurate. So i cannot mark it as complete! My localhost page is continuously loading. also could not connect to the database, spent a really long time trying to figure it out but keep getting an authentication failed for user in the therapy container. I did delete my containers/images and recompose everything too. We have to go on localhost:8080/docs to see the endpoints but maybe we can just use 8000 for everything if we dont need to use sample_service??? Also in the messages model, vscode does not like our “from” field so i have to change to and from into “sender” and “recipient” in our excalidraw. Also why do we have cost as a field in messages again? Also added subject as a field.
+
+May 17, 2023 Wednesday
+Having a lot of trouble creating a table using migrations up, and i'm following the FASTApi video instructions on learn. I fixed the database so all of my containers have been running with no errors
+
+May 18, 2023 Thursday
+Dave showed a way to create my tables by adding python -m migrations up in my dockerfile.dev, then restarting my containers and it worked! will continue to work on finishing another tables and then restarting routers/queries.
+
+May 20, 2023 Saturday
+I redid my create resource query/router, i rewatched the videos off learn and missed a few things. I'm having trouble to the response status, because if I include it the way curtis did in the video, i'm basically hard coding my create to always be a 400 so i removed it for now.
+
+May 21, 2023 Sunday
+Created an update, get details, and delete a resource functionality for the resources table. have to include response codes later.
+
+May 22, 2023 Monday
+Today we're gonna get into authorization. Been having trouble merging with main branch since yesterday.

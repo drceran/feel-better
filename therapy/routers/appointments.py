@@ -1,41 +1,59 @@
 from fastapi import APIRouter, Depends, Response
 from typing import Union, List
-from queries.appointments import AppointmentsIn, AppointmentsOut, AppointmentsRepository, Error
+from queries.appointments import (
+    AppointmentIn,
+    AppointmentRepository,
+    AppointmentOut,
+    Error,
+)
 
 router = APIRouter()
 
 
-
-@router.post("/appointments", response_model=Union[AppointmentsOut, Error])
-def create_appointments(appointments: AppointmentsIn, response: Response, repo: AppointmentsRepository = Depends()):
-   response.status_code = 400
-   return repo.create(appointments)
-
-
-
-@router.get("/appointments", response_model=Union[List[AppointmentsOut], Error])
-def get_all_appointments(repo: AppointmentsRepository = Depends()):
-   return repo.get_all()
+@router.post("/appointments", response_model=Union[AppointmentOut, Error])
+def create_appointment(
+    appointment: AppointmentIn,
+    repo: AppointmentRepository = Depends(),
+):
+    return repo.create(appointment)
 
 
-@router.put("/appointments/{appointment_id}", response_model=Union[AppointmentsOut, Error])
-def update_appointments(
-   appointment_id: int,
-   appointments: AppointmentsIn,
-   response: Response,
-   repo: AppointmentsRepository = Depends(),
-) -> Union[Error, AppointmentsOut]:
-   return repo.update(appointment_id, appointments)
+@router.get("/appointments", response_model=Union[List[AppointmentOut], Error])
+def get_all_appointments(
+    repo: AppointmentRepository = Depends(),
+):
+    return repo.get_all_appointments()
 
-@router.delete("/appointments/{appointment_id}", response_model=bool)
-def delete_appointments(appointment_id: int, repo: AppointmentsRepository = Depends(),
+
+@router.delete(
+    "/appointments/{appointment_id}",
+    response_model=bool,
+)
+def delete_appointment(
+    appointment_id: int,
+    repo: AppointmentRepository = Depends(),
 ) -> bool:
-   return repo.delete(appointment_id)
+    return repo.delete_appointment(appointment_id)
 
-@router.get("/appointments/{appointment_id}", response_model=Union[AppointmentsOut, Error])
-def get_appointment(appointment_id: int, response: Response, repo: AppointmentsRepository = Depends(),
-) -> Union[Error, AppointmentsOut]:
-   appointment = repo.get_one(appointment_id)
-   if appointment is None:
-       response.status_code = 404
-   return appointment
+
+@router.get(
+    "/appointments/{appointment_id}",
+    response_model=Union[Error, AppointmentOut],
+)
+def get_one_appointment(
+    appointment_id: int,
+    repo: AppointmentRepository = Depends(),
+) -> Union[AppointmentOut, Error]:
+    return repo.get_one_appointment(appointment_id)
+
+
+@router.put(
+    "/appointments/{appointment_id}",
+    response_model=Union[AppointmentOut, Error],
+)
+def update_appointment(
+    appointment_id: int,
+    appointment: AppointmentIn,
+    repo: AppointmentRepository = Depends(),
+) -> Union[Error, AppointmentOut]:
+    return repo.update_appointment(appointment_id, appointment)

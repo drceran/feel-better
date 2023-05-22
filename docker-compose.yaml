@@ -1,17 +1,38 @@
 volumes:
-  postgres-data:
+    postgres-data:
+        external: true
+    pg-admin:
       external: true
-  pg-admin:
-    external: true
-
 
 services:
-  postgres:
+  therapy:
     build:
-      context: ./relational-data
+      context: ./therapy
       dockerfile: ./Dockerfile.dev
+    # ports:
+    #     - "8080:8000"
+    # volumes:
+    #     - ./therapy:/app
+    environment:
+      DATABASE_URL: postgresql://example:test@db/therapy
+      #postgresql://example(username):test(password)@db(database/section header)/therapy(name of database)
+      WAIT_HOSTS: db:5432
+      PORT: 8000
+    ports:
+     - "8000:8000"
+    volumes:
+     - ./therapy:/app
+  db:
+    image: postgres:14.5-bullseye
+    environment:
+      POSTGRES_PASSWORD: test
+      POSTGRES_USER: example
+      POSTGRES_DB: therapy
+    ports:
+      - "15432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
+<<<<<<< HEAD
     environment:
       - POSTGRES_MULTIPLE_DATABASES=therapy
       - POSTGRES_USER=therapy
@@ -27,6 +48,33 @@ services:
       - 8000:8000
     volumes:
       - ./sample_service:/app
+=======
+
+
+
+
+
+  # postgres:
+  #   build:
+  #     context: ./relational-data
+  #     dockerfile: ./Dockerfile.dev
+  #   volumes:
+  #     - postgres-data:/var/lib/postgresql/data
+  #   environment:
+  #     - POSTGRES_MULTIPLE_DATABASES=therapy
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=test
+  #   ports:
+  #     - 15432:5432
+  # fastapi:
+  #   build:
+  #     context: sample_service
+  #     dockerfile: Dockerfile.dev
+  #   ports:
+  #     - 8000:8000
+  #   volumes:
+  #     - ./sample_service:/app
+>>>>>>> 77eab3f3fb490732073346d36138bc7bd231dd82
 
   therapy:
     build:
