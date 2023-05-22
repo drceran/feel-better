@@ -4,9 +4,6 @@ from enum import Enum
 from queries.pool import pool
 
 
-# from datetime import date
-
-
 class Error(BaseModel):
     message: str
 
@@ -16,7 +13,6 @@ class JotterType(str, Enum):
     therapist = "therapist"
 
 
-# these are called as typein
 class JottersIn(BaseModel):
     first_name: str
     last_name: str
@@ -49,6 +45,52 @@ class JottersOut(BaseModel):
 
 
 class JottersRepository:
+    def update_jotter(
+        self, jotter_id: int, jotter: JottersIn
+    ) -> Union[JottersOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE jotters
+                        SET first_name = %s
+                        , last_name = %s
+                        , email = %s
+                        , type = %s
+                        , phone_number = %s
+                        , city = %s
+                        , state = %s
+                        , balance = %s
+                        , certificates = %s
+                        , graduated_college = %s
+                        , profile_picture = %s
+                        , about_me = %s
+                        WHERE id = %s
+                        """,
+                        [
+                            jotter.first_name,
+                            jotter.last_name,
+                            jotter.email,
+                            jotter.type,
+                            jotter.phone_number,
+                            jotter.city,
+                            jotter.state,
+                            jotter.balance,
+                            jotter.certificates,
+                            jotter.graduated_college,
+                            jotter.profile_picture,
+                            jotter.about_me,
+                            jotter_id,
+                        ],
+                    )
+                # old_data = jotter.dict()
+                # return JottersOut(id=jotter_id, **old_data)
+                return self.jotter_in_to_out(jotter_id, jotter)
+        except Exception as e:
+            print(e)
+            return {"message": "Could not update that jotter"}
+
     def get_all_jotters(self) -> Union[Error, List[JottersOut]]:
         try:
             with pool.connection() as conn:
@@ -134,5 +176,11 @@ class JottersRepository:
                     ],
                 )
                 id = result.fetchone()[0]
-                old_data = jotter.dict()
-                return JottersOut(id=id, **old_data)
+                # old_data = jotter.dict()
+                # return JottersOut(id=id, **old_data)
+                return self.jotter_in_to_out(id, jotter)
+
+    def jotter_in_to_out(self, id: int, jotter: JottersIn):
+        old_data = jotter.dict()
+        converted = JottersOut(id=id, **old_data)
+        return converted

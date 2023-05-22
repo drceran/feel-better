@@ -24,3 +24,15 @@ def get_all_jotters(
     repo: JottersRepository = Depends(),
 ):
     return repo.get_all_jotters()
+
+
+@router.put("/jotters/{jotter_id}", response_model=Union[JottersOut, Error])
+def update_jotter(
+    jotter_id: int,
+    jotter: JottersIn,
+    repo: JottersRepository = Depends(),
+) -> Union[Error, JottersOut]:
+    try:
+        return repo.update_jotter(jotter_id, jotter)
+    except Exception as e:
+        print(e)
