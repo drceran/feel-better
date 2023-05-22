@@ -32,11 +32,7 @@ class MigrationRecord(BaseModel):
 
 class MigrationStep(BaseModel):
     up: str
-<<<<<<< HEAD
-    down: str | None
-=======
     down: Optional[str]
->>>>>>> 77eab3f3fb490732073346d36138bc7bd231dd82
 
 
 class MigrationFile(MigrationRecord):
