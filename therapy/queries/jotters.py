@@ -18,7 +18,7 @@ class JottersIn(BaseModel):
     last_name: str
     email: str
     type: JotterType
-    phone_number: int
+    phone_number: str
     city: str
     state: str
     balance: int
@@ -34,7 +34,7 @@ class JottersOut(BaseModel):
     last_name: str
     email: str
     type: JotterType
-    phone_number: int
+    phone_number: str
     city: str
     state: str
     balance: int
