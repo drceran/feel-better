@@ -32,23 +32,6 @@ services:
       - "15432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
-<<<<<<< HEAD
-    environment:
-      - POSTGRES_MULTIPLE_DATABASES=therapy
-      - POSTGRES_USER=therapy
-      - POSTGRES_PASSWORD=test
-    ports:
-      - 15432:5432
-
-  fastapi:
-    build:
-      context: sample_service
-      dockerfile: Dockerfile.dev
-    ports:
-      - 8000:8000
-    volumes:
-      - ./sample_service:/app
-=======
 
 
 
@@ -74,7 +57,6 @@ services:
   #     - 8000:8000
   #   volumes:
   #     - ./sample_service:/app
->>>>>>> 77eab3f3fb490732073346d36138bc7bd231dd82
 
   therapy:
     build:
