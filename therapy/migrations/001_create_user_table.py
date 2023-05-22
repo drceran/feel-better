@@ -9,7 +9,7 @@ steps = [
             last_name VARCHAR(1000) NOT NULL,
             email VARCHAR(1000) NOT NULL,
             type user_type NOT NULL,
-            phone_number INTEGER NOT NULL,
+            phone_number VARCHAR(100) NOT NULL,
             city VARCHAR(1000) NOT NULL,
             state VARCHAR(1000) NOT NULL,
             balance INTEGER,
@@ -38,10 +38,9 @@ steps = [
             mood mood NOT NULL DEFAULT 'neutral'
         );
         """,
-
         # "Down" SQL statement
         """
         DROP TABLE journals;
-        """
-    ]
+        """,
+    ],
 ]
