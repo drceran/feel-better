@@ -37,8 +37,11 @@ services:
     volumes:
         - ./therapy:/app
     environment:
+      # SIGNING_KEY:
       DATABASE_URL: postgresql://therapy:test@postgres/therapy
       WAIT_HOSTS: postgres:5432
+      # WAIT_BEFORE: 5
+      # WAIT_TIMEOUT: 60
 
   ghi:
     image: node:lts-bullseye
