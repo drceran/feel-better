@@ -26,6 +26,7 @@ class JottersIn(BaseModel):
     graduated_college: Optional[str]
     profile_picture: Optional[str]
     about_me: Optional[str]
+    password: str
 
 
 class JottersOut(BaseModel):
@@ -42,6 +43,10 @@ class JottersOut(BaseModel):
     graduated_college: Optional[str]
     profile_picture: Optional[str]
     about_me: Optional[str]
+
+
+class JottersOutWithPassword(JottersOut):
+    password: str
 
 
 class JottersRepository:
@@ -91,6 +96,54 @@ class JottersRepository:
         except Exception as e:
             print(e)
             return {"message": "Could not get that jotter"}
+
+    def get_one_by_email(self, email: str) -> Optional[JottersOutWithPassword]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        SELECT id,
+                        first_name,
+                        last_name,
+                        email,
+                        type,
+                        phone_number,
+                        city,
+                        state,
+                        balance,
+                        certificates,
+                        graduated_college,
+                        profile_picture,
+                        about_me,
+                        password
+                        FROM jotters
+                        WHERE email =%s
+                        """,
+                        [email],
+                    )
+                    record = db.fetchone()
+                    if record is None:
+                        return None
+                    return JottersOutWithPassword(
+                        id=record[0],
+                        first_name=record[1],
+                        last_name=record[2],
+                        email=record[3],
+                        type=record[4],
+                        phone_number=record[5],
+                        city=record[6],
+                        state=record[7],
+                        balance=record[8],
+                        certificates=record[9],
+                        graduated_college=record[10],
+                        profile_picture=record[11],
+                        about_me=record[12],
+                        password=record[13],
+                    )
+        except Exception as e:
+            print(e)
+            return None
 
     def update_jotter(
         self, jotter_id: int, jotter: JottersIn
@@ -205,9 +258,10 @@ class JottersRepository:
                         certificates,
                         graduated_college,
                         profile_picture,
-                        about_me)
+                        about_me,
+                        password)
                     VALUES
-                        (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                        (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                     RETURNING id;
                     """,
                     [
@@ -223,6 +277,7 @@ class JottersRepository:
                         jotter.graduated_college,
                         jotter.profile_picture,
                         jotter.about_me,
+                        jotter.password,
                     ],
                 )
                 id = result.fetchone()[0]
