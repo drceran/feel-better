@@ -14,3 +14,19 @@ I also found the big mistake I was making with the Beekeeper Studio's default da
 ## May 18, 2023
 
 merged and pushed to main. studying FastAPI and learning how to create routers and queries. 
+
+## May 20, 2023
+
+finished building the queries and routers for appointments and messages. Pushed to main!
+
+## May 21, 2023
+
+Added CORS to main and I'm beginning to study encryptions and authorizations for users. 
+
+## May 22, 2023
+
+Learning about authentication and how to apply it to the app!
+
+## May 23, 2023
+
+found 

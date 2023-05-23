@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, Response
-from typing import Union, List
+from typing import Union, List, Dict
+from authenticator import authenticator
 from queries.appointments import (
     AppointmentIn,
     AppointmentRepository,
@@ -14,6 +15,7 @@ router = APIRouter()
 def create_appointment(
     appointment: AppointmentIn,
     repo: AppointmentRepository = Depends(),
+    user_data: Dict = Depends(authenticator.get_current_account_data),
 ):
     return repo.create(appointment)
 
@@ -21,6 +23,7 @@ def create_appointment(
 @router.get("/appointments", response_model=Union[List[AppointmentOut], Error])
 def get_all_appointments(
     repo: AppointmentRepository = Depends(),
+    user_data: Dict = Depends(authenticator.get_current_account_data),
 ):
     return repo.get_all_appointments()
 
@@ -32,6 +35,7 @@ def get_all_appointments(
 def delete_appointment(
     appointment_id: int,
     repo: AppointmentRepository = Depends(),
+    user_data: Dict = Depends(authenticator.get_current_account_data),
 ) -> bool:
     return repo.delete_appointment(appointment_id)
 
@@ -43,6 +47,7 @@ def delete_appointment(
 def get_one_appointment(
     appointment_id: int,
     repo: AppointmentRepository = Depends(),
+    user_data: Dict = Depends(authenticator.get_current_account_data),
 ) -> Union[AppointmentOut, Error]:
     return repo.get_one_appointment(appointment_id)
 
@@ -55,5 +60,6 @@ def update_appointment(
     appointment_id: int,
     appointment: AppointmentIn,
     repo: AppointmentRepository = Depends(),
+    user_data: Dict = Depends(authenticator.get_current_account_data),
 ) -> Union[Error, AppointmentOut]:
     return repo.update_appointment(appointment_id, appointment)
