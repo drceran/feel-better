@@ -35,6 +35,8 @@ class MyAuthenticator(Authenticator):
         return account.email, JottersOut(**account.dict())
 
 
-authenticator = MyAuthenticator(
-    "eyJhbGciOiJIUzI1NiJ9.ew0KICAic3ViIjogIjEyMzQ1Njc4OTAiLA0KICAibmFtZSI6ICJBbmlzaCBOYXRoIiwNCiAgImlhdCI6IDE1MTYyMzkwMjINCn0.QNFyIFL5RDI3w2ZcxWPC_lIWj-xvp_EE7CwSTE0X-w8"
-)
+# authenticator = MyAuthenticator(
+#     "eyJhbGciOiJIUzI1NiJ9.ew0KICAic3ViIjogIjEyMzQ1Njc4OTAiLA0KICAibmFtZSI6ICJBbmlzaCBOYXRoIiwNCiAgImlhdCI6IDE1MTYyMzkwMjINCn0.QNFyIFL5RDI3w2ZcxWPC_lIWj-xvp_EE7CwSTE0X-w8"
+# )
+
+authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
