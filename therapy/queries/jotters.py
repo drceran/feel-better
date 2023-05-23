@@ -26,6 +26,7 @@ class JottersIn(BaseModel):
     graduated_college: Optional[str]
     profile_picture: Optional[str]
     about_me: Optional[str]
+    password: str
 
 
 class JottersOut(BaseModel):
@@ -42,6 +43,10 @@ class JottersOut(BaseModel):
     graduated_college: Optional[str]
     profile_picture: Optional[str]
     about_me: Optional[str]
+
+
+class JottersOutWithPassword(JottersOut):
+    password: str
 
 
 class JottersRepository:
@@ -91,6 +96,36 @@ class JottersRepository:
         except Exception as e:
             print(e)
             return {"message": "Could not get that jotter"}
+
+    def get_one_by_email(self, email: str) -> Optional[JottersOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        SELECT id,
+                        first_name,
+                        last_name,
+                        email,
+                        type,
+                        FROM jotters
+                        WHERE email =%s
+                        """,
+                        [email],
+                    )
+                    record = db.fetchone()
+                    if record is None:
+                        return None
+                    return JottersOut(
+                        id=record[0],
+                        first_name=record[1],
+                        last_name=record[2],
+                        email=record[3],
+                        type=record[4],
+                    )
+        except Exception as e:
+            print(e)
+            return None
 
     def update_jotter(
         self, jotter_id: int, jotter: JottersIn
