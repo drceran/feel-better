@@ -97,7 +97,7 @@ class JottersRepository:
             print(e)
             return {"message": "Could not get that jotter"}
 
-    def get_one_by_email(self, email: str) -> Optional[JottersOut]:
+    def get_one_by_email(self, email: str) -> Optional[JottersOutWithPassword]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -108,6 +108,15 @@ class JottersRepository:
                         last_name,
                         email,
                         type,
+                        phone_number,
+                        city,
+                        state,
+                        balance,
+                        certificates,
+                        graduated_college,
+                        profile_picture,
+                        about_me,
+                        password
                         FROM jotters
                         WHERE email =%s
                         """,
@@ -116,12 +125,21 @@ class JottersRepository:
                     record = db.fetchone()
                     if record is None:
                         return None
-                    return JottersOut(
+                    return JottersOutWithPassword(
                         id=record[0],
                         first_name=record[1],
                         last_name=record[2],
                         email=record[3],
                         type=record[4],
+                        phone_number=record[5],
+                        city=record[6],
+                        state=record[7],
+                        balance=record[8],
+                        certificates=record[9],
+                        graduated_college=record[10],
+                        profile_picture=record[11],
+                        about_me=record[12],
+                        password=record[13],
                     )
         except Exception as e:
             print(e)
@@ -240,9 +258,10 @@ class JottersRepository:
                         certificates,
                         graduated_college,
                         profile_picture,
-                        about_me)
+                        about_me,
+                        password)
                     VALUES
-                        (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                        (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                     RETURNING id;
                     """,
                     [
@@ -258,6 +277,7 @@ class JottersRepository:
                         jotter.graduated_college,
                         jotter.profile_picture,
                         jotter.about_me,
+                        jotter.password,
                     ],
                 )
                 id = result.fetchone()[0]
