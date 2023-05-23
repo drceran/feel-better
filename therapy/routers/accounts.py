@@ -60,7 +60,6 @@ async def create_account(
     plain_password = info.password
     hashed_password = authenticator.hash_password(info.password)
     try:
-        # hashed_password parametresini de kullanabilmek icin bu sekilde yaptim
         info.password = hashed_password
         account = accounts.create(info)
     except Exception:

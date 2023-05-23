@@ -95,3 +95,35 @@ I practiced how to debug to figure out an error.
 ## 5/22/2023
 
 Today I completed all of the endpoints for jotter ORM. I discovered pgAdmin.
+
+# Monday
+## 5/23/2023
+Today I started back end authentication. I added a new column to our user table named "password". And I completed the endpoints for get post create for token login and logout.
+At the beginning I created a file named queries/accounts.py as is suggested in Curtis's video. But then I realized that a lot of models were already in queries/jotters.py
+So I deleted that one. Whenever I need to create a new model, I used the current ones and inherited new models from them.
+
+There were two errors that I keep getting. One related with union types. The way fastapi works with several types. I overcome with that one by reading about it and ended up using Union using both None and the other Model or Error and the other model .
+
+Also another thing was, create(info, hashed_password)
+I had to create a new variable named "plain_password" plain_password = info.password and with that I was able to use the hashed_password parameter and also plain password parameter in the same function.
+(To swap two variable in python (a,b => b,a)
+c=a,
+a=b,
+b=c,
+)
+
+And the second one was passing two parameters in one model. The library gave us a hash_password() method and it was getting two parameters, both User model and password. Such as: try:
+        account = repo.create(info, hashed_password)
+
+I did this: try:
+        # to be able to use hashed_password parameter
+        info.password = hashed_password
+        account = accounts.create(info)
+
+Another thing was given in the library:
+authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
+Even though I added this signing key to the docker-compose.yml file, when I run this code, i am getting an error. So I added value's of the signing key to the MyAuthenticator() as a parameter,it worked. (it might be because I didn't delete all of the things in docker and build and compose up from scratch) I will try this now.
+
+While doing get_token and create_account functions, I was getting the same error. To locate the error, I tried to figure out what part of the project may cause the error, and it was internal server error, so it supposed to related with the models. After putting a lot of print statements, I located the reason of the error. I changed the result = db.execute(""" SELECT  -all-""")  all instead of selecting the required (NOT NULL) parameters and it worked. But we cannot ask user to put all the information for just signup. I need to figure out that part.
+
+And I am planning to work on protected endpoints.
