@@ -9,7 +9,7 @@ class Error(BaseModel):
 class ResourceIn(BaseModel):
     title: str
     body: str
-    writer: str
+    writer: int
     picture: Optional[str]
     url_link: Optional[str]
 

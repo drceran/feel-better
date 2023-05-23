@@ -15,3 +15,10 @@ Created an update, get details, and delete a resource functionality for the reso
 
 May 22, 2023 Monday
 Today we're gonna get into authorization. Been having trouble merging with main branch since yesterday.
+
+May 23, 2023 Tuesday
+I fixed the ghi in the compose file since it kept exiting out of the container, i also spent some time putting an image as a background for localhost:3000. i have to redo my resources migration bc only therapists can post a resource. learned that this line: CONSTRAINT therapist_writer CHECK (
+                writer IN (
+                    SELECT id FROM jotters WHERE user_type = 'therapist'
+                )
+checks to see if the writer has an existing id in jotters and has an id type of therapist
