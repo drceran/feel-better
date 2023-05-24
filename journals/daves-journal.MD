@@ -29,4 +29,4 @@ Learning about authentication and how to apply it to the app!
 
 ## May 23, 2023
 
-found 
+updated appointments and messages with authentication for the user end points. 
