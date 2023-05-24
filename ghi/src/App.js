@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
-
+import Nav from "./Nav";
 
 
 
@@ -31,11 +31,16 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <AuthProvider>{/* All of your other components, here */}</AuthProvider>
-      <ErrorNotification error={error} />
+    <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <Nav />
+      <div>
+        <AuthProvider>
+          {/* Your content */}
+        </AuthProvider>
+        <ErrorNotification error={error} />
+      </div>
     </div>
-  );
-}
+    );
+  }
 
-export default App;
+  export default App;
