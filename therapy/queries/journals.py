@@ -3,6 +3,8 @@ from enum import Enum
 from queries.pool import pool
 from datetime import datetime
 from typing import Union, List, Optional
+from jwtdown_fastapi.authentication import Token
+
 
 class Error(BaseModel):
     message: str
@@ -32,6 +34,9 @@ class JournalOut(BaseModel):
     date_time: datetime
     is_private: bool
     mood: mood
+
+class JournalToken(Token):
+    Journal: JournalOut
 
 
 class JournalRepository:
@@ -165,5 +170,3 @@ class JournalRepository:
     def journal_in_to_out(self, id : int, journal : JournalIn):
         old_data = journal.dict()
         return JournalOut(id=id, **old_data)
-
-    
