@@ -1,3 +1,16 @@
+May 25th - Just going to cry all day.
+
+May 24th - Started a messaging app inside the client switched over to the chat we learned about in the learn.
+Also realized that some of the CSS was the reason my nav bar and some of the other features i had were not displaying
+properly.
+
+May 23rd - More issues today some of the react dependicies were downgraded in one of the merge attempts
+we kept getting errors about node.js. Two things worked deleting and reinstalling all the node files
+and changing the react dependicies
+
+May 22nd - had alot of issues with the database and stepup. After a long time of not figuring it out i realized something
+went wrong with the merge and i have two databases. Made a Nav bar
+
 May 19th - I redid everything on my end from scratch (endpoints, DB, tables, and pg-admin)back to where I was
 but everything works.
 

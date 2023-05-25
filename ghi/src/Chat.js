@@ -97,7 +97,7 @@ class Chat extends React.Component {
         <table className="table">
           <thead>
             <tr>
-              <th>Client</th>
+              <th>Jotter</th>
               <th>Date/Time</th>
               <th>Message</th>
             </tr>
