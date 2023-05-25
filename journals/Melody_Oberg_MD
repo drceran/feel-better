@@ -26,3 +26,7 @@ checks to see if the writer has an existing id in jotters and has an id type of 
 
 May 24, 2023 Wednesday
 Today i figured out how to do the frontend authorization! but my challenge is to do it with redux. I created the store, api, and edited my login form and it seems to be working fine but i'm not entirely sure if its correct yet.
+
+
+May 25, 2023 Thursday
+after merging with main my localhost:3000 is filled with errors and it seems like some dependencies got deleted, so i added them back in and i'm getting a bunch of errors.

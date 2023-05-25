@@ -1,6 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-
-
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const usersApi = createApi({
   reducerPath: "users",
@@ -21,7 +19,6 @@ export const usersApi = createApi({
         }
         return {
           url: "/token",
-
           method: "post",
           body: formData,
           credentials: "include",
@@ -31,24 +28,25 @@ export const usersApi = createApi({
         return (result && ["Account"]) || [];
       },
     }),
+    createUser: builder.mutation({
+      query: (data) => ({
+        url: "/token",
+        body: data,
+        method: "post",
+      }),
+    }),
     getToken: builder.query({
       query: () => ({
         url: "/token",
-
+        method: 'get',
         credentials: "include",
       }),
-      createUser: builder.mutation({
-        query: data => ({
-          url: '/api/users',
-          body: data,
-          method: 'post',
-        })
-      }),
-      providesTags: ["Token"],
     }),
   }),
 });
 
-
-export const { useGetUsersQuery } = usersApi
-export const { useCreateUserMutation } = usersApi
+export const {
+  useGetUsersQuery,
+  useLoginMutation,
+  useGetTokenQuery,
+} = usersApi;
