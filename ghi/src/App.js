@@ -3,7 +3,8 @@ import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import Nav from "./Nav";
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Chat from "./Chat";
 
 
 
@@ -31,15 +32,17 @@ function App() {
   }, []);
 
   return (
-    <div style={{ display: "flex", justifyContent: "space-between" }}>
-      <Nav />
+    <BrowserRouter>
       <div>
         <AuthProvider>
-          {/* Your content */}
+          <Nav />
+          <Routes>
+            <Route path="/chat" element={<Chat />} />
+          </Routes>
         </AuthProvider>
         <ErrorNotification error={error} />
       </div>
-    </div>
+    </BrowserRouter>
     );
   }
 
