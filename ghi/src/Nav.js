@@ -15,7 +15,7 @@ function Nav() {
             <a className="nav-link" href="/journals">Entries</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/messages">Messages</a>
+            <a className="nav-link" href="/chat">Messages</a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="/appointments">Appointments</a>
