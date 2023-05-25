@@ -30,3 +30,14 @@ Learning about authentication and how to apply it to the app!
 ## May 23, 2023
 
 updated appointments and messages with authentication for the user end points. 
+<<<<<<< HEAD
+
+## May 24, 2023
+
+updated package.json and corrected the node_modules folder. Learned more about Redux
+
+## May 25, 2023
+
+Working on git issues and merge conflicts with the team.
+=======
+>>>>>>> 894e3733438e27dd50051cddd64ae873c4a4b20f
