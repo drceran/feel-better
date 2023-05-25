@@ -1,3 +1,4 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
@@ -7,43 +8,31 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Chat from "./Chat";
 
 
+import Signup from "./User/SignUp";
+import { Main } from "./Main";
+import TitleBar from "./TitleBar";
+import SignupForm from "./SignupForm";
+import LoginForm from "./LoginForm";
+
+const domain = /https:\/\/[^/]+/;
+const basename = process.env.PUBLIC_URL.replace(domain, "");
 
 function App() {
-  const [launchInfo, setLaunchInfo] = useState([]);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    async function getData() {
-      let url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/launch-details`;
-      console.log("fastapi url: ", url);
-      let response = await fetch(url);
-      console.log("------- hello? -------");
-      let data = await response.json();
-
-      if (response.ok) {
-        console.log("got launch data!");
-        setLaunchInfo(data.launch_details);
-      } else {
-        console.log("drat! something happened");
-        setError(data.message);
-      }
-    }
-    getData();
-  }, []);
-
   return (
-    <BrowserRouter>
-      <div>
-        <AuthProvider>
-          <Nav />
+    <div className="container">
+      <BrowserRouter basename={basename}>
+        <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
+          <TitleBar />
           <Routes>
+            <Route exact path="/" element={<Main />}></Route>
             <Route path="/chat" element={<Chat />} />
+            <Route exact path="/signup" element={<SignupForm />}></Route>
+            <Route exact path="/login" element={<LoginForm />}></Route>
           </Routes>
         </AuthProvider>
-        <ErrorNotification error={error} />
-      </div>
-    </BrowserRouter>
-    );
-  }
+      </BrowserRouter>
+    </div>
+  );
+}
 
   export default App;

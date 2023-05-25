@@ -22,3 +22,7 @@ I fixed the ghi in the compose file since it kept exiting out of the container, 
                     SELECT id FROM jotters WHERE user_type = 'therapist'
                 )
 checks to see if the writer has an existing id in jotters and has an id type of therapist
+
+
+May 24, 2023 Wednesday
+Today i figured out how to do the frontend authorization! but my challenge is to do it with redux. I created the store, api, and edited my login form and it seems to be working fine but i'm not entirely sure if its correct yet.
