@@ -2,12 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
-import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
-import Nav from "./Nav";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Chat from "./Chat";
-
-
+import { AuthProvider } from "@galvanize-inc/jwtdown-for-react"
 import Signup from "./User/SignUp";
 import { Main } from "./Main";
 import TitleBar from "./TitleBar";
