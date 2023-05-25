@@ -3,6 +3,11 @@ import { useEffect, useState } from "react";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
+import Nav from "./Nav";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Chat from "./Chat";
+
+
 import Signup from "./User/SignUp";
 import { Main } from "./Main";
 import TitleBar from "./TitleBar";
@@ -20,6 +25,7 @@ function App() {
           <TitleBar />
           <Routes>
             <Route exact path="/" element={<Main />}></Route>
+            <Route path="/chat" element={<Chat />} />
             <Route exact path="/signup" element={<SignupForm />}></Route>
             <Route exact path="/login" element={<LoginForm />}></Route>
           </Routes>
@@ -29,4 +35,4 @@ function App() {
   );
 }
 
-export default App;
+  export default App;

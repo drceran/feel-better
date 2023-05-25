@@ -28,7 +28,7 @@ steps = [
         """
         DROP TABLE resources;
         """,
-    ]
+    ],
 ]
 
 # $$ is a string literal and we need string literals to be able to filter through data
