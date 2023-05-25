@@ -13,7 +13,7 @@ code {
     monospace;
 }
 
-* {
+/* * {
   padding-top: 100px;
   padding-bottom: 100px;
   background: url('./images/jjlanding.png');
@@ -21,4 +21,4 @@ code {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-}
+} */
