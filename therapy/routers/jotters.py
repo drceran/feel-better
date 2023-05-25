@@ -1,19 +1,22 @@
 from fastapi import APIRouter, Depends, Response
-from typing import Union, List, Optional
+from typing import Union, List, Optional, Dict
 from queries.jotters import (
     Error,
     JottersIn,
     JottersOut,
     JottersRepository,
 )
-
+from authenticator import authenticator
 
 router = APIRouter()
 
 
 @router.post("/jotters", response_model=Union[JottersOut, Error])
 def create_jotter(
-    jotter: JottersIn, response: Response, repo: JottersRepository = Depends()
+    jotter: JottersIn,
+    response: Response,
+    repo: JottersRepository = Depends(),
+    account_data: Dict = Depends(authenticator.get_current_account_data),
 ):
     # response.status_code = 400
     return repo.create(jotter)
@@ -22,6 +25,7 @@ def create_jotter(
 @router.get("/jotters", response_model=Union[Error, List[JottersOut]])
 def get_all_jotters(
     repo: JottersRepository = Depends(),
+    account_data: Dict = Depends(authenticator.get_current_account_data),
 ):
     return repo.get_all_jotters()
 
@@ -31,6 +35,7 @@ def update_jotter(
     jotter_id: int,
     jotter: JottersIn,
     repo: JottersRepository = Depends(),
+    account_data: Dict = Depends(authenticator.get_current_account_data),
 ) -> Union[Error, JottersOut]:
     try:
         return repo.update_jotter(jotter_id, jotter)
@@ -42,6 +47,7 @@ def update_jotter(
 def delete_jotter(
     jotter_id: int,
     repo: JottersRepository = Depends(),
+    account_data: Dict = Depends(authenticator.get_current_account_data),
 ) -> bool:
     return repo.delete(jotter_id)
 
@@ -51,6 +57,7 @@ def get_one_jotter(
     jotter_id: int,
     response: Response,
     repo: JottersRepository = Depends(),
+    account_data: Dict = Depends(authenticator.get_current_account_data),
 ) -> JottersOut:
     jotter = repo.get_one(jotter_id)
     if jotter is None:

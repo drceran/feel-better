@@ -1,6 +1,10 @@
-import { Main } from "./Main";
-import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+import ErrorNotification from "./ErrorNotification";
+import "./App.css";
+import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
+import Signup from "./User/SignUp";
+import { Main } from "./Main";
 import TitleBar from "./TitleBar";
 import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
@@ -12,9 +16,7 @@ function App() {
   return (
     <div className="container">
       <BrowserRouter basename={basename}>
-        <AuthProvider
-          baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}
-        >
+        <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
           <TitleBar />
           <Routes>
             <Route exact path="/" element={<Main />}></Route>

@@ -127,3 +127,19 @@ Even though I added this signing key to the docker-compose.yml file, when I run 
 While doing get_token and create_account functions, I was getting the same error. To locate the error, I tried to figure out what part of the project may cause the error, and it was internal server error, so it supposed to related with the models. After putting a lot of print statements, I located the reason of the error. I changed the result = db.execute(""" SELECT  -all-""")  all instead of selecting the required (NOT NULL) parameters and it worked. But we cannot ask user to put all the information for just signup. I need to figure out that part.
 
 And I am planning to work on protected endpoints.
+
+# Tuesday
+##5/23/2023
+
+Today, I created a new branch, and deleted my old branch. I also made some minor changes in the code that I wrote yesterday. After I recreate volumes and docker containers, the errors that I took was gone. I did protected endpoints for jotters.
+
+# Wednesday
+## 5/24/2023
+
+I had the docker issues, and they were because I haven't restart my docker after I changed two things:
+The first one is: Changing the version of package.json/ to be aligned with the docker-compose.yml/ image: node:lts-bullseye (basically we googled to see what is the compatible version for this node)
+The second one is the migrations/003_resources.py/
+
+After I recreate the volumes and restart the docker, it worked.
+
+I will work on front end today. I will start with create a new jotter page.
