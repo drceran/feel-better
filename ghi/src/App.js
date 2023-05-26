@@ -2,8 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
-import { AuthProvider } from "@galvanize-inc/jwtdown-for-react"
-import Signup from "./User/SignUp";
+import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import { Main } from "./Main";
 import TitleBar from "./TitleBar";
 import SignupForm from "./SignupForm";
@@ -36,4 +35,4 @@ function App() {
   );
 }
 
-  export default App;
+export default App;
