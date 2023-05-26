@@ -1,25 +1,23 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useEffect, useState } from "react";
-import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import Nav from "./Nav";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Chat from "./Chat";
-
-
-import Signup from "./User/SignUp";
 import { Main } from "./Main";
 import TitleBar from "./TitleBar";
 import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
+import MessagesForm from "./MessageForm";
+import MessagesList from "./MessagesList";
 
 const domain = /https:\/\/[^/]+/;
 const basename = process.env.PUBLIC_URL.replace(domain, "");
 
 function App() {
   return (
+
     <div className="container">
+      <Nav />
       <BrowserRouter basename={basename}>
         <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
           <TitleBar />
@@ -28,6 +26,8 @@ function App() {
             <Route path="/chat" element={<Chat />} />
             <Route exact path="/signup" element={<SignupForm />}></Route>
             <Route exact path="/login" element={<LoginForm />}></Route>
+            <Route exact path="/messages" element={<MessagesList />}></Route>
+            <Route exact path="/messages/new" element={<MessagesForm />}></Route>
           </Routes>
         </AuthProvider>
       </BrowserRouter>

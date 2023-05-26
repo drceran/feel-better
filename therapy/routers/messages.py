@@ -15,7 +15,7 @@ router = APIRouter()
 def create_message(
     message: MessageIn,
     repo: MessageRepository = Depends(),
-    user_data: Dict = Depends(authenticator.get_current_account_data),
+    # user_data: Dict = Depends(authenticator.get_current_account_data),
 ):
     return repo.create(message)
 
@@ -23,7 +23,7 @@ def create_message(
 @router.get("/messages", response_model=Union[List[MessageOut], Error])
 def get_all_messages(
     repo: MessageRepository = Depends(),
-    user_data: Dict = Depends(authenticator.get_current_account_data),
+    # user_data: Dict = Depends(authenticator.get_current_account_data),
 ):
     return repo.get_all_messages()
 
@@ -32,7 +32,7 @@ def get_all_messages(
 def delete_message(
     message_id: int,
     repo: MessageRepository = Depends(),
-    user_data: Dict = Depends(authenticator.get_current_account_data),
+    # user_data: Dict = Depends(authenticator.get_current_account_data),
 ) -> bool:
     return repo.delete_message(message_id)
 
@@ -44,7 +44,7 @@ def delete_message(
 def get_one_message(
     message_id: int,
     repo: MessageRepository = Depends(),
-    user_data: Dict = Depends(authenticator.get_current_account_data),
+    # user_data: Dict = Depends(authenticator.get_current_account_data),
 ) -> Union[MessageOut, Error]:
     return repo.get_one_message(message_id)
 
@@ -57,6 +57,6 @@ def update_message(
     message_id: int,
     message: MessageIn,
     repo: MessageRepository = Depends(),
-    user_data: Dict = Depends(authenticator.get_current_account_data),
+    # user_data: Dict = Depends(authenticator.get_current_account_data),
 ) -> Union[Error, MessageOut]:
     return repo.update_message(message_id, message)
