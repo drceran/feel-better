@@ -38,3 +38,5 @@ updated package.json and corrected the node_modules folder. Learned more about R
 ## May 25, 2023
 
 Working on git issues and merge conflicts with the team. Updated Docker compose yaml. 
+
+So I've been able to make the Journal List and Form pages, but I wasn't able to implement user authentication/token to allow the logged in user to view entries or use the form because I couldn't carry over the authentication token/cookie... I'll learn that tomorrow! 
