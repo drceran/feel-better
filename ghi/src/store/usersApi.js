@@ -28,6 +28,19 @@ export const usersApi = createApi({
         return (result && ["Account"]) || [];
       },
     }),
+    signup: builder.mutation({
+      query: (formData) => {
+        return {
+          url: "/api/accounts",
+          method: "post",
+          body: formData,
+          credentials: "include",
+        };
+      },
+      invalidatesTags: (result) => {
+        return (result && ["Account"]) || [];
+      },
+    }),
     createUser: builder.mutation({
       query: (data) => ({
         url: "/token",
@@ -38,7 +51,7 @@ export const usersApi = createApi({
     getToken: builder.query({
       query: () => ({
         url: "/token",
-        method: 'get',
+        method: "get",
         credentials: "include",
       }),
     }),
@@ -48,5 +61,6 @@ export const usersApi = createApi({
 export const {
   useGetUsersQuery,
   useLoginMutation,
+  useSignupMutation,
   useGetTokenQuery,
 } = usersApi;
