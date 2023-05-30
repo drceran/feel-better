@@ -22,18 +22,6 @@ from routers.accounts import AccountForm, get_token
 router = APIRouter()
 
 
-# @router.get("/token", response_model=Union[JournalToken, None])
-# async def get_token(
-#     request: Request,
-#     journal: JournalToken = Depends(authenticator.try_get_current_account_data),
-# ) -> Union[JournalToken, None]:
-#     if journal and authenticator.cookie_name in request.cookies:
-#         return {
-#             "access_token": request.cookies[authenticator.cookie_name],
-#             "type": "Bearer",
-#             "journal": "journal",
-#         }
-
 
 @router.post("/journals", response_model=Union[JournalOut, Error])
 async def create_journal(

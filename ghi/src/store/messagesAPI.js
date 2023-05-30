@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+const timestamp = Date.now();
+
 export const messagesApi = createApi({
     reducerPath: 'messages',
     baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}),
@@ -13,7 +15,8 @@ export const messagesApi = createApi({
             query: (newMessage) => ({
                 url: '/messages/',
                 method: 'post',
-                body: newMessage
+                body: newMessage,
+                timestamp: new Date(timestamp).toISOString()
             }),
             invalidatesTags: ['MessagesList']
         }),
