@@ -10,7 +10,6 @@ function MessagesForm() {
   const [cost, setCost] = useState('');
   const [sender, setSender] = useState('');
   const [recipient, setRecipient] = useState('');
-  const [date_time, setDateTime] = useState('');
   const [error, setError] = useState('');
 
   const [createMessage, result] = useCreateMessagesMutation();
@@ -18,17 +17,18 @@ function MessagesForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      await createMessage({ body, cost, sender, recipient, date_time });
+      await createMessage({ subject, body, cost, sender, recipient });
+      if (result.isSuccess) {
+        navigate('/messages');
+      } else if (result.isError) {
+        setError(result.error);
+      }
     } catch (err) {
       setError(err);
     }
   }
 
-  if (result.isSuccess) {
-    navigate('/messages');
-  } else if (result.isError) {
-    setError(result.error);
-  }
+
 
   return (
     <div>
@@ -53,10 +53,6 @@ function MessagesForm() {
         <label>
           Recipient:
           <input type="text" value={recipient} onChange={(e) => setRecipient(e.target.value)} required />
-        </label>
-        <label>
-          Date/Time:
-          <input type="datetime-local" value={date_time} onChange={(e) => setDateTime(e.target.value)} required />
         </label>
         <button type="submit">Submit</button>
       </form>
