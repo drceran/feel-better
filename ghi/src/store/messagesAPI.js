@@ -10,7 +10,7 @@ export const messagesApi = createApi({
         createMessages: builder.mutation({
             query: (newMessage) => ({
                 url: '/messages/',
-                method: 'POST',
+                method: 'post',
                 body: newMessage
             })
         })

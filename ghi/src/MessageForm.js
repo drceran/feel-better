@@ -56,7 +56,7 @@ function MessagesForm() {
         </label>
         <label>
           Date/Time:
-          <input type="text" value={date_time} onChange={(e) => setDateTime(e.target.value)} required />
+          <input type="datetime-local" value={date_time} onChange={(e) => setDateTime(e.target.value)} required />
         </label>
         <button type="submit">Submit</button>
       </form>

@@ -1,4 +1,6 @@
-May 25th - Just going to cry all day.
+May 29th - Messaging list works both front and back but im having issues get the form working. I should have to done today also having issues with auth and the front end messaging. 
+
+May 25th - trying to get the messaging app going with redux on top
 
 May 24th - Started a messaging app inside the client switched over to the chat we learned about in the learn.
 Also realized that some of the CSS was the reason my nav bar and some of the other features i had were not displaying
@@ -17,7 +19,7 @@ but everything works.
 May 18th- Still having issues starting over it seems to be the dockerfile
 
 May 17th - Skipped ahead for now and I did my end points I followed the videos and my code seems the same but have to check still trying to figure out what is going on with my DB
-    
+
 May 16th - Keep working with the tables having a lot of issues migrating and just getting my info to show up.
 
 May 16th - Added the dockerfile stuff, did our first merge request and started on the tables.

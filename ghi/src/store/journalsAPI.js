@@ -5,7 +5,7 @@ export const journalsApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl: process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}),
     endpoints: builder => ({
         getJournals: builder.query({
-            query: () => '/journals/', 
+            query: () => '/journals/',
         }),
         createJournal: builder.mutation({
             query: data => ({
@@ -17,6 +17,4 @@ export const journalsApi = createApi({
     })
 });
 
-export const { useGetJournalsQuery,
-useCreateJournalMutation,
- } = journalsApi;
+export const { useGetJournalsQuery, useCreateJournalMutation} = journalsApi;
