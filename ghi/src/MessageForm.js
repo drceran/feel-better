@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ErrorNotification from './ErrorNotification';
-import { useCreateMessagesMutation } from './store/messagesAPI';
+import { useCreateMessageMutation } from './store/messagesAPI';
 
 function MessagesForm() {
   const navigate = useNavigate();
@@ -12,12 +12,12 @@ function MessagesForm() {
   const [recipient, setRecipient] = useState('');
   const [error, setError] = useState('');
 
-  const [createMessage, result] = useCreateMessagesMutation();
+  const [createMessage, result] = useCreateMessageMutation();
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const timestamp = new Date().toISOString(); // Generate timestamp
+      const timestamp = new Date();
       await createMessage({ subject, body, cost, sender, recipient, timestamp });
       if (result.isSuccess) {
         navigate('/messages');

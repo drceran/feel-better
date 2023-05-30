@@ -1,29 +1,42 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createSlice } from '@reduxjs/toolkit';
 
 const timestamp = Date.now();
 
 export const messagesApi = createApi({
     reducerPath: 'messages',
-    baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}),
+    baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_SAMPLE_SERVICE_API_HOST }),
     tagTypes: ['MessagesList'],
-    endpoints: builder => ({
+    endpoints: (builder) => ({
         getMessages: builder.query({
             query: () => '/messages/',
             providesTags: ['MessagesList'],
         }),
-        createMessages: builder.mutation({
+        createMessage: builder.mutation({
             query: (newMessage) => ({
                 url: '/messages/',
                 method: 'post',
                 body: newMessage,
-                timestamp: new Date(timestamp).toISOString()
             }),
-            invalidatesTags: ['MessagesList']
+            invalidatesTags: ['MessagesList'],
         }),
     }),
 });
 
-export const {
-    useGetMessagesQuery,
-    useCreateMessagesMutation
-} = messagesApi;
+const messagesSlice = createSlice({
+    name: 'messages',
+    initialState: {
+        selectedMessage: null,
+    },
+    reducers: {
+        selectMessage: (state, action) => {
+            state.selectedMessage = action.payload;
+        },
+    },
+});
+
+export const { selectMessage } = messagesSlice.actions;
+
+export const { useGetMessagesQuery, useCreateMessageMutation } = messagesApi;
+
+export default messagesSlice.reducer;
