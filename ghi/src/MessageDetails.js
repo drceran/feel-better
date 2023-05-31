@@ -1,14 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
+import { selectMessage } from './store/messagesAPI';
 
 function MessageDetails() {
-    const { id } = useParams();
-    const selectedMessage = useSelector((state) =>
-        state.messages.find((messages) => messages.id === id)
-    );
+    // const { id } = useParams();
 
-    if (!selectedMessage) {
+    if (!selectMessage) {
         return <p>No message found.</p>;
     }
 
@@ -16,23 +13,23 @@ function MessageDetails() {
         <div>
             <h2>Message Details</h2>
             <p>
-                <strong>Sender:</strong> {selectedMessage.sender}
+                <strong>Sender:</strong> {selectMessage.sender}
             </p>
             <p>
-                <strong>Recipient:</strong> {selectedMessage.recipient}
+                <strong>Recipient:</strong> {selectMessage.recipient}
             </p>
             <p>
-                <strong>Subject:</strong> {selectedMessage.subject}
+                <strong>Subject:</strong> {selectMessage.subject}
             </p>
             <p>
-                <strong>Body:</strong> {selectedMessage.body}
+                <strong>Body:</strong> {selectMessage.body}
             </p>
             <p>
-                <strong>Cost:</strong> {selectedMessage.cost}
+                <strong>Cost:</strong> {selectMessage.cost}
             </p>
             <p>
                 <strong>Date/Time:</strong>{' '}
-                {new Date(selectedMessage.timestamp).toLocaleString()}
+                {new Date(selectMessage.timestamp).toLocaleString()}
             </p>
         </div>
     );

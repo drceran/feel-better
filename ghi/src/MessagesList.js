@@ -11,7 +11,7 @@ function MessagesList() {
     const navigate = useNavigate();
 
     const handleOpenMessage = (message) => {
-        dispatch(selectMessage(message));
+        dispatch(selectMessage(message.id));
         navigate(`/messages/${message.id}`);
     };
 

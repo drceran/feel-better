@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { createSlice } from '@reduxjs/toolkit';
 
-const timestamp = Date.now();
 
 export const messagesApi = createApi({
     reducerPath: 'messages',
@@ -20,6 +19,12 @@ export const messagesApi = createApi({
             }),
             invalidatesTags: ['MessagesList'],
         }),
+        // getMessageDetails: builder.query({
+        //     query: (id) => ({
+        //         url: `/messages/${id}`,
+        //         method: 'get',
+        //     }),
+        // }),
     }),
 });
 
