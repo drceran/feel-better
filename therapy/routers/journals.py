@@ -30,6 +30,7 @@ async def create_journal(
     repo: JournalRepository = Depends(),
     journal_data: dict = Depends(authenticator.get_current_account_data),
 ):
+    journal.user_id = journal_data["id"]
     return repo.create(journal)
 
 
