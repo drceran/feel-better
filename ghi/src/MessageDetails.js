@@ -1,9 +1,10 @@
 import React from 'react';
-// import { useParams } from 'react-router-dom';
-import { selectMessage } from './store/messagesAPI';
+import { useParams } from 'react-router-dom';
+import { selectMessage,  } from './store/messagesAPI';
 
 function MessageDetails() {
-    // const { id } = useParams();
+    const { id } = useParams();
+    console.log(selectMessage);
 
     if (!selectMessage) {
         return <p>No message found.</p>;

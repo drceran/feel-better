@@ -15,10 +15,10 @@ function MessagesForm() {
   const [createMessage, result] = useCreateMessageMutation();
 
   async function handleSubmit(e) {
+    const datetime = new Date().toISOString();
     e.preventDefault();
     try {
-      const timestamp = new Date();
-      await createMessage({ subject, body, cost, sender, recipient, timestamp });
+      await createMessage({ subject, body, cost, sender, recipient, datetime });
       if (result.isSuccess) {
         navigate('/messages');
       } else if (result.isError) {

@@ -13,6 +13,7 @@ import JournalList from "./JournalList";
 import JournalForm from "./JournalForm";
 import Pricing from "./Pricing";
 import MessageDetails from "./MessageDetails";
+import Spotify from "./Spotify";
 
 const domain = /https:\/\/[^/]+/;
 const basename = process.env.PUBLIC_URL.replace(domain, "");
@@ -36,6 +37,7 @@ function App() {
             <Route exact path="/journals/new" element={<JournalForm />}></Route>
             <Route exact path="/pricing" element={<Pricing />}></Route>
             <Route exact path="/messages/:id" element={<MessageDetails />}></Route>
+            <Route exact path="/spotify" element={<Spotify />}></Route>
           </Routes>
         </AuthProvider>
       </BrowserRouter>

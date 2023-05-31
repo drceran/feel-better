@@ -1,4 +1,5 @@
-May 30th - Came to class early and fixed it. Also did a pricing tier page for the app.
+May 30th - Came to class early and fixed it. Also did a pricing tier page for the app.  worked on the detail view page
+for messaging . Its not totaly working the data does not come through but the page shows up.
 
 May 29th - Messaging list works both front and back but im having issues get the form working. I should have to done today also having issues with auth and the front end messaging.
 
