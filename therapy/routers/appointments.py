@@ -20,22 +20,23 @@ def create_appointment(
     return repo.create(appointment)
 
 
-@router.get("/appointments", response_model=Union[List[AppointmentOut], Error])
-def get_all_appointments(
-    repo: AppointmentRepository = Depends(),
-    user_data: Dict = Depends(authenticator.get_current_account_data),
-):
-    # from fast api get logged  in user id call repo.get_all_appointments_for_user(user_id)
-    return repo.get_all_appointments()
-
-
+# Older version were getting all users' appointments instead of loggedin user. New version -below- will get only loggedin user's appointments.
 # @router.get("/appointments", response_model=Union[List[AppointmentOut], Error])
-# def get_all_appointments_for_user(
+# def get_all_appointments(
 #     repo: AppointmentRepository = Depends(),
 #     user_data: Dict = Depends(authenticator.get_current_account_data),
 # ):
-#     user_id = user_data["id"]
-#     return repo.get_all_appointments_for_user(user_id)
+# from fast api get logged  in user id call repo.get_all_appointments_for_user(user_id)
+# return repo.get_all_appointments()
+
+
+@router.get("/appointments", response_model=Union[List[AppointmentOut], Error])
+def get_all_appointments_for_user(
+    repo: AppointmentRepository = Depends(),
+    user_data: Dict = Depends(authenticator.get_current_account_data),
+):
+    user_id = user_data["id"]
+    return repo.get_all_appointments_for_user(user_id)
 
 
 @router.delete(
