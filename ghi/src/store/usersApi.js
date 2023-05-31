@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const usersApi = createApi({
   reducerPath: "users",
-  tagTypes: ["Token"],
+  tagTypes: ["Token", "Jotter"],
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_SAMPLE_SERVICE_API_HOST,
   }),
@@ -25,7 +25,7 @@ export const usersApi = createApi({
         };
       },
       invalidatesTags: (result) => {
-        return (result && ["Account"]) || [];
+        return (result && ["Token"]) || [];
       },
     }),
     signup: builder.mutation({
@@ -38,29 +38,49 @@ export const usersApi = createApi({
         };
       },
       invalidatesTags: (result) => {
-        return (result && ["Account"]) || [];
+        return (result && ["Token"]) || [];
       },
     }),
-    createUser: builder.mutation({
-      query: (data) => ({
-        url: "/token",
-        body: data,
-        method: "post",
-      }),
-    }),
+    // createUser: builder.mutation({
+    //   query: (data) => ({
+    //     url: "/token",
+    //     body: data,
+    //     method: "post",
+    //   }),
+    // }),
     getToken: builder.query({
       query: () => ({
         url: "/token",
         method: "get",
         credentials: "include",
       }),
+      providesTags: ["Token"],
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: "/token",
+        method: "delete",
+        credentials: "include",
+      }),
+      invalidatesTags: ["Token"],
+    }),
+    getUserInfo: builder.query({
+      query: (id) => {
+        return {
+          url: "/jotters/" + id,
+          method: "get",
+          credentials: "include",
+        };
+      },
+      providesTags: ["Jotter"],
     }),
   }),
 });
 
 export const {
-  useGetUsersQuery,
   useLoginMutation,
   useSignupMutation,
   useGetTokenQuery,
+  useGetUserInfoQuery,
+  useLogoutMutation,
 } = usersApi;
