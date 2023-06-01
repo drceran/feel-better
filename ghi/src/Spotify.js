@@ -70,7 +70,7 @@ export function Spotify() {
                             <button type="submit">Search</button>
                         </form>
 
-                        : <h2>Please Login</h2>
+                        : <h2>Welcome</h2>
                 }
 
                 {renderArtists()}
