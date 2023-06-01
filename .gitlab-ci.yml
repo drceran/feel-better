@@ -9,7 +9,7 @@ lint-test-job:
   stage: test
   script:
     - pip install flake8
-    - flake8 therapy
+    - flake8
 #
 # # Run the unit tests
 # api-unit-tests-job:
