@@ -21,6 +21,12 @@ export default function Nav() {
           current: true,
           destination: "/jotters/" + data.account.id,
         },
+        {
+          name: "Journals",
+          href: "#",
+          current: true,
+          destination: "/journals/",
+        },
       ]);
     }
   }, [data]);
