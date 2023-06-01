@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ErrorNotification from './ErrorNotification';
-import { useCreateMessageMutation } from './store/messagesAPI';
+import { useCreateMessagesMutation } from './store/messagesAPI';
 
 function MessagesForm() {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ function MessagesForm() {
   const [recipient, setRecipient] = useState('');
   const [error, setError] = useState('');
 
-  const [createMessage, result] = useCreateMessageMutation();
+  const [createMessage, result] = useCreateMessagesMutation();
 
   async function handleSubmit(e) {
     const datetime = new Date().toISOString();
