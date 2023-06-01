@@ -5,17 +5,12 @@ function UserProfile() {
   const { id } = useParams();
   const { data, error, isLoading } = useGetUserInfoQuery(id);
 
-  console.log(data);
-
-  console.log("able to initiate data");
   if (error) {
     return <div>Error:{error}</div>;
   }
   if (isLoading || !data) {
     return <progress className="progress is-primary" max="100"></progress>;
   }
-
-  console.log(data);
 
   return (
     <div>
