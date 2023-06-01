@@ -170,3 +170,14 @@ What I learn about git is: first; we should never ever publish our broken code t
 
 Here is a steps of our new workflow:
 /Users/esraceran/module3-project-gamma/visuals for journals/Screenshot 2023-05-25 at 3.24.46 PM.png
+
+# Tuesday (5/30/2023)
+
+Today I worked on several things at the same time. Working on several things at the same time was a different approach. I would say, as long as the features you work on are related to each other, it makes sense.
+
+I redid the navbar, as the styling was poor. I used tailwindcss, and I have to admit, it was impressive. So there are two very cool code snippets that I am very proud of; first one retrieves logged in user data, and with an if else statement, if a user is logged in, we show the profile page and logout feature. And if a user is not loggedin, we show login and setup.
+The second code snippet is, a for loop for navigation, I used setNavigation to loop through the different features of a navigation element, in that way, when a developer want to add a new label in the navbar, all it needs to do is creating an object inside of the for loop I wrote.
+
+I also did the profile page and logout feature.
+
+Along with them I did was able to retrieve the data in the nav so that I use user's data for greetings them as it shows "Welcome user_name" in the navbar.
