@@ -39,7 +39,10 @@ async def get_all(
     repo: JournalRepository = Depends(),
     journal_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    return repo.get_all()
+    if journal_data and authenticator.cookie_name:
+        user_id = journal_data["id"]
+        return repo.get_all(user_id)
+    return Error(message="Authentication failed")
 
 
 @router.put("/journals/{journal_id}", response_model=Union[JournalOut, Error])

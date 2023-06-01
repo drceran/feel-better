@@ -9,14 +9,16 @@ from jwtdown_fastapi.authentication import Token
 class Error(BaseModel):
     message: str
 
+
 class mood(str, Enum):
-    happy = 'happy'
-    sad = 'sad'
-    angry = 'angry'
-    anxious = 'anxious'
-    neutral = 'neutral'
-    ambitious = 'ambitious'
-    carefree = 'carefree'
+    happy = "happy"
+    sad = "sad"
+    angry = "angry"
+    anxious = "anxious"
+    neutral = "neutral"
+    ambitious = "ambitious"
+    carefree = "carefree"
+
 
 class JournalIn(BaseModel):
     user_id: int
@@ -26,6 +28,7 @@ class JournalIn(BaseModel):
     is_private: bool
     mood: mood
 
+
 class JournalOut(BaseModel):
     id: int
     user_id: int
@@ -34,6 +37,7 @@ class JournalOut(BaseModel):
     date_time: datetime
     is_private: bool
     mood: mood
+
 
 class JournalToken(Token):
     Journal: JournalOut
@@ -83,8 +87,7 @@ class JournalRepository:
             return False
 
     def update(
-        self, journal_id: int,
-        journal: JournalIn
+        self, journal_id: int, journal: JournalIn
     ) -> Union[JournalOut, Error]:
         try:
             with pool.connection() as conn:
@@ -117,17 +120,16 @@ class JournalRepository:
             print(e)
             return {"message": "Could not update that journal"}
 
-
-    def get_all(self) -> Union[Error, List[JournalOut]]:
+    def get_all(self, user_id: int) -> Union[Error, List[JournalOut]]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT id, user_id, body, name, date_time, is_private, mood
-                        FROM journals
+                        SELECT * FROM journals Where user_id = %s
                         ORDER BY date_time;
-                        """
+                        """,
+                        [user_id],
                     )
                     result = []
                     for record in db:
@@ -144,8 +146,7 @@ class JournalRepository:
                     return result
         except Exception as e:
             print(e)
-            return {"message": "Could not get all journals"}
-
+            return Error(message="Could not get all journals")
 
     def create(self, journal: JournalIn) -> JournalOut:
         try:
@@ -157,7 +158,14 @@ class JournalRepository:
                         VALUES (%s, %s, %s, %s, %s, %s)
                         RETURNING id
                         """,
-                        [journal.user_id, journal.body, journal.name, journal.date_time, journal.is_private, journal.mood]
+                        [
+                            journal.user_id,
+                            journal.body,
+                            journal.name,
+                            journal.date_time,
+                            journal.is_private,
+                            journal.mood,
+                        ],
                     )
                     id = db.fetchone()[0]
                     # old_data = journal.dict()
@@ -166,7 +174,6 @@ class JournalRepository:
         except Exception:
             return {"message": "Could not create journal"}
 
-
-    def journal_in_to_out(self, id : int, journal : JournalIn):
+    def journal_in_to_out(self, id: int, journal: JournalIn):
         old_data = journal.dict()
         return JournalOut(id=id, **old_data)

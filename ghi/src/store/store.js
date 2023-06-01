@@ -4,6 +4,7 @@ import { usersApi } from './usersApi';
 import { messagesApi } from './messagesAPI';
 import { journalsApi } from './journalsAPI';
 import { authSlice } from './authSlice';
+import { authSlice } from "./authSlice";
 
 export const store = configureStore({
     reducer: {

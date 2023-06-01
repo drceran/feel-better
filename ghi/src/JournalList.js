@@ -1,9 +1,13 @@
 import React from "react";
 import { useGetJournalsQuery } from "./store/journalsAPI";
+import { useGetTokenQuery } from "./store/usersApi";
+
+
+
 
 function JournalList () {
+    const { data: token, refetch: refetchToken } = useGetTokenQuery();
     const { data: journals, error, isLoading } = useGetJournalsQuery();
-
     if (isLoading) {
         return (
             <h1>Loading page! ...</h1>

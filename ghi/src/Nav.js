@@ -21,6 +21,12 @@ export default function Nav() {
           current: true,
           destination: "/jotters/" + data.account.id,
         },
+        {
+          name: "Journals",
+          href: "#",
+          current: true,
+          destination: "/journals/",
+        },
       ]);
     }
   }, [data]);
@@ -83,7 +89,7 @@ export default function Nav() {
                 {/* Profile dropdown */}
                 {data ? (
                   <>
-                    <a class="text-slate-100">
+                    <a className="text-slate-100">
                       Welcome {data.account.first_name}
                     </a>
 
