@@ -3,8 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGetMessagesQuery, selectMessage } from './store/messagesAPI';
 import MessageDetails from './MessageDetails';
+// import { useGetTokenQuery } from './store/usersApi';
 
 function MessagesList() {
+    //const { data: token, refetch: refetchToken } = useGetTokenQuery();
     const { data: messages, error, isLoading } = useGetMessagesQuery();
     const selectedMessage = useSelector((state) => state.messages.selectedMessage);
     const dispatch = useDispatch();

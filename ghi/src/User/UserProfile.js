@@ -5,9 +5,7 @@ function UserProfile() {
   const { id } = useParams();
   const { data, error, isLoading } = useGetUserInfoQuery(id);
 
-  console.log(data);
 
-  console.log("able to initiate data");
   if (error) {
     return <div>Error:{error}</div>;
   }
