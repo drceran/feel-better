@@ -1,5 +1,13 @@
 from fastapi import FastAPI
-from routers import appointments, jotters, resources, journals, messages, accounts, chat
+from routers import (
+    appointments,
+    jotters,
+    resources,
+    journals,
+    messages,
+    accounts,
+    chat,
+)
 from authenticator import authenticator
 from fastapi.middleware.cors import CORSMiddleware
 import os
@@ -23,3 +31,18 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.get("/")
+def launch_details():
+    return {
+        "launch_details": {
+            "year": 2023,
+            "module": 3,
+            "week": 17,
+            "day": 5,
+            "hour": 19,
+            "min": "00",
+            "tz": "PST",
+        }
+    }
