@@ -1,8 +1,8 @@
 volumes:
-    postgres-data:
-        external: true
-    pg-admin:
-      external: true
+  postgres-data:
+    external: true
+  pg-admin:
+    external: true
 
 services:
   db:
@@ -27,9 +27,9 @@ services:
       PORT: 8000
       SIGNING_KEY: eyJhbGciOiJIUzI1NiJ9.ew0KICAic3ViIjogIjEyMzQ1Njc4OTAiLA0KICAibmFtZSI6ICJBbmlzaCBOYXRoIiwNCiAgImlhdCI6IDE1MTYyMzkwMjINCn0.QNFyIFL5RDI3w2ZcxWPC_lIWj-xvp_EE7CwSTE0X-w8
     ports:
-     - "8000:80
+      - 8000:80
     volumes:
-     - ./therapy:/app
+      - ./therapy:/app
 
   ghi:
     image: node:lts-bullseye
