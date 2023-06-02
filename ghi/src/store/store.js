@@ -5,12 +5,14 @@ import { messagesApi } from './messagesAPI';
 import { journalsApi } from './journalsAPI';
 import { authSlice } from './authSlice';
 
+
 export const store = configureStore({
     reducer: {
         [usersApi.reducerPath]: usersApi.reducer,
         [messagesApi.reducerPath]: messagesApi.reducer,
         [journalsApi.reducerPath]: journalsApi.reducer,
         [authSlice.name]: authSlice.reducer,
+
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
