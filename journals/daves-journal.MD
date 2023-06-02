@@ -49,4 +49,3 @@ I've spent the last few days trying to figure out how to finish the authenticati
 I am also going to follow up on the other endpoints to ensure that they work as intended.
 =======
 So I've been able to make the Journal List and Form pages, but I wasn't able to implement user authentication/token to allow the logged in user to view entries or use the form because I couldn't carry over the authentication token/cookie... I'll learn that tomorrow!
->>>>>>> main
