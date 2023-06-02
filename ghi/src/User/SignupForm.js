@@ -24,7 +24,7 @@ const SignupForm = () => {
         onSubmit={handleSubmit}
       >
         <div
-          class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
+          className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
           role="alert"
           style={{ display: result.isError ? "block" : "none" }}
         >
@@ -33,7 +33,7 @@ const SignupForm = () => {
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            for="first_name"
+            htmlFor="first_name"
           >
             First Name
           </label>
@@ -48,7 +48,7 @@ const SignupForm = () => {
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            for="last_name"
+            htmlFor="last_name"
           >
             Last Name
           </label>
@@ -63,7 +63,7 @@ const SignupForm = () => {
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            for="email"
+            htmlFor="email"
           >
             Email Address
           </label>
@@ -78,7 +78,7 @@ const SignupForm = () => {
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            for="type"
+            htmlFor="type"
           >
             I am a
           </label>
@@ -94,7 +94,7 @@ const SignupForm = () => {
         <div className="mb-6">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            for="password"
+            htmlFor="password"
           >
             Password
           </label>

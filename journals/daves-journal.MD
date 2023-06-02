@@ -39,4 +39,13 @@ updated package.json and corrected the node_modules folder. Learned more about R
 
 Working on git issues and merge conflicts with the team. Updated Docker compose yaml.
 
+<<<<<<< HEAD
+So I've been able to make the Journal List and Form pages, but I wasn't able to implement user authentication/token to allow the logged in user to view entries or use the form because I couldn't carry over the authentication token/cookie... I'll learn that tomorrow! 
+
+## June 2, 2023
+
+I've spent the last few days trying to figure out how to finish the authentications and I finally did it! I also learned how to better manage the state with redux. 
+I am also going to follow up on the other endpoints to ensure that they work as intended. 
+=======
 So I've been able to make the Journal List and Form pages, but I wasn't able to implement user authentication/token to allow the logged in user to view entries or use the form because I couldn't carry over the authentication token/cookie... I'll learn that tomorrow!
+>>>>>>> main

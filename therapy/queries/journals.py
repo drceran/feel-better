@@ -44,7 +44,7 @@ class JournalToken(Token):
 
 
 class JournalRepository:
-    def get_one(self, journal_id: int) -> Optional[JournalOut]:
+    def get_one(self, user_id: int, journal_id: int) -> Optional[JournalOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -52,9 +52,9 @@ class JournalRepository:
                         """
                         SELECT id, user_id, body, name, date_time, is_private, mood
                         FROM journals
-                        WHERE id = %s
+                        WHERE user_id = %s AND id = %s
                         """,
-                        [journal_id],
+                        [user_id, journal_id],
                     )
                     record = db.fetchone()
                     return JournalOut(

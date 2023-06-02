@@ -6,7 +6,7 @@ import { useGetTokenQuery } from "./store/usersApi";
 
 
 function JournalList () {
-    const { data: token, refetch: refetchToken } = useGetTokenQuery();
+
     const { data: journals, error, isLoading } = useGetJournalsQuery();
     if (isLoading) {
         return (
