@@ -11,6 +11,7 @@ import Nav from "./Nav";
 import JournalForm from "./JournalForm";
 import UserProfile from "./User/UserProfile";
 import Logout from "./User/Logout";
+import ProfileForm from "./User/ProfileForm";
 
 const domain = /https:\/\/[^/]+/;
 const basename = process.env.PUBLIC_URL.replace(domain, "");
@@ -30,6 +31,11 @@ function App() {
             <Route exact path="/journals" element={<JournalList />}></Route>
             <Route exact path="/journals/new" element={<JournalForm />}></Route>
             <Route exact path="/jotters/:id" element={<UserProfile />}></Route>
+            <Route
+              exact
+              path="/editProfile/:id"
+              element={<ProfileForm />}
+            ></Route>
           </Routes>
         </AuthProvider>
       </BrowserRouter>

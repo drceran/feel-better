@@ -41,13 +41,6 @@ export const usersApi = createApi({
         return (result && ["Token"]) || [];
       },
     }),
-    // createUser: builder.mutation({
-    //   query: (data) => ({
-    //     url: "/token",
-    //     body: data,
-    //     method: "post",
-    //   }),
-    // }),
     getToken: builder.query({
       query: () => ({
         url: "/token",
@@ -74,6 +67,17 @@ export const usersApi = createApi({
       },
       providesTags: ["Jotter"],
     }),
+    editUserInfo: builder.mutation({
+      query: (id, formData) => {
+        return {
+          url: "/jotters/" + id,
+          method: "put",
+          body: formData,
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["token"],
+    }),
   }),
 });
 
@@ -83,4 +87,5 @@ export const {
   useGetTokenQuery,
   useGetUserInfoQuery,
   useLogoutMutation,
+  useEditUserInfoMutation,
 } = usersApi;
