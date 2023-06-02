@@ -130,21 +130,23 @@ class MessageRepository:
                 "message": "Something went wrong while updating the message"
             }
 
-    def get_all_messages(self, user_id: int) -> Union[Error, List[MessageOut]]:
+    def get_all_messages(self, sender: int) -> Union[Error, List[MessageOut]]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT * FROM messages where user_id = %s
+                        SELECT id, sender, recipient, subject, body, cost, datetime
+                        FROM messages
+                        WHERE sender = %s
                         ORDER BY datetime ASC;
                         """,
-                        [user_id],
+                        [sender],
                     )
                     return [
                         MessageOut(
                             id=record[0],
-                            sender=record[1],
+                            sender=record[1],   
                             recipient=record[2],
                             subject=record[3],
                             body=record[4],

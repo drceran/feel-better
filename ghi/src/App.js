@@ -1,8 +1,8 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import Nav from "./Nav";
-// import Chat from "./Chat";
 import { Main } from "./Main";
 import SignupForm from "./User/SignupForm";
 import LoginForm from "./User/LoginForm";
@@ -21,25 +21,23 @@ const basename = process.env.PUBLIC_URL.replace(domain, "");
 
 function App() {
   return (
-
     <div className="container">
       <BrowserRouter basename={basename}>
         <Nav />
         <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
           <Routes>
-            <Route exact path="/" element={<Main />}></Route>
-            {/* <Route path="/chat" element={<Chat />} /> */}
-            <Route exact path="/signup" element={<SignupForm />}></Route>
-            <Route exact path="/login" element={<LoginForm />}></Route>
-            <Route exact path="/messages" element={<MessagesList />}></Route>
-            <Route exact path="/messages/new" element={<MessagesForm />}></Route>
-            <Route exact path="/journals" element={<JournalList />}></Route>
-            <Route exact path="/journals/new" element={<JournalForm />}></Route>
-            <Route exact path="/pricing" element={<Pricing />}></Route>
-            <Route exact path="/messages/:id" element={<MessageDetails />}></Route>
-            <Route exact path="/spotify" element={<Spotify />}></Route>
-            <Route exact path="/logout" element={<Logout />}></Route>
-            <Route exact path="/jotters/:id" element={<UserProfile />}></Route>
+            <Route exact path="/" element={<Main />} />
+            <Route exact path="/signup" element={<SignupForm />} />
+            <Route exact path="/login" element={<LoginForm />} />
+            <Route exact path="/messages" element={<MessagesList />} />
+            <Route exact path="/messages/new" element={<MessagesForm />} />
+            <Route exact path="/journals" element={<JournalList />} />
+            <Route exact path="/journals/new" element={<JournalForm />} />
+            <Route exact path="/pricing" element={<Pricing />} />
+            <Route exact path="/messages/:id" element={<MessageDetails />} />
+            <Route exact path="/spotify" element={<Spotify />} />
+            <Route exact path="/logout" element={<Logout />} />
+            <Route exact path="/jotters/:id" element={<UserProfile />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>
