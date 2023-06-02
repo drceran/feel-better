@@ -1,6 +1,5 @@
-import { useSignupMutation, useGetTokenQuery } from "../store/usersApi";
+import { useSignupMutation } from "../store/usersApi";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 const SignupForm = () => {
   const [signup, result] = useSignupMutation();

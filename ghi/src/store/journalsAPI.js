@@ -21,7 +21,7 @@ export const journalsApi = createApi({
     }),
     endpoints: builder => ({
         getJournals: builder.query({
-            query: () => '/journals/', 
+            query: () => '/journals/',
         }),
         createJournal: builder.mutation({
             query: data => ({

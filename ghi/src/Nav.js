@@ -27,6 +27,12 @@ export default function Nav() {
           current: true,
           destination: "/journals/",
         },
+        {
+          name: "Messages",
+          href: "#",
+          current: true,
+          destination: "/messages/",
+        },
       ]);
     }
   }, [data]);

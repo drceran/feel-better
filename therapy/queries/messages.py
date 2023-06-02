@@ -13,7 +13,7 @@ class MessageDetail(BaseModel):
 
 
 class MessageIn(BaseModel):
-    sender: int
+    user_id: int
     recipient: int
     subject: str
     body: str
@@ -22,7 +22,7 @@ class MessageIn(BaseModel):
 
 class MessageOut(BaseModel):
     id: int
-    sender: int
+    user_id: int
     recipient: int
     subject: str
     body: str
@@ -31,16 +31,16 @@ class MessageOut(BaseModel):
 
 
 class MessageRepository:
-    def get_one_message(self, message_id: int) -> Union[Error, MessageOut]:
+    def get_one_message(self, user_id: int, message_id: int) -> Union[Error, MessageOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """
                         SELECT * FROM messages
-                        WHERE id = %s
+                        WHERE id = %s AND user_id = %s
                         """,
-                        [message_id],
+                        [message_id, user_id],
                     )
                     record = db.fetchone()
                     print(record)
@@ -49,7 +49,7 @@ class MessageRepository:
                     else:
                         message = MessageOut(
                             id=record[0],
-                            sender=record[1],
+                            user_id=record[1],
                             recipient=record[2],
                             subject=record[3],
                             body=record[4],
@@ -86,7 +86,7 @@ class MessageRepository:
                     db.execute(
                         """
                         UPDATE messages
-                        SET sender = %s
+                        SET user_id = %s
                         , recipient = %s
                         , subject = %s
                         , body = %s
@@ -94,7 +94,7 @@ class MessageRepository:
                         WHERE id = %s
                         """,
                         [
-                            message.sender,
+                            message.user_id,
                             message.recipient,
                             message.subject,
                             message.body,
@@ -116,7 +116,7 @@ class MessageRepository:
                     else:
                         message_out = MessageOut(
                             id=record[0],
-                            sender=record[1],
+                            user_id=record[1],
                             recipient=record[2],
                             subject=record[3],
                             body=record[4],
@@ -130,50 +130,53 @@ class MessageRepository:
                 "message": "Something went wrong while updating the message"
             }
 
-    def get_all_messages(self) -> Union[Error, List[MessageOut]]:
+    def get_all_messages(self, user_id: int) -> Union[Error, List[MessageOut]]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT id, sender, recipient, subject, body, cost, datetime
+                        SELECT id, user_id, recipient, subject, body, cost, datetime
                         FROM messages
-                        ORDER BY datetime ASC;
-                        """
+                        WHERE user_id = %s
+                        """,
+                        [user_id],
                     )
-                    return [
-                        MessageOut(
-                            id=record[0],
-                            sender=record[1],
-                            recipient=record[2],
-                            subject=record[3],
-                            body=record[4],
-                            cost=record[5],
-                            datetime=record[6],
+                    messages = []
+                    for row in result.fetchall():
+                        message = MessageOut(
+                            id=row[0],
+                            user_id=row[1],
+                            recipient=row[2],
+                            subject=row[3],
+                            body=row[4],
+                            cost=row[5],
+                            datetime=row[6],
                         )
-                        for record in db
-                    ]
-
+                        messages.append(message)
+                    return messages
         except Exception as e:
             print(e)
-            return {"message": "An error occurred fetching the messages"}
+            return {"message": "An error occurred while fetching the messages"}
 
-    def create(self, message: MessageIn) -> MessageOut:
+    def create(self, message: MessageIn) -> Union[MessageOut, Error]:
         with pool.connection() as conn:
             with conn.cursor() as db:
+                # Check if the user_id exists in the jotters table
+                db.execute("SELECT id FROM jotters WHERE id = %s", [message.user_id])
+                record = db.fetchone()
+                if record is None:
+                    return {"message": "User not found with the given user_id"}
+
+                # User exists, proceed with message creation
                 result = db.execute(
                     """
-                    INSERT INTO messages(
-                        sender,
-                        recipient,
-                        subject,
-                        body,
-                        cost)
+                    INSERT INTO messages (user_id, recipient, subject, body, cost)
                     VALUES (%s, %s, %s, %s, %s)
                     RETURNING id, datetime;
                     """,
                     [
-                        message.sender,
+                        message.user_id,
                         message.recipient,
                         message.subject,
                         message.body,
@@ -182,7 +185,3 @@ class MessageRepository:
                 )
                 id, datetime = result.fetchone()
                 return MessageOut(id=id, datetime=datetime, **message.dict())
-
-    def message_in_to_out(self, id: int, message: MessageIn):
-        old_data = message.dict()
-        return MessageOut(id=id, **old_data)

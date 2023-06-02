@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React from "react";
 import { useGetJournalsQuery } from "./store/journalsAPI";
 import { useGetTokenQuery } from "./store/usersApi";
 
