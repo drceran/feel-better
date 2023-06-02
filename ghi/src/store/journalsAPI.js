@@ -10,9 +10,6 @@ export const journalsApi = createApi({
             const selector = usersApi.endpoints.getToken.select();
             const { data: tokenData } = selector(getState());
 
-
-            // const token = getState().auth.token;
-            // console.log(token);
             if (tokenData && tokenData.access_token) {
               headers.set('Authorization', `Bearer ${tokenData.access_token}`)
             }
