@@ -60,9 +60,9 @@ async def get_one_message(
     message_id: int,
     response: Response,
     repo: MessageRepository = Depends(),
-    user_data: dict = Depends(authenticator.get_current_account_data),
+    message_data: dict = Depends(authenticator.get_current_account_data),
 ) -> MessageOut:
-    message = repo.get_one_message(message_id)
-    if message is None:
-        response.status_code = 404
-        return message
+    if message_data and authenticator.cookie_name:
+        user_id = message_data["id"]
+        return repo.get_one_message(user_id, message_id)
+    return Error(message="Authentication failed")

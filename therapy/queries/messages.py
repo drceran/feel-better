@@ -31,16 +31,16 @@ class MessageOut(BaseModel):
 
 
 class MessageRepository:
-    def get_one_message(self, message_id: int) -> Union[Error, MessageOut]:
+    def get_one_message(self, user_id: int, message_id: int) -> Union[Error, MessageOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """
                         SELECT * FROM messages
-                        WHERE id = %s
+                        WHERE id = %s AND user_id = %s
                         """,
-                        [message_id],
+                        [message_id, user_id],
                     )
                     record = db.fetchone()
                     print(record)

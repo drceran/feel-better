@@ -9,6 +9,7 @@ export const messagesApi = createApi({
         prepareHeaders: (headers, { getState }) => {
             const selector = usersApi.endpoints.getToken.select();
             const { data: tokenData } = selector(getState());
+            console.log('tokenData', tokenData);
 
             if (tokenData && tokenData.access_token) {
                 headers.set('Authorization', `Bearer ${tokenData.access_token}`);

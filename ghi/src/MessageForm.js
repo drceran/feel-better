@@ -8,17 +8,16 @@ function MessagesForm() {
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState('');
   const [cost, setCost] = useState('');
-  const [sender, setSender] = useState('');
   const [recipient, setRecipient] = useState('');
   const [error, setError] = useState('');
 
   const [createMessage, result] = useCreateMessagesMutation();
 
   async function handleSubmit(e) {
-    const datetime = new Date().toISOString();
     e.preventDefault();
+    const datetime = new Date().toISOString();
     try {
-      await createMessage({ subject, body, cost, sender, recipient, datetime });
+      await createMessage({ subject, body, cost, recipient, datetime });
       if (result.isSuccess) {
         navigate('/messages');
       } else if (result.isError) {
@@ -44,10 +43,6 @@ function MessagesForm() {
         <label>
           Cost:
           <input type="text" value={cost} onChange={(e) => setCost(e.target.value)} required />
-        </label>
-        <label>
-          Sender:
-          <input type="text" value={sender} onChange={(e) => setSender(e.target.value)} required />
         </label>
         <label>
           Recipient:
