@@ -1,4 +1,4 @@
-import LoginForm from "./User/LoginForm";
+import LoginForm from "./authorization/LoginForm";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 
 export const Main = () => {
