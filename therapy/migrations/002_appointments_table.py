@@ -22,8 +22,6 @@ steps = [
         END;
         $$ LANGUAGE plpgsql;
 
-
-
         CREATE TRIGGER appointee_check BEFORE INSERT OR UPDATE ON appointments
         FOR EACH ROW EXECUTE PROCEDURE check_therapist_id_is_therapist();
 
