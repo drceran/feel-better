@@ -22,10 +22,6 @@ from routers.accounts import AccountForm, get_token
 router = APIRouter()
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 @router.post("/journals", response_model=Union[JournalOut, Error])
 async def create_journal(
     journal: JournalIn,
