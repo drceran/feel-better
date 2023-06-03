@@ -13,7 +13,7 @@ export default function Nav() {
   const [navigation, setNavigation] = useState([]);
 
   useEffect(() => {
-    if (data) {
+    if (data && data.access_token) {
       setNavigation([
         {
           name: "Your Profile",
@@ -27,7 +27,15 @@ export default function Nav() {
           current: true,
           destination: "/journals/",
         },
+        {
+          name: "Messages",
+          href: "#",
+          current: true,
+          destination: "/messages/",
+        },
       ]);
+    } else {
+        setNavigation([]);
     }
   }, [data]);
 

@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React from "react";
 import { useGetJournalsQuery } from "./store/journalsAPI";
 import { useGetTokenQuery } from "./store/usersApi";
 
@@ -6,7 +6,7 @@ import { useGetTokenQuery } from "./store/usersApi";
 
 
 function JournalList () {
-    const { data: token, refetch: refetchToken } = useGetTokenQuery();
+
     const { data: journals, error, isLoading } = useGetJournalsQuery();
     if (isLoading) {
         return (
