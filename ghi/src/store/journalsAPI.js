@@ -11,7 +11,7 @@ export const journalsApi = createApi({
             const { data: tokenData } = selector(getState());
 
             if (tokenData && tokenData.access_token) {
-              headers.set('Authorization', `Bearer ${tokenData.access_token}`)
+                headers.set('Authorization', `Bearer ${tokenData.access_token}`)
             }
             return headers
         }
@@ -20,14 +20,30 @@ export const journalsApi = createApi({
         getJournals: builder.query({
             query: () => '/journals/',
         }),
+        getOneJournal: builder.query({
+            query: (id) => {
+                return {
+                    url: `/journals/${id}`,
+                    method: "get",
+
+                };
+            },
+        }),
         createJournal: builder.mutation({
             query: data => ({
                 url: '/journals/',
                 body: data,
                 method: 'post',
             })
+        }),
+        editJournal: builder.mutation({
+            query: ({ id, ...journal }) => ({
+                url: `/journals/${id}`,
+                method: 'put',
+                body: journal,
+            })
         })
     })
 });
 
-export const { useGetJournalsQuery, useCreateJournalMutation } = journalsApi;
+export const { useEditJournalMutation, useGetJournalsQuery, useCreateJournalMutation, useGetOneJournalQuery } = journalsApi;
