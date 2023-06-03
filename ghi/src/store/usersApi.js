@@ -41,6 +41,16 @@ export const usersApi = createApi({
         return (result && ["Token"]) || [];
       },
     }),
+<<<<<<< HEAD
+=======
+    getUsers: builder.query({
+      query: () => ({
+        url: "/users",
+        method: "get",
+        credentials: "include",
+      }),
+    }),
+>>>>>>> main
     getToken: builder.query({
       query: () => ({
         url: "/token",
@@ -67,6 +77,7 @@ export const usersApi = createApi({
       },
       providesTags: ["Jotter"],
     }),
+<<<<<<< HEAD
     editUserInfo: builder.mutation({
       query: (id, formData) => {
         return {
@@ -77,6 +88,42 @@ export const usersApi = createApi({
         };
       },
       invalidatesTags: ["token"],
+=======
+    getClients: builder.query({
+      query: () => ({
+        url: "/jotters",
+        method: "get",
+        credentials: "include",
+      }),
+    }),
+    getClientDetail: builder.query({
+      query: (id) => ({
+        url: "/jotters" + id,
+        method: "get",
+        credentials: "include",
+      }),
+    }),
+    // getClientByTherapist: builder.query({
+    //   query: (therapistId) => ({
+    //     url: `/therapists/${therapistId}/clients`,
+    //     method: "get",
+    //     credentials: "include",
+    //   }),
+    // }), how does this even get the therapist id tho???
+    getTherapists: builder.query({
+      query: () => ({
+        url: "/jotters",
+        method: "get",
+        credentials: "include",
+      }),
+    }),
+    getTherapistDetail: builder.query({
+      query: (id) => ({
+        url: "/jotters" + id,
+        method: "get",
+        credentials: "include",
+      }),
+>>>>>>> main
     }),
   }),
 });
@@ -85,6 +132,11 @@ export const {
   useLoginMutation,
   useSignupMutation,
   useGetTokenQuery,
+  useGetClientsQuery,
+  useGetClientDetailQuery,
+  // useGetClientByTherapistQuery,
+  useGetTherapistsQuery,
+  useGetTherapistDetailQuery,
   useGetUserInfoQuery,
   useLogoutMutation,
   useEditUserInfoMutation,

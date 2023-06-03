@@ -22,19 +22,10 @@ from routers.accounts import AccountForm, get_token
 router = APIRouter()
 
 
-# @router.get("/token", response_model=Union[JournalToken, None])
-# async def get_token(
-#     request: Request,
-#     journal: JournalToken = Depends(authenticator.try_get_current_account_data),
-# ) -> Union[JournalToken, None]:
-#     if journal and authenticator.cookie_name in request.cookies:
-#         return {
-#             "access_token": request.cookies[authenticator.cookie_name],
-#             "type": "Bearer",
-#             "journal": "journal",
-#         }
+<<<<<<< HEAD
+=======
 
-
+>>>>>>> main
 @router.post("/journals", response_model=Union[JournalOut, Error])
 async def create_journal(
     journal: JournalIn,
@@ -83,7 +74,12 @@ async def get_journal(
     repo: JournalRepository = Depends(),
     journal_data: dict = Depends(authenticator.get_current_account_data),
 ) -> JournalOut:
-    journal = repo.get_one(journal_id)
-    if journal is None:
-        response.status_code = 404
-    return journal
+    if journal_data and authenticator.cookie_name:
+        user_id = journal_data["id"]
+        return repo.get_one(user_id, journal_id)
+    return Error(message="Authentication failed")
+
+    # journal = repo.get_one(journal_id)
+    # if journal is None:
+    #     response.status_code = 404
+    # return journal

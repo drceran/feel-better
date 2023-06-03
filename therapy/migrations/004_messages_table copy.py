@@ -4,7 +4,7 @@ steps = [
         """
         CREATE TABLE messages (
             id SERIAL PRIMARY KEY,
-            sender INTEGER REFERENCES jotters(id),
+            user_id INTEGER REFERENCES jotters(id),
             recipient INTEGER REFERENCES jotters(id),
             subject VARCHAR(1000),
             body TEXT,

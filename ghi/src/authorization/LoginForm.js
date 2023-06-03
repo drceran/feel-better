@@ -1,4 +1,4 @@
-import { useLoginMutation, useGetTokenQuery } from "../store/usersApi";
+import { useLoginMutation } from "../store/usersApi";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
