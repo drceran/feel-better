@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCreateJournalMutation } from './store/journalsAPI';
-import ErrorNotification from './ErrorNotification';
+import { useCreateJournalMutation } from '../store/journalsAPI';
+import ErrorNotification from '../ErrorNotification';
+import { usersApi } from '../store/usersApi';
+import { useGetTokenQuery } from '../store/usersApi';
 
-function JournalForm () {
+function JournalForm() {
     const navigate = useNavigate();
     const [body, setBody] = useState('');
     const [name, setName] = useState('');
@@ -13,29 +15,42 @@ function JournalForm () {
     const [error, setError] = useState('');
 
     const [createJournal, result] = useCreateJournalMutation();
+    const { data, errorToken } = useGetTokenQuery();
+
 
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            await createJournal({body, name, dateTime, privacy, mood});
+            const journ = {
+                user_id: data.account.id,
+                body: body, name: name,
+                date_time: dateTime,
+                is_private: privacy,
+                mood: mood
+            }
+            const result = await createJournal(journ);
+            if (result.isSuccess) {
+                navigate("/journals");
+            } else if (result.isError) {
+                setError(result.error);
+            }
         } catch (err) {
             setError(err);
         }
-    }
+        if (result.isSuccess) {
+            navigate("/journals/");
+        };
+    };
 
-    if (result.isSuccess) {
-        navigate("/journals");
-    } else if (result.isError) {
-        setError(result.error);
-    }
+
 
     return (
         <div>
-            {error && <ErrorNotification error={error}/>}
+            {error && <ErrorNotification error={error} />}
             <form onSubmit={handleSubmit}>
                 <label>
                     Body:
-                    <textarea value={body} onChange={(e) => setBody(e.target.value)} required />
+                    <input type="text" value={body} onChange={(e) => setBody(e.target.value)} required />
                 </label>
                 <br />
                 <label>
