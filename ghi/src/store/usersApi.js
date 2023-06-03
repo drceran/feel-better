@@ -41,8 +41,6 @@ export const usersApi = createApi({
         return (result && ["Token"]) || [];
       },
     }),
-<<<<<<< HEAD
-=======
     getUsers: builder.query({
       query: () => ({
         url: "/users",
@@ -50,7 +48,6 @@ export const usersApi = createApi({
         credentials: "include",
       }),
     }),
->>>>>>> main
     getToken: builder.query({
       query: () => ({
         url: "/token",
@@ -77,7 +74,6 @@ export const usersApi = createApi({
       },
       providesTags: ["Jotter"],
     }),
-<<<<<<< HEAD
     editUserInfo: builder.mutation({
       query: (id, formData) => {
         return {
@@ -87,8 +83,8 @@ export const usersApi = createApi({
           credentials: "include",
         };
       },
-      invalidatesTags: ["token"],
-=======
+      invalidatesTags: ["Token"],
+    }),
     getClients: builder.query({
       query: () => ({
         url: "/jotters",
@@ -98,18 +94,11 @@ export const usersApi = createApi({
     }),
     getClientDetail: builder.query({
       query: (id) => ({
-        url: "/jotters" + id,
+        url: "/jotters/" + id,
         method: "get",
         credentials: "include",
       }),
     }),
-    // getClientByTherapist: builder.query({
-    //   query: (therapistId) => ({
-    //     url: `/therapists/${therapistId}/clients`,
-    //     method: "get",
-    //     credentials: "include",
-    //   }),
-    // }), how does this even get the therapist id tho???
     getTherapists: builder.query({
       query: () => ({
         url: "/jotters",
@@ -119,11 +108,10 @@ export const usersApi = createApi({
     }),
     getTherapistDetail: builder.query({
       query: (id) => ({
-        url: "/jotters" + id,
+        url: "/jotters/" + id,
         method: "get",
         credentials: "include",
       }),
->>>>>>> main
     }),
   }),
 });
@@ -134,7 +122,6 @@ export const {
   useGetTokenQuery,
   useGetClientsQuery,
   useGetClientDetailQuery,
-  // useGetClientByTherapistQuery,
   useGetTherapistsQuery,
   useGetTherapistDetailQuery,
   useGetUserInfoQuery,
