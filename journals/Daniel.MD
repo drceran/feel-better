@@ -1,3 +1,6 @@
+
+june
+
 May 31st - Trying to fix messaging gave up after a little was not making progress. Moved over and started working'
 on the spotify api. The pictures work so i know i have a connection and auth works but i still have not been able
 to get a music player in the app.
@@ -17,7 +20,7 @@ May 23rd - More issues today some of the react dependencies were downgraded in o
 we kept getting errors about node.js. Two things worked deleting and reinstalling all the node files
 and changing the react dependencies
 
-May 22nd - had a lot of issues with the database and stepup. After a long time of not figuring it out i realized something went wrong with the merge and i have two databases? Made a Nav bar with 
+May 22nd - had a lot of issues with the database and stepup. After a long time of not figuring it out i realized something went wrong with the merge and i have two databases? Made a Nav bar with
 
 May 19th - I redid everything on my end from scratch (endpoints, DB, tables, and pg-admin)back to where I was
 but everything works.
