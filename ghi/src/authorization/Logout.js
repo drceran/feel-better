@@ -20,7 +20,7 @@ function Logout() {
   }, [data, dispatch]);
 
   if (isSuccess) {
-    navigate("/");
+    navigate("/ ");
   }
 
   return (

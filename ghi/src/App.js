@@ -8,9 +8,9 @@ import SignupForm from "./authorization/SignupForm";
 import LoginForm from "./authorization/LoginForm";
 import MessagesForm from "./MessageForm";
 import MessagesList from "./MessagesList";
-import JournalList from "./JournalList";
-import JournalForm from "./JournalForm";
-import ProfileForm from "./authorization/ProfileForm";
+import JournalEntry from "./components/JournalOne";
+import JournalList from "./components/JournalList";
+import JournalForm from "./components/JournalForm";
 import ResourcesList from "./components/ResourcesList";
 import ClientsList from "./components/Clientslist";
 import AppointmentList from "./components/AppointmentsList";
@@ -19,6 +19,8 @@ import UserProfile from "./authorization/UserProfile";
 import Logout from "./authorization/Logout";
 import Pricing from "./Pricing";
 import MessageDetails from "./MessageDetails";
+import JournalFormEdit from "./components/JournalEdit";
+import ProfileForm from "./authorization/ProfileForm";
 // import { Spotify } from "./Spotify";
 
 const domain = /https:\/\/[^/]+/;
@@ -36,15 +38,16 @@ function App() {
             <Route exact path="/login" element={<LoginForm />}></Route>
             <Route exact path="/logout" element={<Logout />}></Route>
             <Route exact path="/jotters/:id" element={<UserProfile />}></Route>
-            <Route
-              exact
-              path="/editProfile/:id"
-              element={<ProfileForm />}
-            ></Route>
-            <Route exact path="/journals" element={<JournalList />}></Route>
-            <Route exact path="/journals/new" element={<JournalForm />}></Route>
+            <Route exact path="/editProfile/:id" element={<ProfileForm />}></Route>
+            <Route exact path="/" element={<Main />} />
+            <Route exact path="/signup" element={<SignupForm />} />
+            {/* <Route exact path="/login" element={<LoginForm />} /> */}
             <Route exact path="/messages" element={<MessagesList />} />
             <Route exact path="/messages/new" element={<MessagesForm />} />
+            <Route exact path="/journals/:id/edit" element={<JournalFormEdit />} />
+            <Route exact path="/journals/:id" element={<JournalEntry />} />
+            <Route exact path="/journals" element={<JournalList />} />
+            <Route exact path="/journals/new" element={<JournalForm />} />
             <Route exact path="/pricing" element={<Pricing />} />
             <Route exact path="/messages/:id" element={<MessageDetails />} />
             {/* <Route exact path="/spotify" element={<Spotify />} /> */}
