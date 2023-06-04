@@ -23,7 +23,20 @@ export const resourcesApi = createApi({
             credentials: "include",
         }),
     }),
+    editResource: builder.mutation({
+        query: ({ id, ...resource }) => ({
+            url: `/resources/${id}`,
+            method: 'put',
+            body: resource,
+        })
+    }),
+    deleteResource: builder.mutation({
+        query: (id) => ({
+            url: `/resources/${id}`,
+            method: 'delete',
+        })
+    })
     }),
 });
 
-export const { useGetResourcesQuery, useCreateResourceMutation, useGetResourceDetailQuery } = resourcesApi;
+export const { useGetResourcesQuery, useCreateResourceMutation, useGetResourceDetailQuery, useEditResourceMutation, useDeleteResourceMutation } = resourcesApi;
