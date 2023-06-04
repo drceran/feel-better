@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import { useGetJournalsQuery } from "../store/journalsAPI";
 import { Link } from 'react-router-dom';
 
 function JournalList() {
+    const [searchTerm, setSearchTerm] = useState("");
     let { data: journals, error, isLoading } = useGetJournalsQuery();
     if (isLoading) {
         return <h1>Loading page! ...</h1>;
@@ -12,7 +13,24 @@ function JournalList() {
         return <h1>Error occurred! {error.message}</h1>;
     }
 
-    const sortedJournals = Array.from(journals).sort((a, b) => {
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
+
+    const filteredJournals = journals.filter(({ body, name, date_time }) => {
+        const search = searchTerm.toLowerCase();
+        const lowercaseDateTime = new Date(date_time).toLocaleString().toLowerCase();
+        return (
+            body.toLowerCase().includes(search) ||
+            name.toLowerCase().includes(search) ||
+            lowercaseDateTime.includes(search)
+        );
+    });
+
+    // const sortedJournals = Array.from(journals).sort((a, b) => {
+    //     return new Date(b.date_time) - new Date(a.date_time);
+    // });
+    const sortedJournals = filteredJournals.sort((a, b) => {
         return new Date(b.date_time) - new Date(a.date_time);
     });
 
@@ -21,7 +39,8 @@ function JournalList() {
     return (
         <div>
             <h1>Journal Entries</h1>
-            <div>{journals && journals.length > 0 ? (
+            <input type="text" value={searchTerm} onChange={handleSearchChange} placeholder="Search..." />
+            <div>{filteredJournals.length > 0 ? (
                 <ul>
                     {mostRecentJournals.map((journal, index) => (
                         <Link to={`/journals/${journal.id}`} key={index}>
