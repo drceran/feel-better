@@ -21,6 +21,7 @@ import Pricing from "./Pricing";
 import MessageDetails from "./MessageDetails";
 import JournalFormEdit from "./components/JournalEdit";
 import ProfileForm from "./authorization/ProfileForm";
+import HomePage from "./home";
 // import { Spotify } from "./Spotify";
 
 const domain = /https:\/\/[^/]+/;
@@ -34,6 +35,7 @@ function App() {
         <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
           <Routes>
             <Route exact path="/" element={<Main />} />
+            <Route exact path="/home" element={<HomePage />} />
             <Route exact path="/signup" element={<SignupForm />} />
             <Route exact path="/login" element={<LoginForm />}></Route>
             <Route exact path="/logout" element={<Logout />}></Route>
