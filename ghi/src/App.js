@@ -34,6 +34,7 @@ function App() {
         <Nav />
         <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
           <Routes>
+            <Route exact path="/home" element={<HomePage />}></Route>
             <Route exact path="/" element={<Main />} />
             <Route exact path="/home" element={<HomePage />} />
             <Route exact path="/signup" element={<SignupForm />} />
