@@ -17,16 +17,15 @@ class JottersIn(BaseModel):
     first_name: str
     last_name: str
     email: str
-    type: JotterType
+    type: Optional[JotterType]
     phone_number: str
     city: str
     state: str
-    balance: int
     certificates: Optional[str]
     graduated_college: Optional[str]
     profile_picture: Optional[str]
     about_me: Optional[str]
-    password: str
+    password: Optional[str]
 
 
 class JottersOut(BaseModel):
@@ -157,11 +156,9 @@ class JottersRepository:
                         SET first_name = %s
                         , last_name = %s
                         , email = %s
-                        , type = %s
                         , phone_number = %s
                         , city = %s
                         , state = %s
-                        , balance = %s
                         , certificates = %s
                         , graduated_college = %s
                         , profile_picture = %s
@@ -172,11 +169,9 @@ class JottersRepository:
                             jotter.first_name,
                             jotter.last_name,
                             jotter.email,
-                            jotter.type,
                             jotter.phone_number,
                             jotter.city,
                             jotter.state,
-                            jotter.balance,
                             jotter.certificates,
                             jotter.graduated_college,
                             jotter.profile_picture,
@@ -186,7 +181,7 @@ class JottersRepository:
                     )
                 # old_data = jotter.dict()
                 # return JottersOut(id=jotter_id, **old_data)
-                return self.jotter_in_to_out(jotter_id, jotter)
+            return self.get_one(jotter_id)
         except Exception as e:
             print(e)
             return {"message": "Could not update that jotter"}
@@ -254,7 +249,6 @@ class JottersRepository:
                         phone_number,
                         city,
                         state,
-                        balance,
                         certificates,
                         graduated_college,
                         profile_picture,
@@ -272,7 +266,6 @@ class JottersRepository:
                         jotter.phone_number,
                         jotter.city,
                         jotter.state,
-                        jotter.balance,
                         jotter.certificates,
                         jotter.graduated_college,
                         jotter.profile_picture,

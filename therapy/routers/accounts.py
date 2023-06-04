@@ -41,12 +41,15 @@ router = APIRouter()
 async def get_token(
     request: Request,
     account: JottersOut = Depends(authenticator.try_get_current_account_data),
+    jottersRepo: JottersRepository = Depends(),
 ) -> Union[AccountToken, None]:
     if account and authenticator.cookie_name in request.cookies:
+        print(account)
+        accountFromDB = jottersRepo.get_one(account["id"])
         return {
             "access_token": request.cookies[authenticator.cookie_name],
             "type": "Bearer",
-            "account": account,
+            "account": accountFromDB,
         }
 
 

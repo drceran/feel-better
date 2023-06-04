@@ -22,6 +22,7 @@ steps = [
         # DOWN SQL Statement
         """
         DROP TABLE jotters;
+        DROP TYPE user_type;
         """,
     ],
     [
@@ -33,7 +34,8 @@ steps = [
             user_id INTEGER REFERENCES jotters(id),
             body TEXT NOT NULL,
             name VARCHAR(255) NOT NULL,
-            date_time TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            date_time TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT
+              CURRENT_TIMESTAMP,
             is_private BOOLEAN NOT NULL DEFAULT FALSE,
             mood mood NOT NULL DEFAULT 'neutral'
         );
@@ -41,6 +43,7 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE journals;
+        DROP TYPE mood;
         """,
     ],
 ]
