@@ -6,7 +6,7 @@ import Nav from "./Nav";
 import { Main } from "./Main";
 import SignupForm from "./authorization/SignupForm";
 import LoginForm from "./authorization/LoginForm";
-import MessagesForm from "./MessageForm";
+import MessagesForm from "./MessageForm"; 
 import MessagesList from "./MessagesList";
 import JournalEntry from "./components/JournalOne";
 import JournalList from "./components/JournalList";
@@ -21,6 +21,7 @@ import Pricing from "./Pricing";
 import MessageDetails from "./MessageDetails";
 import JournalFormEdit from "./components/JournalEdit";
 import ProfileForm from "./authorization/ProfileForm";
+import MessagesEdit from "./MessagesEdit";
 // import ResourceForm from "./components/ResourceForm";
 // import { Spotify } from "./Spotify";
 
@@ -45,6 +46,7 @@ function App() {
             {/* <Route exact path="/login" element={<LoginForm />} /> */}
             <Route exact path="/messages" element={<MessagesList />} />
             <Route exact path="/messages/new" element={<MessagesForm />} />
+            <Route exact path="/messages/:id/edit" element={< MessagesEdit />} />
             <Route exact path="/journals/:id/edit" element={<JournalFormEdit />} />
             <Route exact path="/journals/:id" element={<JournalEntry />} />
             <Route exact path="/journals" element={<JournalList />} />
