@@ -23,13 +23,6 @@ export const appointmentsApi = createApi({
             credentials: "include",
         }),
     }),
-    getAppointments: builder.query({
-        query: (id) => ({
-            url: `/appointments/`,
-            method: "get",
-            credentials: "include",
-        }),
-    }),
     }),
 });
 
