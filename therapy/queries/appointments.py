@@ -123,6 +123,7 @@ class AppointmentRepository:
                         ORDER BY appointment_date ASC;
                         """
                     )
+                    records = db.fetchall()
                     return [
                         AppointmentOut(
                             id=record[0],
@@ -132,9 +133,8 @@ class AppointmentRepository:
                             appointment_time=record[4],
                             cost=record[5],
                         )
-                        for record in db
+                        for record in records
                     ]
-
         except Exception as e:
             print(e)
             return {"Message": "something broke about the appointments"}

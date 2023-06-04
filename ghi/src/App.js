@@ -21,6 +21,7 @@ import Pricing from "./Pricing";
 import MessageDetails from "./MessageDetails";
 import JournalFormEdit from "./components/JournalEdit";
 import ProfileForm from "./authorization/ProfileForm";
+// import ResourceForm from "./components/ResourceForm";
 // import { Spotify } from "./Spotify";
 
 const domain = /https:\/\/[^/]+/;
@@ -53,7 +54,6 @@ function App() {
             {/* <Route exact path="/spotify" element={<Spotify />} /> */}
             <Route exact path="/resources" element={<ResourcesList />}></Route>
             <Route exact path="/jotters" element={<ClientsList />}></Route>
-            {/* <Route exact path="/resources/" element={<ResourceForm />}></Route> */}
             <Route exact path="/appointments" element={<AppointmentList />}></Route>
             <Route exact path="/appointments" element={<ClientList />}></Route>
           </Routes >
