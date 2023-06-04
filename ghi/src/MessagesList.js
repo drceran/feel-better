@@ -29,6 +29,13 @@ function MessagesList() {
         return <h1>Error occurred! {error.message}</h1>;
     }
 
+
+    const sortedMessages = Array.from(messages).sort((a, b) => {
+        return new Date(b.timestamp) - new Date(a.timestamp);
+    });
+
+    const recentMessages = sortedMessages?.length <= 10 ? sortedMessages : sortedMessages.slice(0, 10);
+
     return (
         <div>
             <h1>Messages</h1>
@@ -50,22 +57,22 @@ function MessagesList() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {messages.map((message, index) => (
+                                {recentMessages.map((message, index) => (
                                     <tr key={index}>
                                         <td>
                                             <Link
                                                 to={`/messages/${message.id}`}
                                                 onClick={() => handleOpenMessage(message)}
-                                                style={{ textDecoration: 'none', color: 'inherit' }}
+                                                style={{ textDecoration: 'underline', color: 'blue' }}
                                             >
-                                                {message.sender}
+                                                {message.user_id}
                                             </Link>
                                         </td>
                                         <td>{message.recipient}</td>
                                         <td>{message.subject}</td>
                                         <td>{message.body}</td>
                                         <td>{message.cost}</td>
-                                        <td>{new Date(message.timestamp).toLocaleString()}</td>
+                                        <td>{new Date(message.datetime).toLocaleString()}</td>
                                     </tr>
                                 ))}
                             </tbody>
