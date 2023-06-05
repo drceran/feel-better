@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from typing import Optional, List, Union
 from enum import Enum
 from queries.pool import pool
+from psycopg.rows import dict_row
 
 
 class Error(BaseModel):
@@ -14,30 +15,29 @@ class JotterType(str, Enum):
 
 
 class JottersIn(BaseModel):
-    first_name: str
-    last_name: str
+    first_name: Optional[str]
+    last_name: Optional[str]
     email: str
-    type: JotterType
-    phone_number: str
-    city: str
-    state: str
-    balance: int
+    type: Optional[JotterType]
+    phone_number: Optional[str]
+    city: Optional[str]
+    state: Optional[str]
     certificates: Optional[str]
     graduated_college: Optional[str]
     profile_picture: Optional[str]
     about_me: Optional[str]
-    password: str
+    password: Optional[str]
 
 
 class JottersOut(BaseModel):
     id: int
-    first_name: str
-    last_name: str
+    first_name: Optional[str]
+    last_name: Optional[str]
     email: str
     type: JotterType
-    phone_number: str
-    city: str
-    state: str
+    phone_number: Optional[str]
+    city: Optional[str]
+    state: Optional[str]
     balance: int
     certificates: Optional[str]
     graduated_college: Optional[str]
@@ -53,22 +53,10 @@ class JottersRepository:
     def get_one(self, jotter_id: int) -> Optional[JottersOut]:
         try:
             with pool.connection() as conn:
-                with conn.cursor() as db:
+                with conn.cursor(row_factory=dict_row) as db:
                     db.execute(
                         """
-                        SELECT id,
-                        first_name,
-                        last_name,
-                        email,
-                        type,
-                        phone_number,
-                        city,
-                        state,
-                        balance,
-                        certificates,
-                        graduated_college,
-                        profile_picture,
-                        about_me
+                        SELECT *
                         FROM jotters
                         WHERE id =%s
                         """,
@@ -77,22 +65,7 @@ class JottersRepository:
                     record = db.fetchone()
                     if record is None:
                         return {"message": "No user found with this id"}
-                    # return self.record_to_jotter_out(record)
-                    return JottersOut(
-                        id=record[0],
-                        first_name=record[1],
-                        last_name=record[2],
-                        email=record[3],
-                        type=record[4],
-                        phone_number=record[5],
-                        city=record[6],
-                        state=record[7],
-                        balance=record[8],
-                        certificates=record[9],
-                        graduated_college=record[10],
-                        profile_picture=record[11],
-                        about_me=record[12],
-                    )
+                    return JottersOut(**record)
         except Exception as e:
             print(e)
             return {"message": "Could not get that jotter"}
@@ -100,23 +73,10 @@ class JottersRepository:
     def get_one_by_email(self, email: str) -> Optional[JottersOutWithPassword]:
         try:
             with pool.connection() as conn:
-                with conn.cursor() as db:
+                with conn.cursor(row_factory=dict_row) as db:
                     db.execute(
                         """
-                        SELECT id,
-                        first_name,
-                        last_name,
-                        email,
-                        type,
-                        phone_number,
-                        city,
-                        state,
-                        balance,
-                        certificates,
-                        graduated_college,
-                        profile_picture,
-                        about_me,
-                        password
+                        SELECT *
                         FROM jotters
                         WHERE email =%s
                         """,
@@ -125,22 +85,7 @@ class JottersRepository:
                     record = db.fetchone()
                     if record is None:
                         return None
-                    return JottersOutWithPassword(
-                        id=record[0],
-                        first_name=record[1],
-                        last_name=record[2],
-                        email=record[3],
-                        type=record[4],
-                        phone_number=record[5],
-                        city=record[6],
-                        state=record[7],
-                        balance=record[8],
-                        certificates=record[9],
-                        graduated_college=record[10],
-                        profile_picture=record[11],
-                        about_me=record[12],
-                        password=record[13],
-                    )
+                    return JottersOutWithPassword(**record)
         except Exception as e:
             print(e)
             return None
@@ -150,33 +95,30 @@ class JottersRepository:
     ) -> Union[JottersOut, Error]:
         try:
             with pool.connection() as conn:
-                with conn.cursor() as db:
-                    db.execute(
+                with conn.cursor(row_factory=dict_row) as db:
+                    result = db.execute(
                         """
                         UPDATE jotters
                         SET first_name = %s
                         , last_name = %s
                         , email = %s
-                        , type = %s
                         , phone_number = %s
                         , city = %s
                         , state = %s
-                        , balance = %s
                         , certificates = %s
                         , graduated_college = %s
                         , profile_picture = %s
                         , about_me = %s
                         WHERE id = %s
+                        RETURNING *
                         """,
                         [
                             jotter.first_name,
                             jotter.last_name,
                             jotter.email,
-                            jotter.type,
                             jotter.phone_number,
                             jotter.city,
                             jotter.state,
-                            jotter.balance,
                             jotter.certificates,
                             jotter.graduated_college,
                             jotter.profile_picture,
@@ -184,9 +126,9 @@ class JottersRepository:
                             jotter_id,
                         ],
                     )
-                # old_data = jotter.dict()
-                # return JottersOut(id=jotter_id, **old_data)
-                return self.jotter_in_to_out(jotter_id, jotter)
+                    record = result.fetchone()
+                    # old_data = jotter.dict()
+                    return JottersOut(**record)
         except Exception as e:
             print(e)
             return {"message": "Could not update that jotter"}
@@ -194,23 +136,10 @@ class JottersRepository:
     def get_all_jotters(self) -> Union[Error, List[JottersOut]]:
         try:
             with pool.connection() as conn:
-                with conn.cursor() as db:
+                with conn.cursor(row_factory=dict_row) as db:
                     result = db.execute(
                         """
-                        SELECT
-                        id,
-                        first_name,
-                        last_name,
-                        email,
-                        type,
-                        phone_number,
-                        city,
-                        state,
-                        balance,
-                        certificates,
-                        graduated_college,
-                        profile_picture,
-                        about_me
+                        SELECT *
                         FROM jotters
                         ORDER BY id;
                         """
@@ -234,16 +163,14 @@ class JottersRepository:
                     #     )
                     #     result.append(jotter)
                     # return result
-                    return [
-                        self.record_to_jotter_out(record) for record in result
-                    ]
+                    return [JottersOut(**record) for record in result]
         except Exception as e:
             print(e)
             return {"message": "Could not get all jotters"}
 
     def create(self, jotter: JottersIn) -> JottersOut:
         with pool.connection() as conn:
-            with conn.cursor() as db:
+            with conn.cursor(row_factory=dict_row) as db:
                 result = db.execute(
                     """
                     INSERT INTO jotters
@@ -254,15 +181,14 @@ class JottersRepository:
                         phone_number,
                         city,
                         state,
-                        balance,
                         certificates,
                         graduated_college,
                         profile_picture,
                         about_me,
                         password)
                     VALUES
-                        (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                    RETURNING id;
+                        (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    RETURNING *;
                     """,
                     [
                         jotter.first_name,
@@ -272,7 +198,6 @@ class JottersRepository:
                         jotter.phone_number,
                         jotter.city,
                         jotter.state,
-                        jotter.balance,
                         jotter.certificates,
                         jotter.graduated_college,
                         jotter.profile_picture,
@@ -280,10 +205,10 @@ class JottersRepository:
                         jotter.password,
                     ],
                 )
-                id = result.fetchone()[0]
+                record = result.fetchone()
                 # old_data = jotter.dict()
                 # return JottersOut(id=id, **old_data)
-                return self.jotter_in_to_out(id, jotter)
+                return JottersOut(**record)
 
     def delete(self, jotter_id: int) -> bool:
         try:
@@ -304,20 +229,3 @@ class JottersRepository:
     def jotter_in_to_out(self, id: int, jotter: JottersIn):
         old_data = jotter.dict()
         return JottersOut(id=id, **old_data)
-
-    def record_to_jotter_out(self, record):
-        return JottersOut(
-            id=record[0],
-            first_name=record[1],
-            last_name=record[2],
-            email=record[3],
-            type=record[4],
-            phone_number=record[5],
-            city=record[6],
-            state=record[7],
-            balance=record[8],
-            certificates=record[9],
-            graduated_college=record[10],
-            profile_picture=record[11],
-            about_me=record[12],
-        )

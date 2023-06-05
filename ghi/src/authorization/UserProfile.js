@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 function UserProfile() {
   const { id } = useParams();
   const { data, error, isLoading } = useGetUserInfoQuery(id);
-  const navigate = useNavigate();
 
   if (error) {
     return <div>Error:{error}</div>;
