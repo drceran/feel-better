@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useGetTokenQuery, usersApi } from "./store/usersApi";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useGetTokenQuery } from "./store/usersApi";
 import { useNavigate } from "react-router-dom";
 
 function classNames(...classes) {
@@ -9,7 +9,7 @@ function classNames(...classes) {
 }
 export default function Nav() {
   const navigate = useNavigate();
-  const { data, error } = useGetTokenQuery();
+  const { data } = useGetTokenQuery();
   const [navigation, setNavigation] = useState([]);
 
   useEffect(() => {
@@ -98,7 +98,7 @@ export default function Nav() {
                 {data ? (
                   <>
                     <a className="text-slate-100">
-                      Welcome {data.account.first_name}
+                      Welcome {data?.account.first_name}
                     </a>
 
                     <Menu as="div" className="relative ml-3">
