@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { useGetMessagesQuery } from './store/messagesAPI';
+import { useGetMessagesQuery, useDeleteMessageMutation } from './store/messagesAPI';
 import MessageDetails from './MessageDetails';
-import { selectMessage } from './store/messagesSlice';
-
+import { selectMessage, deleteMessage } from './store/messagesSlice';
 
 function MessagesList() {
     const { data: messages, error, isLoading } = useGetMessagesQuery();
     const selectedMessage = useSelector((state) => state.messages.selectedMessage);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [deleteMessage] = useDeleteMessageMutation();
+
+    useEffect(() => {
+        if (deleteMessage.isSuccess) {
+            dispatch(deleteMessage(deleteMessage.arg));
+        }
+    }, [deleteMessage.isSuccess, deleteMessage.arg, dispatch]);
 
     const handleOpenMessage = (message) => {
         dispatch(selectMessage(message.id));
@@ -29,12 +35,23 @@ function MessagesList() {
         return <h1>Error occurred! {error.message}</h1>;
     }
 
-
     const sortedMessages = Array.from(messages).sort((a, b) => {
-        return new Date(b.timestamp) - new Date(a.timestamp);
+        const dateComparison = new Date(b.timestamp) - new Date(a.timestamp);
+        if (dateComparison !== 0) {
+            return dateComparison;
+        }
+        return b.id - a.id;
     });
 
-    const recentMessages = sortedMessages?.length <= 10 ? sortedMessages : sortedMessages.slice(0, 10);
+    const recentMessages = sortedMessages?.length <= 20 ? sortedMessages : sortedMessages.slice(0, 20);
+
+    const handleDelete = async (id) => {
+        try {
+            await deleteMessage(id);
+        } catch (err) {
+            console.error('Error deleting message:', err);
+        }
+    };
 
     return (
         <div>
@@ -54,6 +71,7 @@ function MessagesList() {
                                     <th>Body</th>
                                     <th>Cost</th>
                                     <th>Date/Time</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,6 +91,9 @@ function MessagesList() {
                                         <td>{message.body}</td>
                                         <td>{message.cost}</td>
                                         <td>{new Date(message.datetime).toLocaleString()}</td>
+                                        <td>
+                                            <button onClick={() => handleDelete(message.id)}>Delete</button>
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>

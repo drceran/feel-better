@@ -6,7 +6,7 @@ import Nav from "./Nav";
 import { Main } from "./Main";
 import SignupForm from "./authorization/SignupForm";
 import LoginForm from "./authorization/LoginForm";
-import MessagesForm from "./MessageForm"; 
+import MessagesForm from "./MessageForm";
 import MessagesList from "./MessagesList";
 import JournalEntry from "./components/JournalOne";
 import JournalList from "./components/JournalList";
@@ -23,7 +23,8 @@ import JournalFormEdit from "./components/JournalEdit";
 import ProfileForm from "./authorization/ProfileForm";
 import MessagesEdit from "./MessagesEdit";
 // import ResourceForm from "./components/ResourceForm";
-// import { Spotify } from "./Spotify";
+import { Spotify } from "./Spotify";
+import SpotifyPlayer from "./SpotifyPlayer";
 
 const domain = /https:\/\/[^/]+/;
 const basename = process.env.PUBLIC_URL.replace(domain, "");
@@ -53,7 +54,8 @@ function App() {
             <Route exact path="/journals/new" element={<JournalForm />} />
             <Route exact path="/pricing" element={<Pricing />} />
             <Route exact path="/messages/:id" element={<MessageDetails />} />
-            {/* <Route exact path="/spotify" element={<Spotify />} /> */}
+            <Route exact path="/spotify" element={<Spotify />} />
+            <Route exact path="/spotifyPlayer" element={<SpotifyPlayer />} />
             <Route exact path="/resources" element={<ResourcesList />}></Route>
             <Route exact path="/jotters" element={<ClientsList />}></Route>
             <Route exact path="/appointments" element={<AppointmentList />}></Route>

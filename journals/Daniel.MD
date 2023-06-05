@@ -1,5 +1,7 @@
+Jun 3rd - Finally finished Messages the only thing i have to figure out now is how to make it so that
+instead of the user.id it shows the actual users name 
 
-june
+June 1st - Git took a long time today a few issues. Still working on messaging the biggest issue its making it to work with auth
 
 May 31st - Trying to fix messaging gave up after a little was not making progress. Moved over and started working'
 on the spotify api. The pictures work so i know i have a connection and auth works but i still have not been able

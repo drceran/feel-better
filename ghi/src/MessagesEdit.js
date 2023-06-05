@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ErrorNotification from './ErrorNotification';
-import { useEditMessageMutation, useGetOneMessageQuery } from './store/messagesAPI';
-import { useGetTokenQuery } from './store/usersApi';
+import { useEditMessageMutation, useGetOneMessageQuery, useDeleteMessageMutation } from './store/messagesAPI';
 
 function MessagesFormEdit() {
     const navigate = useNavigate();
@@ -15,7 +14,8 @@ function MessagesFormEdit() {
     const [dateTime, setDateTime] = useState('');
 
     const { data: message } = useGetOneMessageQuery(id);
-    const { data, errorToken } = useGetTokenQuery();
+    const [editMessage, result] = useEditMessageMutation();
+    const [deleteMessage] = useDeleteMessageMutation();
 
     useEffect(() => {
         if (message) {
@@ -27,15 +27,12 @@ function MessagesFormEdit() {
         }
     }, [message]);
 
-    const [editMessage, result] = useEditMessageMutation();
-
     async function handleSubmit(e) {
         e.preventDefault();
 
         try {
             const updatedMessage = {
                 id: parseInt(id),
-                user_id: data.account.id,
                 subject: subject,
                 body: body,
                 cost: cost,
@@ -50,6 +47,15 @@ function MessagesFormEdit() {
             } else if (result.isError) {
                 setError(result.error);
             }
+        } catch (err) {
+            setError(err);
+        }
+    }
+
+    async function handleDelete() {
+        try {
+            await deleteMessage(id);
+            navigate('/messages');
         } catch (err) {
             setError(err);
         }
@@ -76,6 +82,7 @@ function MessagesFormEdit() {
                     <input type="text" value={recipient} onChange={(e) => setRecipient(e.target.value)} required />
                 </label>
                 <button type="submit">Submit</button>
+                <button type="button" onClick={handleDelete}>Delete</button>
             </form>
         </div>
     );

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Spotify } from "./Spotify";
 
 function SpotifyPlayer() {
-    const [token, setToken] = useState("");
+    const [token] = useState("");
 
     useEffect(() => {
         window.onSpotifyWebPlaybackSDKReady = () => {
@@ -20,7 +20,6 @@ function SpotifyPlayer() {
     return (
         <div className="container">
             <div className="main-wrapper">
-                {/* Rest of your component code */}
             </div>
         </div>
     );

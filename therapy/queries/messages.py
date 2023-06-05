@@ -79,7 +79,7 @@ class MessageRepository:
 
     def update_message(
         self, message_id: int, message: MessageIn
-    ) -> Union[MessageOut, Error]:
+    ) -> Union[MessageOut, Error,]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
