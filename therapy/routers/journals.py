@@ -4,19 +4,9 @@ from queries.journals import (
     JournalRepository,
     JournalOut,
     Error,
-    JournalToken,
 )
 from typing import Union, List, Optional
 from authenticator import authenticator
-from fastapi import (
-    APIRouter,
-    Depends,
-    Response,
-    Request,
-    HTTPException,
-    status,
-)
-from routers.accounts import AccountForm, get_token
 
 
 router = APIRouter()
@@ -30,13 +20,10 @@ async def create_journal(
     journal_data: dict = Depends(authenticator.get_current_account_data),
 ):
     if journal_data and authenticator.cookie_name:
-        user_id = journal_data["id"]
+        journal.user_id = journal_data["id"]
         print(journal)
         return repo.create(journal)
     return Error(message="Authentication failed")
-    # journal.user_id = journal_data["id"]
-    # print(journal)
-    # return repo.create(journal)
 
 
 @router.get("/journals/", response_model=Union[Error, List[JournalOut]])

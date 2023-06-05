@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from datetime import date, time
-from typing import Optional, Union, List
+from typing import Union, List
 from queries.pool import pool
 
 
@@ -116,9 +116,10 @@ class AppointmentRepository:
             with pool.connection() as conn:
                 # get a cursor (something to run SQ: with)
                 with conn.cursor() as db:
-                    result = db.execute(
+                    db.execute(
                         """
-                        SELECT id, user_id, therapist_id, appointment_date, appointment_time, cost
+                        SELECT id, user_id, therapist_id, appointment_date,
+                          appointment_time, cost
                         FROM appointments
                         ORDER BY appointment_date ASC;
                         """
