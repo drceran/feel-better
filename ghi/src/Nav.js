@@ -97,9 +97,9 @@ export default function Nav() {
                 {/* Profile dropdown */}
                 {data ? (
                   <>
-                    <a className="text-slate-100">
-                      Welcome {data?.account.first_name}
-                    </a>
+                    <p className="text-slate-100">
+                      Welcome {data.account.first_name}
+                    </p>
 
                     <Menu as="div" className="relative ml-3">
                       <div>
