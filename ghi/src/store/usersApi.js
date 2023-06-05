@@ -75,7 +75,7 @@ export const usersApi = createApi({
       providesTags: ["Jotter"],
     }),
     editUserInfo: builder.mutation({
-      query: (id, formData) => {
+      query: ({ id, formData }) => {
         return {
           url: "/jotters/" + id,
           method: "put",
@@ -83,7 +83,7 @@ export const usersApi = createApi({
           credentials: "include",
         };
       },
-      invalidatesTags: ["Token"],
+      invalidatesTags: ["Jotter", "Token"],
     }),
     getClients: builder.query({
       query: () => ({

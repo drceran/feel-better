@@ -3,7 +3,7 @@ steps = [
         # "Up" SQL statement
         """
         CREATE TABLE messages (
-            id SERIAL PRIMARY KEY,
+            id SERIAL PRIMARY KEY NOT NULL,
             user_id INTEGER REFERENCES jotters(id),
             recipient INTEGER REFERENCES jotters(id),
             subject VARCHAR(1000),
