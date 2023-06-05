@@ -65,7 +65,8 @@ async def create_account(
     try:
         info.password = hashed_password
         account = accounts.create(info)
-    except Exception:
+    except Exception as e:
+        print(e)
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot create an account with those credentials",
