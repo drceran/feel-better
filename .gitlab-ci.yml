@@ -9,7 +9,7 @@ lint-test-job:
   stage: test
   script:
     - pip install flake8
-    - flake8 --exit-zero
+    - flake8
 
 services:
   - docker:dind
