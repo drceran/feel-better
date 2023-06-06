@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useGetTokenQuery } from "./store/usersApi";
 import { useNavigate } from "react-router-dom";
+import logo from './images/logo.png';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -33,6 +34,18 @@ export default function Nav() {
           current: true,
           destination: "/messages/",
         },
+        {
+          name: "Appointments",
+          href: "#",
+          current: true,
+          destination: "/appointments/",
+        },
+        {
+          name: "Resources",
+          href: "#",
+          current: true,
+          destination: "/resources/",
+        },
       ]);
     } else {
       setNavigation([]);
@@ -60,13 +73,13 @@ export default function Nav() {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="block h-8 w-auto lg:hidden"
-                    src="/logo2.png"
-                    alt="Your Company"
+                    src={logo}
+                    alt="JournalJotter logo"
                   />
                   <img
                     className="hidden h-8 w-auto lg:block"
-                    src="/logo2.png"
-                    alt="Your Company"
+                    src={logo}
+                    alt="JournalJotter logo"
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">

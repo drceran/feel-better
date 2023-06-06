@@ -40,7 +40,6 @@ export default function ResourceForm() {
         }
         if (result.isSuccess) {
             navigate("/resources/");
-            window.location.reload();
         }
     }
 
@@ -54,28 +53,23 @@ export default function ResourceForm() {
             {showForm ? (
                 <form onSubmit={handleSubmit}>
                     <label>
-                        Title:
-                        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+                        Title: <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
                     </label>
                     <br />
                     <label>
-                        Body:
-                        <input type="text" value={body} onChange={(e) => setBody(e.target.value)} required />
+                        Body: <input type="text" value={body} onChange={(e) => setBody(e.target.value)} required />
                     </label>
                     <br />
                     <label>
-                        Writer:
-                        <input type="text" value={writer} onChange={(e) => setWriter(e.target.value)} required />
+                        Writer: <input type="text" value={writer} onChange={(e) => setWriter(e.target.value)} required />
                     </label>
                     <br />
                     <label>
-                        Picture:
-                        <input type="text" value={picture} onChange={(e) => setPicture(e.target.value)} />
+                        Picture: <input type="text" value={picture} onChange={(e) => setPicture(e.target.value)} />
                     </label>
                     <br />
                     <label>
-                        URL:
-                        <input type="text" value={url_link} onChange={(e) => setUrl(e.target.value)} required />
+                        URL: <input type="text" value={url_link} onChange={(e) => setUrl(e.target.value)} required />
                     </label>
                     <br />
                     <button type="submit" disabled={result.isLoading}>

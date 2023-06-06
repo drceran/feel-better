@@ -18,15 +18,13 @@ Today we're gonna get into authorization. Been having trouble merging with main 
 
 May 23, 2023 Tuesday
 I fixed the ghi in the compose file since it kept exiting out of the container, i also spent some time putting an image as a background for localhost:3000. i have to redo my resources migration bc only therapists can post a resource. learned that this line: CONSTRAINT therapist_writer CHECK (
-                writer IN (
-                    SELECT id FROM jotters WHERE user_type = 'therapist'
-                ))
+writer IN (
+SELECT id FROM jotters WHERE user_type = 'therapist'
+))
 checks to see if the writer has an existing id in jotters and has an id type of therapist
-
 
 May 24, 2023 Wednesday
 Today i figured out how to do the frontend authorization! but my challenge is to do it with redux. I created the store, api, and edited my login form and it seems to be working fine but i'm not entirely sure if its correct yet.
-
 
 May 25, 2023 Thursday
 after merging with main my localhost:3000 is filled with errors and it seems like some dependencies got deleted, so i added them back in and i'm getting a bunch of errors. ended up fixing the login again, and started working on list pages.
@@ -41,10 +39,19 @@ May 29, 2023 Monday
 I learned that i can only use the endpoints that we made on our backend, so I have to display clients/therapists on /jotters.
 
 May 30, 2023 Tuesday
-Learned a bit  more about redux but still very confused on how to manage the state properly. I worked on resources list with a search bar functionality, and when clicking on a resource, it will show the details of it at the bottom of the list.
+Learned a bit more about redux but still very confused on how to manage the state properly. I worked on resources list with a search bar functionality, and when clicking on a resource, it will show the details of it at the bottom of the list.
 
 May 31, 2023 Wednesday
 Still have not been able to filter through the lists, I want to be able to say if the logged in user has a user.type of 'client' then show this on their page and vise versa for 'therapist'. And not sure how to see how clients/therapists are connected to eachother. I was thinking of connecting them through appointments since its too late to change too much in our backend but I'm still a bit stuck for filtering through.
 
 June 1, 2023 Thursday
 I made changes to our appointments schema to make sure that when making an appointment, the appointment is only scheduled with a therapist. I also created a list of client appointments and list of appointments for therapists. I created a form to create an appointment but its not working yet. I also created a create resource button that shows up with a form but it is not working yet. pulling from main has giving me so many crazy errors that i cannot fix and can't even build my docker so i had to resort to going back to an old commit to try to get some work done.
+
+June 3, 2023 Saturday
+I created delete/edit for resources and finally got the form to work! Esra helped me figure out how to display certain things when a user type is logged in so we got the resources list available to clients/unauthorized users and the list/edit/delete/form only available to therapist users!!
+
+June 4, 2023 Sunday
+I spent the entire day trying to list out appointments for users and therapists. I had to go back to the backend and add another function to list appointments for therapists, it would not work if i combined them together. I added a new query to appointmentsapi to grab the therapist information from the new endpoint i had to create to be able to get therapist appointments. I can successfully see a user's upcoming appointments as a logged in user and a therapist's upcoming appointments as a logged in therapist!
+
+June 5, 2023 Monday
+Finished appointments form, cancel, and rescheduling features.
