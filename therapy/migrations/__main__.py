@@ -33,6 +33,7 @@ async def migrate():
 
 
 if __name__ == "__main__":
-    from asyncio import run
+    # from asyncio import run
 
-    run(migrate())
+    # run(migrate())
+    print("Migration would have run already.")
