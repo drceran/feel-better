@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useGetOneMessageQuery } from './store/messagesAPI';
 
+
 function MessageDetails() {
   const { id } = useParams();
   const { data: message, error, isLoading } = useGetOneMessageQuery(id);
