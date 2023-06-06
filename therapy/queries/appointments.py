@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from datetime import date, time
-from typing import Optional, Union, List
+from typing import Union, List
 from queries.pool import pool
 
 
@@ -89,11 +89,11 @@ class AppointmentRepository:
                         """
                         UPDATE appointments
                         SET user_id = %s
-                         , therapist_id = %s
-                         , appointment_date = %s
-                         , appointment_time = %s
-                         , cost = %s
-                         WHERE id = %s
+                        , therapist_id = %s
+                        , appointment_date = %s
+                        , appointment_time = %s
+                        , cost = %s
+                        WHERE id = %s
                         """,
                         [
                             appointment.user_id,
@@ -110,18 +110,57 @@ class AppointmentRepository:
             print(e)
             return {"Message": "something broke about the update"}
 
-    def get_all_appointments(self) -> Union[Error, List[AppointmentOut]]:
+    def get_all_appointments_for_user(
+        self, user_id: int
+    ) -> Union[Error, List[AppointmentOut]]:
         try:
             # connect to the database
             with pool.connection() as conn:
                 # get a cursor (something to run SQ: with)
                 with conn.cursor() as db:
-                    result = db.execute(
+                    db.execute(
                         """
-                        SELECT id, user_id, therapist_id, appointment_date, appointment_time, cost
+                        SELECT id, user_id, therapist_id, appointment_date,
+                        appointment_time, cost
                         FROM appointments
+                        WHERE user_id = %s
                         ORDER BY appointment_date ASC;
+                        """,
+                        [user_id]
+                    )
+                    records = db.fetchall()
+                    return [
+                        AppointmentOut(
+                            id=record[0],
+                            user_id=record[1],
+                            therapist_id=record[2],
+                            appointment_date=record[3],
+                            appointment_time=record[4],
+                            cost=record[5],
+                        )
+                        for record in records
+                    ]
+        except Exception as e:
+            print(e)
+            return {"Message": "something broke about the appointments"}
+
+    def get_all_appointments_for_therapist(
+        self, therapist_id: int
+    ) -> Union[Error, List[AppointmentOut]]:
+        try:
+            # connect to the database
+            with pool.connection() as conn:
+                # get a cursor (something to run SQ: with)
+                with conn.cursor() as db:
+                    db.execute(
                         """
+                        SELECT id, user_id, therapist_id, appointment_date,
+                        appointment_time, cost
+                        FROM appointments
+                        WHERE therapist_id = %s
+                        ORDER BY appointment_date ASC;
+                        """,
+                        [therapist_id]
                     )
                     records = db.fetchall()
                     return [

@@ -28,7 +28,8 @@ steps = [
     [
         # "Up" Table journal SQL statement
         """
-        CREATE TYPE mood AS ENUM ('happy', 'sad', 'angry', 'anxious', 'neutral', 'ambitious', 'carefree');
+        CREATE TYPE mood AS ENUM ('happy', 'sad', 'angry', 'anxious',
+          'neutral', 'ambitious', 'carefree');
         CREATE TABLE journals (
             id SERIAL PRIMARY KEY NOT NULL,
             user_id INTEGER REFERENCES jotters(id),

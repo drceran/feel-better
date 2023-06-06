@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCreateJournalMutation } from '../store/journalsAPI';
 import ErrorNotification from '../ErrorNotification';
-import { usersApi } from '../store/usersApi';
 import { useGetTokenQuery } from '../store/usersApi';
 
 function JournalForm() {
@@ -15,7 +14,7 @@ function JournalForm() {
     const [error, setError] = useState('');
 
     const [createJournal, result] = useCreateJournalMutation();
-    const { data, errorToken } = useGetTokenQuery();
+    const { data } = useGetTokenQuery();
 
 
     async function handleSubmit(e) {

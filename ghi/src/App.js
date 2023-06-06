@@ -12,9 +12,8 @@ import JournalEntry from "./components/JournalOne";
 import JournalList from "./components/JournalList";
 import JournalForm from "./components/JournalForm";
 import ResourcesList from "./components/ResourcesList";
-import ClientsList from "./components/Clientslist";
-import AppointmentList from "./components/AppointmentsList";
-import ClientList from "./components/AppointmentsList";
+import AppointmentList from "./components/AppointmentList";
+import AppointmentForm from "./components/AppointmentForm"
 import UserProfile from "./authorization/UserProfile";
 import Logout from "./authorization/Logout";
 import Pricing from "./Pricing";
@@ -25,6 +24,7 @@ import MessagesEdit from "./MessagesEdit";
 // import ResourceForm from "./components/ResourceForm";
 import { Spotify } from "./Spotify";
 import SpotifyPlayer from "./SpotifyPlayer";
+
 
 const domain = /https:\/\/[^/]+/;
 const basename = process.env.PUBLIC_URL.replace(domain, "");
@@ -44,7 +44,6 @@ function App() {
             <Route exact path="/editProfile/:id" element={<ProfileForm />}></Route>
             <Route exact path="/" element={<Main />} />
             <Route exact path="/signup" element={<SignupForm />} />
-            {/* <Route exact path="/login" element={<LoginForm />} /> */}
             <Route exact path="/messages" element={<MessagesList />} />
             <Route exact path="/messages/new" element={<MessagesForm />} />
             <Route exact path="/messages/:id/edit" element={< MessagesEdit />} />
@@ -57,9 +56,8 @@ function App() {
             <Route exact path="/spotify" element={<Spotify />} />
             <Route exact path="/spotifyPlayer" element={<SpotifyPlayer />} />
             <Route exact path="/resources" element={<ResourcesList />}></Route>
-            <Route exact path="/jotters" element={<ClientsList />}></Route>
             <Route exact path="/appointments" element={<AppointmentList />}></Route>
-            <Route exact path="/appointments" element={<ClientList />}></Route>
+            <Route exact path="/appointments/create" element={<AppointmentForm />}></Route>
           </Routes >
         </AuthProvider >
       </BrowserRouter >
