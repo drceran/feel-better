@@ -29,6 +29,18 @@ def get_all_appointments_for_user(
     return repo.get_all_appointments_for_user(user_id)
 
 
+@router.get(
+    "/therapistappointments/{therapist_id}",
+    response_model=Union[List[AppointmentOut], Error],
+)
+def get_all_appointments_for_therapist(
+    repo: AppointmentRepository = Depends(),
+    user_data: Dict = Depends(authenticator.get_current_account_data),
+):
+    therapist_id = user_data["id"]
+    return repo.get_all_appointments_for_therapist(therapist_id)
+
+
 @router.delete(
     "/appointments/{appointment_id}",
     response_model=bool,

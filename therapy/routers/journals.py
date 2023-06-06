@@ -30,13 +30,9 @@ async def create_journal(
     journal_data: dict = Depends(authenticator.get_current_account_data),
 ):
     if journal_data and authenticator.cookie_name:
-        user_id = journal_data["id"]
-        print(journal)
+        journal.user_id = journal_data["id"]
         return repo.create(journal)
     return Error(message="Authentication failed")
-    # journal.user_id = journal_data["id"]
-    # print(journal)
-    # return repo.create(journal)
 
 
 @router.get("/journals/", response_model=Union[Error, List[JournalOut]])

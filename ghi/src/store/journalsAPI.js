@@ -10,7 +10,7 @@ export const journalsApi = createApi({
             const selector = usersApi.endpoints.getToken.select();
             const { data: tokenData } = selector(getState());
 
-            if (tokenData && tokenData.access_token) {
+            if (tokenData && tokenData?.access_token) {
                 headers.set('Authorization', `Bearer ${tokenData.access_token}`)
             }
             return headers
@@ -25,7 +25,6 @@ export const journalsApi = createApi({
                 return {
                     url: `/journals/${id}`,
                     method: "get",
-
                 };
             },
         }),

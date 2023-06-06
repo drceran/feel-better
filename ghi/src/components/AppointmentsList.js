@@ -1,96 +1,68 @@
 import React from "react";
-import { useGetAppointmentsQuery, useCreateAppointmentMutation } from "../store/appointmentsApi";
-import { useParams } from "react-router-dom";
+import { useGetClientAppointmentsQuery, useEditAppointmentMutation, useDeleteAppointmentMutation, useGetTherapistAppointmentsQuery } from "../store/appointmentsApi";
 import { useGetTokenQuery } from "../store/usersApi";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function AppointmentList() {
-    const { id } = useParams();
-    const { data: clientAppointments, isLoading } = useGetAppointmentsQuery(id);
-    const { data: token, refetch: refetchToken } = useGetTokenQuery();
 
-    if (isLoading || !clientAppointments) {
-        return <progress className="progress is-primary" max="100"></progress>;
-    }
-}
+export default function AppointmentList() {
 
-function AppointmentForm({ onSubmit }) {
-    const [appointmentData, setAppointmentData] = useState({
-        therapist_id: "",
-        appointment_date: "",
-        appointment_time: "",
-    });
+    const { data, error } = useGetTokenQuery();
+    const { data: appointments } = useGetClientAppointmentsQuery(data?.account.id);
+    const { data: therapistsappointments } = useGetTherapistAppointmentsQuery(data?.account.id)
+    const [editAppointment] = useEditAppointmentMutation();
+    const [deleteAppointment] = useDeleteAppointmentMutation();
+    const navigate = useNavigate();
 
-    const handleChange = (e) => {
-    setAppointmentData((prevData) => ({
-        ...prevData,
-        [e.target.name]: e.target.value,
-        }));
+    const handleScheduleAppointment = () => {
+        navigate("/appointments/create");
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onSubmit(appointmentData);
+    const handleCancelAppointment = async (id) => {
+        try {
+            await deleteAppointment(id);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
-    return (
-        <div>
-        <h2>Create Appointment</h2>
-        <form onSubmit={handleSubmit}>
+    const handleRescheduleAppointment = async (id, data) => {
+        try {
+            await editAppointment({ id, data });
+            navigate("/appointments/create")
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+
+    if (data && data.access_token && data.account.type === "client") {
+        return (
             <div>
-            <label htmlFor="therapist_id">Therapist ID:</label>
-            <input type="text" id="therapist_id" name="therapist_id" value={appointmentData.therapist_id} onChange={handleChange}/>
+                <h2>My Appointments</h2>
+                {appointments?.map((appointment) => (
+                    <div key={appointment.id}>
+                        <p>Therapist: {appointment.therapist_id} Date: {appointment.appointment_date} Time: {appointment.appointment_time}
+                            <button onClick={() => handleCancelAppointment(appointment.id)}>Cancel </button>
+                            <button onClick={() => handleRescheduleAppointment(appointment.id, data)}> Reschedule</button></p>
+                    </div>
+                ))}
+                <button onClick={handleScheduleAppointment}>Schedule an Appointment</button>
             </div>
-            <div>
-            <label htmlFor="appointment_date">Date:</label>
-            <input type="date" id="appointment_date" name="appointment_date" value={appointmentData.appointment_date} onChange={handleChange} />
-            </div>
-            <div>
-            <label htmlFor="appointment_time">Time:</label>
-            <input type="time" id="appointment_time" name="appointment_time" value={appointmentData.appointment_time} onChange={handleChange} />
-        </div>
-        <button type="submit">Create</button>
-        </form>
-        </div>
         );
-}
+    } else if (data && data.access_token && data.account.type === "therapist") {
+        return (
+            <div>
+                <h2>My Appointments</h2>
+                {therapistsappointments?.map((appointment) => (
+                    <div key={appointment.id}>
+                        <p>Client: {appointment.user_id} Date: {appointment.appointment_date} Time: {appointment.appointment_time}
+                            <button onClick={() => handleCancelAppointment(appointment.id)}>Cancel </button> </p>
+                    </div>
+                ))}
+            </div>
+        );
+    } else {
 
-function ClientList() {
-    const { id } = useParams();
-    const { data: clientAppointments, isLoading } = useGetAppointmentsQuery(id);
-    const { data: token, refetch: refetchToken } = useGetTokenQuery();
-    const createAppointment = useCreateAppointmentMutation();
-
-    if (isLoading || !clientAppointments) {
-        return <progress className="progress is-primary" max="100"></progress>;
+        return <div>oopsie.</div>; // return something else if user is not a therapist
     }
-
-    const handleCreateAppointment = (appointmentData) => {
-       createAppointment(appointmentData);
-    };
-
-    return (
-        <div>
-        <h2>Appointments for Client</h2>
-        <AppointmentList />
-        {clientAppointments.map((appointment) => (
-            <div key={appointment.id}>
-                <p>Therapist: {appointment.therapist_id}</p>
-                <p>Date: {appointment.appointment_date}</p>
-                <p>Time: {appointment.appointment_time}</p>
-            </div>
-        ))}
-        <h2>Appointments for therapist</h2>
-        {clientAppointments.map((appointment) => (
-            <div key={appointment.id}>
-            <p>Client: {appointment.user_id}</p>
-            <p>Date: {appointment.appointment_date}</p>
-            <p>Time: {appointment.appointment_time}</p>
-            </div>
-        ))}
-        <AppointmentForm onSubmit={handleCreateAppointment} />
-        </div>
-    );
 }
-
-export default ClientList;

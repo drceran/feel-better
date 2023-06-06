@@ -172,7 +172,7 @@ class JournalRepository:
                     # return JournalOut(id=id, **old_data)
                     return self.journal_in_to_out(id, journal)
         except Exception:
-            return {"message": "Could not create journal"}
+            return Error(message="Could not create journal")
 
     def journal_in_to_out(self, id: int, journal: JournalIn):
         old_data = journal.dict()

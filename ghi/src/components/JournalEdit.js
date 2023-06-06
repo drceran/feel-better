@@ -51,7 +51,7 @@ function JournalFormEdit() {
             }
 
             const result = await editJournal(journ);
-            console.log(result);
+
             if (result) {
                 navigate("/journals/");
             } else if (result.isError) {

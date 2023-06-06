@@ -33,6 +33,12 @@ export default function Nav() {
           current: true,
           destination: "/messages/",
         },
+        {
+          name: "Appointments",
+          href: "#",
+          current: true,
+          destination: "/appointments/",
+        },
       ]);
     } else {
       setNavigation([]);

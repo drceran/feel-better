@@ -15,7 +15,7 @@ function Logout() {
 
   useEffect(() => {
     if (data) {
-      dispatch(logout);
+      dispatch(logout());
     }
   }, [data, dispatch]);
 

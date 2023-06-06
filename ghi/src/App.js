@@ -24,6 +24,7 @@ import ProfileForm from "./authorization/ProfileForm";
 // import ResourceForm from "./components/ResourceForm";
 import HomePage from "./home";
 // import { Spotify } from "./Spotify";
+import AppointmentForm from "./components/AppointmentForm";
 
 const domain = /https:\/\/[^/]+/;
 const basename = process.env.PUBLIC_URL.replace(domain, "");
@@ -59,6 +60,8 @@ function App() {
             <Route exact path="/jotters" element={<ClientsList />}></Route>
             <Route exact path="/appointments" element={<AppointmentList />}></Route>
             <Route exact path="/appointments" element={<ClientList />}></Route>
+            <Route exact path="/appointments/create" element={<AppointmentForm />}></Route>
+
           </Routes >
         </AuthProvider >
       </BrowserRouter >

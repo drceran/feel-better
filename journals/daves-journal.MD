@@ -48,3 +48,9 @@ I've spent the last few days trying to figure out how to finish the authenticati
 I am also going to follow up on the other endpoints to ensure that they work as intended. 
 
 Spent a lot more time flushing out the rest of the front-end points for Journals and completed them!
+
+## June 5, 2023
+
+Helped Melody with some errors she was having trouble with on the appointments CRUD front end pages. Helped Esra fix an error with the Logout component. Worked with Martey in learning how to apply the "?" in different components to allow components to load only once they have their data. 
+
+## June 6, 2023

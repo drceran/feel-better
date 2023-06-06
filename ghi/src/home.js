@@ -10,7 +10,9 @@ import { useGetTokenQuery } from "./store/usersApi";
 
 const HomePage = () => {
     const { data, error } = useGetTokenQuery();
-    const userType = data.account.type;
+    const userType = data?.account.type;
+
+
 
     console.log(data);
     if (userType == 'client') {
@@ -23,7 +25,7 @@ const HomePage = () => {
             <div>
                 <JournalList />
                 <ClientsList />
-                {/* <ClientList /> */}
+                <ClientList />
             </div>
         </>
     )
