@@ -1,9 +1,7 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { selectMessage } from './store/messagesSlice';
 
 function MessageDetails() {
-    const { id } = useParams();
     console.log(selectMessage);
 
     if (!selectMessage) {

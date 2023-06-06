@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { useCallback } from "react";
+
 
 function ProfileForm() {
 
@@ -16,7 +16,7 @@ function ProfileForm() {
   useEffect(() => {
     setFormData(data || {});
   }, [data]);
-  const [error, setError] = useState("");
+  const [setError] = useState("");
 
   const [editUSer, result] = useEditUserInfoMutation();
 
@@ -43,7 +43,7 @@ function ProfileForm() {
     if (result.isSuccess) {
       navigate("/jotters/" + data.id);
     }
-  }, [result]);
+  }, [result, data.id, navigate]);
 
   if (result.isError) {
     setError(result.error);

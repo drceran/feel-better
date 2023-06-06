@@ -3,8 +3,10 @@ from typing import Optional, List, Union
 from datetime import datetime
 from queries.pool import pool
 
+
 class Error(BaseModel):
     message: str
+
 
 class ResourceIn(BaseModel):
     title: str
@@ -29,7 +31,9 @@ class ResourceRepository:
                         SELECT * FROM resources
                         WHERE id = %s
                         """,
-                        [resource_id,]
+                        [
+                            resource_id,
+                        ],
                     )
                     record = result.fetchone()
                 if record:
@@ -37,31 +41,37 @@ class ResourceRepository:
                 else:
                     return {"message": "Resource does not exist."}
         except Exception as e:
+            print(e)
             return {"message": "Cannot load resource details."}
 
     def delete_resource(self, resource_id: int) -> bool:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    result = db.execute(
+                    db.execute(
                         """
                         DELETE FROM resources
                         WHERE id = %s
                         """,
-                        [resource_id,]
+                        [
+                            resource_id,
+                        ],
                     )
                     return True
         except Exception:
             return False
 
-    def update(self, resource_id: int, resource:ResourceIn) -> Union[ResourceOut, Error]:
+    def update(
+        self, resource_id: int, resource: ResourceIn
+    ) -> Union[ResourceOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    result = db.execute(
+                    db.execute(
                         """
                         UPDATE resources
-                        SET title = %s, body = %s, writer = %s, picture = %s, url_link = %s
+                        SET title = %s, body = %s, writer = %s,
+                          picture = %s, url_link = %s
                         WHERE id = %s
                         """,
                         [
@@ -71,8 +81,7 @@ class ResourceRepository:
                             resource.picture,
                             resource.url_link,
                             resource_id,
-
-                        ]
+                        ],
                     )
                 return self.resource_in_to_out(resource_id, resource)
         except Exception:
@@ -84,12 +93,16 @@ class ResourceRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT id, title, body, writer, picture, url_link, posted_date
+                        SELECT id, title, body, writer, picture,
+                          url_link, posted_date
                         FROM resources
                         ORDER BY posted_date;
                         """
                     )
-                    return [self.record_to_resource_out(record) for record in result]
+                    return [
+                        self.record_to_resource_out(record)
+                        for record in result
+                    ]
         except Exception:
             return {"message": "Could not get resources."}
 
@@ -105,7 +118,13 @@ class ResourceRepository:
                             (%s, %s, %s, %s, %s)
                         RETURNING id, posted_date;
                         """,
-                        [resource.title, resource.body, resource.writer, resource.picture, resource.url_link]
+                        [
+                            resource.title,
+                            resource.body,
+                            resource.writer,
+                            resource.picture,
+                            resource.url_link,
+                        ],
                     )
                     id, posted_date = result.fetchone()
                     old = resource.dict()
@@ -113,7 +132,7 @@ class ResourceRepository:
         except Exception:
             return {"message": "Could not create resource."}
 
-    def resource_in_to_out(self, id:int, resource: ResourceIn):
+    def resource_in_to_out(self, id: int, resource: ResourceIn):
         old_data = resource.dict()
         return ResourceOut(id=id, **old_data)
 
@@ -126,7 +145,7 @@ class ResourceRepository:
                 writer=record[3],
                 picture=record[4],
                 url_link=record[5],
-                posted_date=record[6]
+                posted_date=record[6],
             )
         else:
             return None

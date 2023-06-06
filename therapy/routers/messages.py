@@ -33,8 +33,6 @@ async def get_all_messages(
     return Error(message="Authentication failed")
 
 
-
-
 @router.delete("/messages/{message_id}", response_model=bool)
 async def delete_message(
     message_id: int,
@@ -42,7 +40,6 @@ async def delete_message(
     message_data: dict = Depends(authenticator.get_current_account_data),
 ) -> bool:
     return repo.delete_message(message_id)
-
 
 
 @router.put("/messages/{message_id}", response_model=Union[MessageOut, Error])

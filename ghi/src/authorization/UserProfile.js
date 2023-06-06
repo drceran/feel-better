@@ -1,6 +1,5 @@
 import { useGetUserInfoQuery } from "../store/usersApi";
 import { useParams } from "react-router";
-import { useNavigate } from "react-router-dom";
 
 function UserProfile() {
   const { id } = useParams();

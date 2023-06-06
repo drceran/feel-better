@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useGetTokenQuery, usersApi } from "./store/usersApi";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useGetTokenQuery } from "./store/usersApi";
 import { useNavigate } from "react-router-dom";
 
 function classNames(...classes) {
@@ -9,7 +9,7 @@ function classNames(...classes) {
 }
 export default function Nav() {
   const navigate = useNavigate();
-  const { data, error } = useGetTokenQuery();
+  const { data } = useGetTokenQuery();
   const [navigation, setNavigation] = useState([]);
 
   useEffect(() => {
@@ -97,9 +97,9 @@ export default function Nav() {
                 {/* Profile dropdown */}
                 {data ? (
                   <>
-                    <a className="text-slate-100">
+                    <p className="text-slate-100">
                       Welcome {data.account.first_name}
-                    </a>
+                    </p>
 
                     <Menu as="div" className="relative ml-3">
                       <div>
@@ -125,7 +125,7 @@ export default function Nav() {
                         <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <Menu.Item>
                             {({ active }) => (
-                              <a
+                              <p
                                 href="#"
                                 onClick={() =>
                                   navigate("/editProfile/" + data.account.id)
@@ -136,12 +136,12 @@ export default function Nav() {
                                 )}
                               >
                                 Edit Profile
-                              </a>
+                              </p>
                             )}
                           </Menu.Item>
                           <Menu.Item>
                             {({ active }) => (
-                              <a
+                              <p
                                 href="#"
                                 onClick={() => navigate("/logout")}
                                 className={classNames(
@@ -150,7 +150,7 @@ export default function Nav() {
                                 )}
                               >
                                 Logout
-                              </a>
+                              </p>
                             )}
                           </Menu.Item>
                         </Menu.Items>
@@ -182,7 +182,7 @@ export default function Nav() {
                       <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item>
                           {({ active }) => (
-                            <a
+                            <p
                               href="#"
                               onClick={() => navigate("/signup")}
                               className={classNames(
@@ -191,12 +191,12 @@ export default function Nav() {
                               )}
                             >
                               Signup
-                            </a>
+                            </p>
                           )}
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
+                            <p
                               href="#"
                               onClick={() => navigate("/login")}
                               className={classNames(
@@ -205,7 +205,7 @@ export default function Nav() {
                               )}
                             >
                               Login
-                            </a>
+                            </p>
                           )}
                         </Menu.Item>
                       </Menu.Items>

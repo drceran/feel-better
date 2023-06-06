@@ -50,7 +50,8 @@ class JournalRepository:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        SELECT id, user_id, body, name, date_time, is_private, mood
+                        SELECT id, user_id, body, name, date_time,
+                          is_private, mood
                         FROM journals
                         WHERE user_id = %s AND id = %s
                         """,
@@ -154,7 +155,8 @@ class JournalRepository:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        INSERT INTO journals (user_id, body, name, date_time, is_private, mood)
+                        INSERT INTO journals (user_id, body,
+                          name, date_time, is_private, mood)
                         VALUES (%s, %s, %s, %s, %s, %s)
                         RETURNING id
                         """,
