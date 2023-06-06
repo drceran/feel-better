@@ -12,8 +12,6 @@ from authenticator import authenticator
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
-from queries.pool import pool
-
 app = FastAPI()
 
 app.add_middleware(
