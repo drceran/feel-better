@@ -26,9 +26,9 @@ steps = [
         FOR EACH ROW EXECUTE PROCEDURE check_writer_is_therapist();
         """,
         """
-        DROP TRIGGER IF EXIST writer_check
+        DROP TRIGGER IF EXISTS writer_check
         ON resources;
-        DROP FUNCTION IF EXIST check_writer_is_therapist;
+        DROP FUNCTION IF EXISTS check_writer_is_therapist;
         DROP TABLE resources;
         """,
     ],

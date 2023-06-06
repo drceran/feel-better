@@ -27,9 +27,9 @@ steps = [
         """,
         # "Down" SQL statement
         """
-        DROP TRIGGER IF EXIST appointee_check
+        DROP TRIGGER IF EXISTS appointee_check
         ON appointments;
-        DROP FUNCTION IF EXIST check_therapist_id_is_therapist;
+        DROP FUNCTION IF EXISTS check_therapist_id_is_therapist;
         DROP TABLE appointments;
         """,
     ],
