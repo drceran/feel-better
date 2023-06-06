@@ -21,8 +21,8 @@ function JournalEntry() {
     return (
         <div>
             <div>
-                <a><Link to={`/home/`}>Home</Link></a>
-                <a><Link to={`/journals/${id}/edit`}>Edit</Link></a>
+                <p><Link to={`/home/`}>Home</Link></p>
+                <p><Link to={`/journals/${id}/edit`}>Edit</Link></p>
             </div>
             <h2>{journal.name} - {new Date(journal.date_time).toLocaleString()}</h2>
             <p>{journal.body}</p>

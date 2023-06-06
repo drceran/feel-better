@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useCreateResourceMutation, useEditResourceMutation, useGetResourceDetailQuery } from "../store/resourcesApi";
+import { useCreateResourceMutation } from "../store/resourcesApi";
 import { useGetTokenQuery } from "../store/usersApi";
 import ErrorNotification from "../ErrorNotification";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ export default function ResourceForm() {
     const [showForm, setShowForm] = useState(false);
 
     const [createResource, result] = useCreateResourceMutation();
-    const { data, errorToken } = useGetTokenQuery();
+    const { data } = useGetTokenQuery();
 
     async function handleSubmit(e) {
         e.preventDefault();
