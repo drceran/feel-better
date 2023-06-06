@@ -1,7 +1,6 @@
 import React from "react";
 import { useGetAppointmentsQuery, useCreateAppointmentMutation } from "../store/appointmentsApi";
 import { useParams } from "react-router-dom";
-import { useGetTokenQuery } from "../store/usersApi";
 import { useState } from "react";
 
 function AppointmentList() {
