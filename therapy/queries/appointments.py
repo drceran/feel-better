@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from datetime import date, time
-from typing import Optional, Union, List
+from typing import Union, List
 from queries.pool import pool
 
 
@@ -89,11 +89,11 @@ class AppointmentRepository:
                         """
                         UPDATE appointments
                         SET user_id = %s
-                         , therapist_id = %s
-                         , appointment_date = %s
-                         , appointment_time = %s
-                         , cost = %s
-                         WHERE id = %s
+                        , therapist_id = %s
+                        , appointment_date = %s
+                        , appointment_time = %s
+                        , cost = %s
+                        WHERE id = %s
                         """,
                         [
                             appointment.user_id,
@@ -118,14 +118,15 @@ class AppointmentRepository:
             with pool.connection() as conn:
                 # get a cursor (something to run SQ: with)
                 with conn.cursor() as db:
-                    result = db.execute(
+                    db.execute(
                         """
-                        SELECT id, user_id, therapist_id, appointment_date, appointment_time, cost
+                        SELECT id, user_id, therapist_id, appointment_date,
+                        appointment_time, cost
                         FROM appointments
                         WHERE user_id = %s
                         ORDER BY appointment_date ASC;
                         """,
-                        [user_id],
+                        [user_id]
                     )
                     records = db.fetchall()
                     return [
@@ -151,14 +152,15 @@ class AppointmentRepository:
             with pool.connection() as conn:
                 # get a cursor (something to run SQ: with)
                 with conn.cursor() as db:
-                    result = db.execute(
+                    db.execute(
                         """
-                        SELECT id, user_id, therapist_id, appointment_date, appointment_time, cost
+                        SELECT id, user_id, therapist_id, appointment_date,
+                        appointment_time, cost
                         FROM appointments
                         WHERE therapist_id = %s
                         ORDER BY appointment_date ASC;
                         """,
-                        [therapist_id],
+                        [therapist_id]
                     )
                     records = db.fetchall()
                     return [

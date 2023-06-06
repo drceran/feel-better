@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends
 from typing import Union, List, Dict
 from authenticator import authenticator
 from queries.appointments import (
@@ -15,9 +15,12 @@ router = APIRouter()
 def create_appointment(
     appointment: AppointmentIn,
     repo: AppointmentRepository = Depends(),
-    user_data: Dict = Depends(authenticator.get_current_account_data),
+    user_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    return repo.create(appointment)
+    if user_data and authenticator.cookie_name:
+        appointment.user_id = user_data["id"]
+        return repo.create(appointment)
+    return Error(message="Authentication failed")
 
 
 @router.get("/appointments", response_model=Union[List[AppointmentOut], Error])
@@ -29,10 +32,8 @@ def get_all_appointments_for_user(
     return repo.get_all_appointments_for_user(user_id)
 
 
-@router.get(
-    "/therapistappointments/{therapist_id}",
-    response_model=Union[List[AppointmentOut], Error],
-)
+@router.get("/therapistappointments/{therapist_id}",
+            response_model=Union[List[AppointmentOut], Error])
 def get_all_appointments_for_therapist(
     repo: AppointmentRepository = Depends(),
     user_data: Dict = Depends(authenticator.get_current_account_data),

@@ -34,7 +34,7 @@ export const appointmentsApi = createApi({
             }),
         }),
         getClientAppointments: builder.query({
-            query: () => ({
+            query: (id) => ({
                 url: `/appointments`,
                 method: "get",
                 credentials: "include",
@@ -55,7 +55,7 @@ export const appointmentsApi = createApi({
         }),
         deleteAppointment: builder.mutation({
             query: (id) => ({
-                url: `/resources/${id}`,
+                url: `/appointments/${id}`,
                 method: "delete",
             }),
         }),

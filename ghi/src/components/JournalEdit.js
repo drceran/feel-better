@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEditJournalMutation, useGetOneJournalQuery } from '../store/journalsAPI';
 import ErrorNotification from '../ErrorNotification';
-import { usersApi } from '../store/usersApi';
 import { useGetTokenQuery } from '../store/usersApi';
 import { useParams } from 'react-router-dom';
 
@@ -32,7 +31,7 @@ function JournalFormEdit() {
     }, [journal]);
 
     const [editJournal, result] = useEditJournalMutation(id);
-    const { data, errorToken } = useGetTokenQuery();
+    const { data } = useGetTokenQuery();
 
 
     async function handleSubmit(e) {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Spotify } from "./Spotify";
 
 function SpotifyPlayer() {
-    const [token, setToken] = useState("");
+    const [token] = useState("");
 
     useEffect(() => {
         window.onSpotifyWebPlaybackSDKReady = () => {

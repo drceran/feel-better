@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Depends, Response
 from typing import Union, List, Optional  # union means more than one thing
-from datetime import datetime
 from queries.resources import (
     ResourceIn,
     ResourceRepository,

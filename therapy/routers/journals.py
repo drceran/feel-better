@@ -4,19 +4,9 @@ from queries.journals import (
     JournalRepository,
     JournalOut,
     Error,
-    JournalToken,
 )
 from typing import Union, List, Optional
 from authenticator import authenticator
-from fastapi import (
-    APIRouter,
-    Depends,
-    Response,
-    Request,
-    HTTPException,
-    status,
-)
-from routers.accounts import AccountForm, get_token
 
 
 router = APIRouter()

@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import Optional, Union, List
+from typing import Union, List
 from queries.pool import pool
 
 
@@ -31,7 +31,9 @@ class MessageOut(BaseModel):
 
 
 class MessageRepository:
-    def get_one_message(self, user_id: int, message_id: int) -> Union[Error, MessageOut]:
+    def get_one_message(
+        self, user_id: int, message_id: int
+    ) -> Union[Error, MessageOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -136,7 +138,8 @@ class MessageRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT id, user_id, recipient, subject, body, cost, datetime
+                        SELECT id, user_id, recipient,
+                          subject, body, cost, datetime
                         FROM messages
                         WHERE user_id = %s
                         """,
@@ -163,7 +166,9 @@ class MessageRepository:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 # Check if the user_id exists in the jotters table
-                db.execute("SELECT id FROM jotters WHERE id = %s", [message.user_id])
+                db.execute(
+                    "SELECT id FROM jotters WHERE id = %s", [message.user_id]
+                )
                 record = db.fetchone()
                 if record is None:
                     return {"message": "User not found with the given user_id"}
@@ -171,7 +176,8 @@ class MessageRepository:
                 # User exists, proceed with message creation
                 result = db.execute(
                     """
-                    INSERT INTO messages (user_id, recipient, subject, body, cost)
+                    INSERT INTO messages (user_id, recipient,
+                      subject, body, cost)
                     VALUES (%s, %s, %s, %s, %s)
                     RETURNING id, datetime;
                     """,

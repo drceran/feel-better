@@ -12,3 +12,18 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+/* html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("./images/twopagespit.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  ;
+} */

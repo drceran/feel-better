@@ -3,20 +3,22 @@ import { useCreateAppointmentMutation } from "../store/appointmentsApi";
 import { useGetTherapistsQuery, useGetTokenQuery } from "../store/usersApi";
 import { useNavigate } from "react-router-dom";
 
+
 export default function AppointmentForm() {
     const { data: getTherapist, isLoading } = useGetTherapistsQuery();
     const [createAppointment] = useCreateAppointmentMutation();
-    const [error, setError] = useState("");
-    const { data, errorToken } = useGetTokenQuery();
+    const [setError] = useState("");
+    const { data } = useGetTokenQuery();
     const navigate = useNavigate();
 
-    const therapists = getTherapist?.filter((therapist) => therapist.type === "therapist") || [];
 
+    const therapists = getTherapist?.filter((therapist) => therapist.type === "therapist") || [];
     const [appointmentData, setAppointmentData] = useState({
         therapist_id: "",
         appointment_date: "",
         appointment_time: "",
     });
+
 
     const handleChange = (e) => {
         setAppointmentData((oldData) => ({
@@ -27,17 +29,17 @@ export default function AppointmentForm() {
 
 
     const handleSubmit = async (e) => {
-
         e.preventDefault();
+        console.log(appointmentData)
+        console.log(data)
         try {
             const appt = {
                 user_id: data.account.id,
                 therapist_id: appointmentData.therapist_id,
                 appointment_date: appointmentData.appointment_date,
                 appointment_time: appointmentData.appointment_time,
-                cost: data.account.balance,
+                cost: (data.account.balance),
             };
-
             const result = await createAppointment(appt);
             if (result.isSuccess) {
                 navigate("/appointments");
@@ -45,15 +47,14 @@ export default function AppointmentForm() {
                 setError(result.error);
             }
         } catch (err) {
-            console.log(err);
-
+            setError(err);
         }
     };
+
 
     if (isLoading) {
         return <progress className="progress is-primary" max="100"></progress>;
     }
-
     return (
         <div>
             <form onSubmit={handleSubmit}>
