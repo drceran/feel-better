@@ -78,7 +78,8 @@ def fake_jotters_in(jotter):
 
 
 def test_get_all_jotters():
-    app.dependency_overrides[authenticator.get_current_account_data] = fake_get_current_jotters_data
+    app.dependency_overrides[authenticator.get_current_account_data
+        ] = fake_get_current_jotters_data
     response = client.get("/jotters")
     app.dependency_overrides = {}
     assert response.status_code == 200
@@ -86,8 +87,11 @@ def test_get_all_jotters():
 
 
 def test_get_one_jotters():
-    app.dependency_overrides[authenticator.get_current_account_data] = fake_get_current_jotters_data
+    app.dependency_overrides[authenticator.get_current_account_data
+        ] = fake_get_current_jotters_data
     response = client.get("/jotters/1")
     app.dependency_overrides = {}
     assert response.status_code == 200
     assert isinstance(response.json(), dict)
+
+
