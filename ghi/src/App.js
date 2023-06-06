@@ -12,7 +12,6 @@ import JournalEntry from "./components/JournalOne";
 import JournalList from "./components/JournalList";
 import JournalForm from "./components/JournalForm";
 import ResourcesList from "./components/ResourcesList";
-import ClientsList from "./components/Clientslist";
 import AppointmentList from "./components/AppointmentsList";
 import ClientList from "./components/AppointmentsList";
 import UserProfile from "./authorization/UserProfile";
@@ -53,7 +52,6 @@ function App() {
             <Route exact path="/messages/:id" element={<MessageDetails />} />
             {/* <Route exact path="/spotify" element={<Spotify />} /> */}
             <Route exact path="/resources" element={<ResourcesList />}></Route>
-            <Route exact path="/jotters" element={<ClientsList />}></Route>
             <Route exact path="/appointments" element={<AppointmentList />}></Route>
             <Route exact path="/appointments" element={<ClientList />}></Route>
           </Routes >
