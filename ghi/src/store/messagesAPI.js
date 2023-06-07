@@ -31,6 +31,7 @@ export const messagesApi = createApi({
                 url: `/messages/${id}`,
                 method: 'get',
             }),
+            invalidates: [{ type: "getMessages", endpoint: "messages" }]
         }),
         editMessage: builder.mutation({
             query: ({ id, ...message }) => ({
@@ -38,12 +39,14 @@ export const messagesApi = createApi({
                 method: 'put',
                 body: message,
             }),
+            invalidates: [{ type: "getMessages", endpoint: "messages" }]
         }),
         deleteMessage: builder.mutation({
             query: (id) => ({
                 url: `/messages/${id}`,
                 method: 'delete',
             }),
+            invalidates: [{ type: "getMessages", endpoint: "messages" }]
         }),
     }),
 });

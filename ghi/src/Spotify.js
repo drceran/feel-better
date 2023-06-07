@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Player from "./Player";
 
-// function Spotify() {
-//     const CLIENT_ID = "c7543eda9c9b4e4a8fd6bcdb7f7d7f41";
-//     const REDIRECT_URI = "http://localhost:3000/spotify";
-//     const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-//     const RESPONSE_TYPE = "token";
+
 
 function Spotify() {
     const CLIENT_ID = "c7543eda9c9b4e4a8fd6bcdb7f7d7f41";
@@ -83,13 +79,6 @@ function Spotify() {
             </div>
         ));
     };
-
-                {renderArtists()}
-            </header>
-        </div>
-    );
-}
-
 
     return (
          <div className="App">
