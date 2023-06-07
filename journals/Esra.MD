@@ -175,9 +175,23 @@ Here is a steps of our new workflow:
 
 Today I worked on several things at the same time. Working on several things at the same time was a different approach. I would say, as long as the features you work on are related to each other, it makes sense.
 
-I redid the navbar, as the styling was poor. I used tailwindcss, and I have to admit, it was impressive. So there are two very cool code snippets that I am very proud of; first one retrieves logged in user data, and with an if else statement, if a user is logged in, we show the profile page and logout feature. And if a user is not loggedin, we show login and setup.
+I redid the navbar, as the styling was poor. I used tailwindcss, and I have to admit, it was impressive. So there are two very cool code snippets I wrote that I am very proud of; first one retrieves logged in user data, and with an if else statement, if a user is logged in, we show the profile page and logout feature. And if a user is not loggedin, we show login and setup.
 The second code snippet is, a for loop for navigation, I used setNavigation to loop through the different features of a navigation element, in that way, when a developer want to add a new label in the navbar, all it needs to do is creating an object inside of the for loop I wrote.
 
 I also did the profile page and logout feature.
 
 Along with them I did was able to retrieve the data in the nav so that I use user's data for greetings them as it shows "Welcome user_name" in the navbar.
+
+# Tuesday (6/10/2023)
+
+After working on since Friday, today I have finally deployed our project. It is on air! Last week, I also created user profile page. In addition to that, I created
+a form for editing profile page. It's been challenging to show already put information as placeholder. After I manage that, another challenge was updating given information in other parts of the project. Like when a user change their first_name, it was not showing up in the navbar unless I reload the page.
+Another thing I needed to fix was by using Optional and checking the NULL/ NOT NULL fields, aligning the tables and the backend. In addition to that, my form is showing different fields in accordance with user type.
+After those are done, I went over the tables. It turns out we needed to implement better understanding to the table. Some of the # "Down" SQL statements were broken, I fixed them. I developed my understanding about migrations and how they works. According to my research; we are supposed to never change current tables. The best practice suggests that migrations works from beginning to end by order, and every time a new table is added, the newest one is effective. But for some reason if we would like to go back to the older version, all we need to use down sql statements.
+For the deployment, I cleaned our project's code.
+I will work on unit testing and the balance-cost-packages functionality. When I am done with that, I will work on beautifying our project.
+
+# Wednesday (6/11/2023)
+
+Yesterday I worked on the backend for the packages/buy, I completed the back end, tested in the bumblebee. It was working. And today, I worked on the front end. I tested and it went well. I wrote my first test. wow. I used tailwindcss template for pricing stuff, that David created last week. By using a mutation I send a request to the backend, and with the response, I can buy a package. And if we are in the process of the getting the data, the button is getting disabled. I tested using time.sleep(20), tested in the bumblebee. According to the message comes from backend, if user successfully bought the message, they are getting a notification saying: "your current balance is: this amount"
+I wanted to implement the purchasing part, too. So I started to test it in the messages, but create message was giving me error. My teammate and I are gonna work on that. And once I pull from main, I will test appointments in the frontend too.

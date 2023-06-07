@@ -1,13 +1,19 @@
 import { CheckIcon } from '@heroicons/react/20/solid'
+import { useBuyPackageMutation } from './store/usersApi';
 
-const includedFeatures = [
-    'Private one on one sessions',
-    'Member resources',
-    'Interact with the best therapists',
+const Pricing = () => {
+    const [buyPackage, { data: buyPackageResult, isLoading }] = useBuyPackageMutation();
+    const handleBuyButtonClick = (e, credits) => {
+        e.preventDefault();
+        buyPackage(credits)
+    };
 
-]
+    const includedFeatures = [
+        'Private one on one sessions',
+        'Member resources',
+        'Interact with the best therapists',
+    ];
 
-export default function Pricing() {
     return (
         <div className="bg-white py-24 sm:py-32">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -17,6 +23,11 @@ export default function Pricing() {
                         Come get the help you need at a price you can afford, we are here to help you.
                     </p>
                 </div>
+                {buyPackageResult ? (<div className="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">
+                    <p class="font-bold">Your purchase is successful</p>
+                    <p class="text-sm">Your new balance is {buyPackageResult.total_credit}</p>
+                </div>) : (<div />)}
+
                 <div className="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
                     <div className="p-8 sm:p-10 lg:flex-auto">
                         <h3 className="text-2xl font-bold tracking-tight text-gray-900">Monthly membership</h3>
@@ -43,15 +54,17 @@ export default function Pricing() {
                             <div className="mx-auto max-w-xs px-8">
                                 <p className="text-base font-semibold text-gray-600">Monthly Price</p>
                                 <p className="mt-6 flex items-baseline justify-center gap-x-2">
-                                    <span className="text-5xl font-bold tracking-tight text-gray-900">$75</span>
+                                    <span className="text-5xl font-bold tracking-tight text-gray-900">$100</span>
                                     <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">USD</span>
                                 </p>
-                                <a
+                                <button
+                                    disabled={isLoading}
+                                    onClick={(e) => handleBuyButtonClick(e, 100)}
                                     href="/"
-                                    className="mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                    className={`mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                                 >
-                                    Join Now
-                                </a>
+                                    Buy
+                                </button>
                                 <p className="mt-6 text-xs leading-5 text-gray-600">
                                     Invoices and receipts available for easy company reimbursement
                                 </p>
@@ -61,5 +74,6 @@ export default function Pricing() {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
+export default Pricing;

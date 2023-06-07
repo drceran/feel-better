@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGetMessagesQuery, useDeleteMessageMutation } from './store/messagesAPI';
 import MessageDetails from './MessageDetails';
-import { selectMessage, deleteMessage } from './store/messagesSlice';
+import { selectMessage } from './store/messagesSlice';
 
 function MessagesList() {
     const { data: messages, error, isLoading } = useGetMessagesQuery();
@@ -16,7 +16,7 @@ function MessagesList() {
         if (deleteMessage.isSuccess) {
             dispatch(deleteMessage(deleteMessage.arg));
         }
-    }, [deleteMessage.isSuccess, deleteMessage.arg, dispatch]);
+    }, [deleteMessage.isSuccess, deleteMessage.arg, dispatch, deleteMessage]);
 
     const handleOpenMessage = (message) => {
         dispatch(selectMessage(message.id));

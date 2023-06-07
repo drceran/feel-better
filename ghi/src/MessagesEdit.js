@@ -15,7 +15,7 @@ function MessagesFormEdit() {
     const [dateTime, setDateTime] = useState('');
 
     const { data: message } = useGetOneMessageQuery(id);
-    const { data, errorToken } = useGetTokenQuery();
+    const { data } = useGetTokenQuery();
 
     useEffect(() => {
         if (message) {
@@ -27,7 +27,7 @@ function MessagesFormEdit() {
         }
     }, [message]);
 
-    const [editMessage, result] = useEditMessageMutation();
+    const [editMessage ] = useEditMessageMutation();
 
     async function handleSubmit(e) {
         e.preventDefault();

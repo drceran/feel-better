@@ -21,7 +21,6 @@ async def create_journal(
 ):
     if journal_data and authenticator.cookie_name:
         journal.user_id = journal_data["id"]
-        print(journal)
         return repo.create(journal)
     return Error(message="Authentication failed")
 
@@ -64,6 +63,7 @@ async def get_journal(
     journal_data: dict = Depends(authenticator.get_current_account_data),
 ) -> JournalOut:
     if journal_data and authenticator.cookie_name:
+        print(journal_data)
         user_id = journal_data["id"]
         return repo.get_one(user_id, journal_id)
     return Error(message="Authentication failed")

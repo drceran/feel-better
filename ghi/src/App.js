@@ -21,10 +21,10 @@ import MessageDetails from "./MessageDetails";
 import JournalFormEdit from "./components/JournalEdit";
 import ProfileForm from "./authorization/ProfileForm";
 import MessagesEdit from "./MessagesEdit";
-// import Spotify2 from "./Spotify2";
 // import ResourceForm from "./components/ResourceForm";
-// import Spotify from "./Spotify";
-// import SpotifyPlayer from "./SpotifyPlayer";
+import { Spotify } from "./Spotify";
+import SpotifyPlayer from "./SpotifyPlayer";
+import HomePage from "./home";
 
 
 const domain = /https:\/\/[^/]+/;
@@ -38,11 +38,12 @@ function App() {
         <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
           <Routes>
             <Route exact path="/" element={<Main />} />
+            <Route exact path="/home" element={<HomePage />} />
             <Route exact path="/signup" element={<SignupForm />} />
             <Route exact path="/login" element={<LoginForm />}></Route>
             <Route exact path="/logout" element={<Logout />}></Route>
-            <Route exact path="/jotters/:id" element={<UserProfile />}></Route>
-            <Route exact path="/editProfile/:id" element={<ProfileForm />}></Route>
+            <Route exact path="/jotters/" element={<UserProfile />}></Route>
+            <Route exact path="/editProfile/" element={<ProfileForm />}></Route>
             <Route exact path="/" element={<Main />} />
             <Route exact path="/signup" element={<SignupForm />} />
             <Route exact path="/messages" element={<MessagesList />} />
@@ -54,8 +55,8 @@ function App() {
             <Route exact path="/journals/new" element={<JournalForm />} />
             <Route exact path="/pricing" element={<Pricing />} />
             <Route exact path="/messages/:id" element={<MessageDetails />} />
-            {/* <Route exact path="/spotify" element={<Spotify2 />} /> */}
-            {/* <Route exact path="/spotifyPlayer" element={<SpotifyPlayer />} />  */}
+            <Route exact path="/spotify" element={<Spotify />} />
+            <Route exact path="/spotifyPlayer" element={<SpotifyPlayer />} />
             <Route exact path="/resources" element={<ResourcesList />}></Route>
             <Route exact path="/appointments" element={<AppointmentList />}></Route>
             <Route exact path="/appointments/create" element={<AppointmentForm />}></Route>

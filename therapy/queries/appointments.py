@@ -59,9 +59,9 @@ class AppointmentRepository:
                     return appointment
         except Exception as e:
             print(e)
-            return {
-                "message": "An error occurred while fetching the appointment"
-            }
+            return Error(
+                message="An error occurred while fetching the appointment"
+            )
 
     def delete_appointment(self, appointment_id: int) -> bool:
         try:
