@@ -14,7 +14,7 @@ function MessagesForm() {
   const [error, setError] = useState('');
 
   const [createMessage, result] = useCreateMessagesMutation();
-  const { data } = useGetTokenQuery();
+  const { data, errorToken } = useGetTokenQuery();
 
   async function handleSubmit(e) {
     e.preventDefault();
