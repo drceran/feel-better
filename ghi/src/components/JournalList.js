@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function JournalList() {
     const [searchTerm, setSearchTerm] = useState("");
-    let { data: journals, error, isLoading, refetch } = useGetJournalsQuery();
+    let { data: journals, isLoading, refetch } = useGetJournalsQuery();
 
     useEffect(() => {
         refetch();
