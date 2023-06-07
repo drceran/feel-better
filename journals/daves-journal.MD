@@ -54,3 +54,7 @@ Spent a lot more time flushing out the rest of the front-end points for Journals
 Helped Melody with some errors she was having trouble with on the appointments CRUD front end pages. Helped Esra fix an error with the Logout component. Worked with Martey in learning how to apply the "?" in different components to allow components to load only once they have their data. 
 
 ## June 6, 2023
+worked on trying to make sure that all of the endpoints didn't use the "ID" for said objects in the database. I thought that it was restful api to avoid usage of that information to help be more secure and use less variety in the URLS to show simplicity. Turns out I am wrong and spent a lot of time trying to work on setting the journals up for such an unnecessary URL path. So I only updated the user profile and anything to do with the profile to help keep the user data secure. 
+
+## June 7, 2023
+The app was having issues with the data not being cleared after logging out or creating new journal entries. Looks like it is working now!

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLogoutMutation } from "../store/usersApi";
+import { useLogoutMutation, resetApiState, usersApi } from "../store/usersApi";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../store/authSlice";
@@ -16,6 +16,8 @@ function Logout() {
   useEffect(() => {
     if (data) {
       dispatch(logout());
+      dispatch(usersApi.util.resetApiState());
+      console.log("logout dispatched!", data)
     }
   }, [data, dispatch]);
 

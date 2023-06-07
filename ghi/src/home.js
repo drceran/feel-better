@@ -1,31 +1,27 @@
 import React from "react";
 import JournalList from "./components/JournalList";
-import ClientsList from "./components/Clientslist";
-import ClientList from "./components/AppointmentsList";
 import { useGetTokenQuery } from "./store/usersApi";
 
-
-
-
-
 const HomePage = () => {
-    const { data, error } = useGetTokenQuery();
+    const { data, error, isFetching } = useGetTokenQuery();
     const userType = data?.account.type;
 
 
-
-    console.log(data);
-    if (userType == 'client') {
-        console.log("Welcome Client!!")
+    if (error) {
+        console.log("Error: ", error)
+    };
+    if (!userType) {
+        console.log("Error: ", error)
     };
 
+    if (isFetching || !data) {
+        return <h1>Loading...</h1>;
+    }
 
     return (
         <>
             <div>
                 <JournalList />
-                <ClientsList />
-                <ClientList />
             </div>
         </>
     )

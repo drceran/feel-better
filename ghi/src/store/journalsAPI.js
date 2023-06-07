@@ -33,16 +33,27 @@ export const journalsApi = createApi({
                 url: '/journals/',
                 body: data,
                 method: 'post',
-            })
+            }),
+            invalidates: [{ type: 'getJournals', endpoint: 'journals' }]
         }),
         editJournal: builder.mutation({
             query: ({ id, ...journal }) => ({
                 url: `/journals/${id}`,
                 method: 'put',
                 body: journal,
-            })
+            }),
+            invalidates: [{ type: 'getJournals', endpoint: 'journals' }]
+        }),
+        deleteJournal: builder.mutation({
+            query: (id) => {
+                return {
+                    url: `/journals/${id}`,
+                    method: "delete",
+                };
+            },
+            invalidates: [{ type: 'getJournals', endpoint: 'journals' }]
         })
     })
 });
 
-export const { useEditJournalMutation, useGetJournalsQuery, useCreateJournalMutation, useGetOneJournalQuery } = journalsApi;
+export const { useEditJournalMutation, useGetJournalsQuery, useCreateJournalMutation, useGetOneJournalQuery, useDeleteJournalMutation } = journalsApi;

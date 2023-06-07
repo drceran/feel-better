@@ -14,13 +14,13 @@ export default function Nav() {
   const [navigation, setNavigation] = useState([]);
 
   useEffect(() => {
-    if (data && data.access_token) {
+    if (data && data?.access_token) {
       setNavigation([
         {
           name: "Your Profile",
           href: "#",
           current: true,
-          destination: "/jotters/" + data.account.id,
+          destination: "/jotters/"
         },
         {
           name: "Entries",
@@ -111,7 +111,7 @@ export default function Nav() {
                 {data ? (
                   <>
                     <p className="text-slate-100">
-                      Welcome {data.account.first_name}
+                      Welcome {data?.account.first_name}
                     </p>
 
                     <Menu as="div" className="relative ml-3">
@@ -120,7 +120,7 @@ export default function Nav() {
                           <span className="sr-only">Open user menu</span>
                           <img
                             className="h-8 w-8 rounded-full"
-                            src={data.account.profile_picture}
+                            src={data?.account.profile_picture}
                             alt=""
                           />
                         </Menu.Button>
@@ -141,7 +141,7 @@ export default function Nav() {
                               <p
                                 href="#"
                                 onClick={() =>
-                                  navigate("/editProfile/" + data.account.id)
+                                  navigate("/editProfile/")
                                 }
                                 className={classNames(
                                   active ? "bg-gray-100" : "",

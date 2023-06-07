@@ -13,7 +13,7 @@ import JournalList from "./components/JournalList";
 import JournalForm from "./components/JournalForm";
 import ResourcesList from "./components/ResourcesList";
 import AppointmentList from "./components/AppointmentList";
-import AppointmentForm from "./components/AppointmentForm";
+import AppointmentForm from "./components/AppointmentForm"
 import UserProfile from "./authorization/UserProfile";
 import Logout from "./authorization/Logout";
 import Pricing from "./Pricing";
@@ -45,7 +45,7 @@ function App() {
             <Route exact path="/signup" element={<SignupForm />} />
             <Route exact path="/messages" element={<MessagesList />} />
             <Route exact path="/messages/new" element={<MessagesForm />} />
-            <Route exact path="/journals/edit" element={<JournalFormEdit />} />
+            <Route exact path="/journals/:id/edit" element={<JournalFormEdit />} />
             <Route exact path="/journals/:id" element={<JournalEntry />} />
             <Route exact path="/journals" element={<JournalList />} />
             <Route exact path="/journals/new" element={<JournalForm />} />

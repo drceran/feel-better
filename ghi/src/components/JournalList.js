@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useGetJournalsQuery } from "../store/journalsAPI";
 import { Link } from 'react-router-dom';
 
 function JournalList() {
     const [searchTerm, setSearchTerm] = useState("");
-    let { data: journals, error, isLoading } = useGetJournalsQuery();
+    let { data: journals, error, isLoading, refetch } = useGetJournalsQuery();
+
+    useEffect(() => {
+        refetch();
+    }, [refetch]);
+
     if (isLoading) {
         return <h1>Loading page! ...</h1>;
     }
-
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
@@ -29,11 +33,14 @@ function JournalList() {
     });
 
     const mostRecentJournals = sortedJournals?.length <= 10 ? sortedJournals : sortedJournals?.slice(0, 10);
-    // add a loading spinning icon
+
     return (
         <div>
             <h1>Journal Entries</h1>
             <input type="text" value={searchTerm} onChange={handleSearchChange} placeholder="Search..." />
+            <Link to={`/journals/new`}>
+                <button>Create Journal Entry</button>
+            </Link>
             <div>{filteredJournals?.length > 0 ? (
                 <ul>
                     {mostRecentJournals?.map((journal, index) => (
