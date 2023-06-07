@@ -28,16 +28,18 @@ function MessagesForm() {
         datetime: new Date().toISOString(),
       }
       const result = await createMessage(message);
-      if (result.isSuccess) {
-        navigate('/messages');
+      if (result) {
+        navigate("/messages/");
+
       } else if (result.isError) {
         setError(result.error);
+        console.log(result.error);
       }
     } catch (err) {
       setError(err);
     }
     if (result.isSuccess) {
-      navigate('/messages');
+      navigate("/messages/");
     };
   };
 

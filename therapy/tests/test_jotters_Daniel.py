@@ -1,5 +1,5 @@
 from fastapi.testclient import TestClient
-from main import app
+from therapy.main import app
 from typing import Optional
 from pydantic import BaseModel
 from authenticator import authenticator
@@ -85,7 +85,6 @@ def test_get_all_jotters():
     app.dependency_overrides = {}
     assert response.status_code == 200
     assert isinstance(response.json(), list)
-
 
 def test_get_one_jotters():
     app.dependency_overrides[authenticator.get_current_account_data] = (
