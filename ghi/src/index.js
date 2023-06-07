@@ -4,14 +4,13 @@ import "./index.css";
 import App from "./App";
 import { store } from "./store/store";
 import { Provider } from "react-redux";
-// import SpotifyPlayer from "./SpotifyPlayer";
-
+import Spotify from "./Spotify";
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <SpotifyPlayer /> */}
     <Provider store={store}>
       <App />
+      <Spotify />
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -14,7 +14,7 @@ function MessagesForm() {
   const [error, setError] = useState('');
 
   const [createMessage, result] = useCreateMessagesMutation();
-  const { data, errorToken } = useGetTokenQuery();
+  const { data } = useGetTokenQuery();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -28,18 +28,22 @@ function MessagesForm() {
         datetime: new Date().toISOString(),
       }
       const result = await createMessage(message);
-      if (result.isSuccess) {
-        navigate('/messages');
+      if (result) {
+        navigate("/messages/");
+        console.log(result);
+
       } else if (result.isError) {
         setError(result.error);
+        console.log(result.error);
       }
     } catch (err) {
       setError(err);
     }
     if (result.isSuccess) {
-      navigate('/messages');
+      navigate("/messages/");
     };
   };
+
 
   return (
     <div>
