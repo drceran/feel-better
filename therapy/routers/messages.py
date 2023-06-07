@@ -7,6 +7,7 @@ from queries.messages import (
     MessageOut,
     Error,
 )
+from queries.jotters import JottersRepository
 
 router = APIRouter()
 
@@ -17,9 +18,15 @@ async def create_message(
     response: Response,
     repo: MessageRepository = Depends(),
     message_data: dict = Depends(authenticator.get_current_account_data),
+    jotter_repo: JottersRepository = Depends(),
 ):
     message.user_id = message_data["id"]
-    return repo.create(message)
+    current_balance = jotter_repo.get_one(message_data["id"]).balance
+    if current_balance < 1:
+        return Error(message="Your balance is insufficient to send a message")
+    result = repo.create(message)
+    jotter_repo.change_balance(-1)
+    return result
 
 
 @router.get("/messages", response_model=Union[List[MessageOut], Error])

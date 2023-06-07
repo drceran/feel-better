@@ -33,6 +33,12 @@ export default function Nav() {
           current: true,
           destination: "/messages/",
         },
+        {
+          name: "Pricing",
+          href: "#",
+          current: true,
+          destination: "/pricing/",
+        },
       ]);
     } else {
       setNavigation([]);

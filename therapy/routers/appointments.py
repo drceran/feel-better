@@ -7,6 +7,8 @@ from queries.appointments import (
     AppointmentOut,
     Error,
 )
+from queries.jotters import JottersRepository
+
 
 router = APIRouter()
 
@@ -16,8 +18,17 @@ def create_appointment(
     appointment: AppointmentIn,
     repo: AppointmentRepository = Depends(),
     user_data: Dict = Depends(authenticator.get_current_account_data),
+    jotter_repo: JottersRepository = Depends(),
 ):
-    return repo.create(appointment)
+    appointment.user_id = user_data["id"]
+    current_balance = jotter_repo.get_one(user_data["id"]).balance
+    if current_balance < 10:
+        return Error(
+            message="Your balance is insufficient to make an appointment"
+        )
+    result = repo.create(appointment)
+    jotter_repo.change_balance(-10)
+    return result
 
 
 @router.get("/appointments", response_model=Union[List[AppointmentOut], Error])
