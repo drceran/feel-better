@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useEditJournalMutation, useGetOneJournalQuery } from '../store/journalsAPI';
+import { useEditJournalMutation, useDeleteJournalMutation, useGetOneJournalQuery } from '../store/journalsAPI';
 import ErrorNotification from '../ErrorNotification';
 import { useGetTokenQuery } from '../store/usersApi';
 import { useParams } from 'react-router-dom';
@@ -16,6 +16,15 @@ function JournalFormEdit() {
     const { id } = useParams();
 
     const { data: journal } = useGetOneJournalQuery(id);
+    const options = [
+        "happy",
+        "sad",
+        "angry",
+        "anxious",
+        "neutral",
+        "ambitious",
+        "carefree",
+    ]
 
     useEffect(() => {
         let dateObj = new Date(journal.date_time);
@@ -31,6 +40,7 @@ function JournalFormEdit() {
     }, [journal]);
 
     const [editJournal, result] = useEditJournalMutation(id);
+    const [deleteJournal, deleteResult] = useDeleteJournalMutation();
     const { data } = useGetTokenQuery();
 
 
@@ -38,7 +48,7 @@ function JournalFormEdit() {
         e.preventDefault();
 
         try {
-            setDateTime(journal.date_time);
+            setDateTime(journal?.date_time);
             const journ = {
                 user_id: data.account.id,
                 id: parseInt(id),
@@ -48,13 +58,26 @@ function JournalFormEdit() {
                 is_private: privacy,
                 mood: mood
             }
-
+            console.log(journ);
             const result = await editJournal(journ);
-            console.log(result);
+
             if (result) {
                 navigate("/journals/");
             } else if (result.isError) {
                 setError(result.error);
+            }
+        } catch (err) {
+            setError(err);
+        }
+
+    }
+    async function handleDelete() {
+        try {
+            const result = await deleteJournal(id);
+            if (result) {
+                navigate("/journals/");
+            } else if (deleteResult.isError) {
+                setError(deleteResult.error);
             }
         } catch (err) {
             setError(err);
@@ -89,10 +112,15 @@ function JournalFormEdit() {
                 <br />
                 <label>
                     Mood:
-                    <input type="text" value={mood} onChange={(e) => setMood(e.target.value)} required />
+                    <select value={mood} onChange={(e) => setMood(e.target.value)} required>
+                        {options.map((option, index) =>
+                            <option key={index} value={option}>{option}</option>
+                        )}
+                    </select>
                 </label>
                 <br />
                 <button type="submit" disabled={result.isLoading}>Submit</button>
+                <button type="button" onClick={handleDelete} disabled={deleteResult.isLoading}>Delete</button>
             </form>
         </div>
     );

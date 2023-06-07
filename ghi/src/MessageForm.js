@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ErrorNotification from './ErrorNotification';
 import { useCreateMessagesMutation } from './store/messagesAPI';
+import { useGetTokenQuery } from './store/usersApi';
+
 
 function MessagesForm() {
   const navigate = useNavigate();
@@ -12,12 +14,20 @@ function MessagesForm() {
   const [error, setError] = useState('');
 
   const [createMessage, result] = useCreateMessagesMutation();
+  const { data } = useGetTokenQuery();
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const datetime = new Date().toISOString();
     try {
-      await createMessage({ subject, body, cost, recipient, datetime });
+      const message = {
+        user_id: data.account.id,
+        subject: subject,
+        body: body,
+        cost: cost,
+        recipient: recipient,
+        datetime: new Date().toISOString(),
+      }
+      const result = await createMessage(message);
       if (result.isSuccess) {
         navigate('/messages');
       } else if (result.isError) {
@@ -26,11 +36,14 @@ function MessagesForm() {
     } catch (err) {
       setError(err);
     }
-  }
+    if (result.isSuccess) {
+      navigate('/messages');
+    };
+  };
 
   return (
     <div>
-      {error && <ErrorNotification message={error.message} />}
+      {error && <ErrorNotification message={error} />}
       <form onSubmit={handleSubmit}>
         <label>
           Subject:

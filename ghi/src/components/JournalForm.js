@@ -16,6 +16,15 @@ function JournalForm() {
     const [createJournal, result] = useCreateJournalMutation();
     const { data } = useGetTokenQuery();
 
+    const options = [
+        "happy",
+        "sad",
+        "angry",
+        "anxious",
+        "neutral",
+        "ambitious",
+        "carefree",
+    ]
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -28,10 +37,13 @@ function JournalForm() {
                 mood: mood
             }
             const result = await createJournal(journ);
-            if (result.isSuccess) {
-                navigate("/journals");
+            if (result) {
+                navigate("/journals/");
+                console.log(result);
+
             } else if (result.isError) {
                 setError(result.error);
+                console.log(result.error);
             }
         } catch (err) {
             setError(err);
@@ -48,13 +60,13 @@ function JournalForm() {
             {error && <ErrorNotification error={error} />}
             <form onSubmit={handleSubmit}>
                 <label>
-                    Body:
-                    <input type="text" value={body} onChange={(e) => setBody(e.target.value)} required />
+                    Title:
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
                 </label>
                 <br />
                 <label>
-                    Name:
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+                    Body:
+                    <input type="text" value={body} onChange={(e) => setBody(e.target.value)} required />
                 </label>
                 <br />
                 <label>
@@ -69,7 +81,11 @@ function JournalForm() {
                 <br />
                 <label>
                     Mood:
-                    <input type="text" value={mood} onChange={(e) => setMood(e.target.value)} required />
+                    <select value={mood} onChange={(e) => setMood(e.target.value)} required>
+                        {options.map((option, index) =>
+                            <option key={index} value={option}>{option}</option>
+                        )}
+                    </select>
                 </label>
                 <br />
                 <button type="submit" disabled={result.isLoading}>Submit</button>

@@ -22,7 +22,6 @@ def create_jotter(
     repo: JottersRepository = Depends(),
     account_data: Dict = Depends(authenticator.get_current_account_data),
 ):
-    # response.status_code = 400
     return repo.create(jotter)
 
 
