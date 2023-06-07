@@ -15,6 +15,7 @@ export const resourcesApi = createApi({
             body: data,
             method: "post",
         }),
+        invalidates: [{ type: 'getResources', endpoint: 'resources' }]
     }),
     getResourceDetail: builder.query({
         query: (id) => ({
@@ -22,19 +23,22 @@ export const resourcesApi = createApi({
             method: "get",
             credentials: "include",
         }),
+        invalidates: [{ type: 'getResources', endpoint: 'resources' }]
     }),
     editResource: builder.mutation({
         query: ({ id, ...resource }) => ({
             url: `/resources/${id}`,
             method: 'put',
             body: resource,
-        })
+        }),
+        invalidates: [{ type: 'getResources', endpoint: 'resources' }]
     }),
     deleteResource: builder.mutation({
         query: (id) => ({
             url: `/resources/${id}`,
             method: 'delete',
-        })
+        }),
+        invalidates: [{ type: 'getResources', endpoint: 'resources' }]
     })
     }),
 });
