@@ -1,5 +1,8 @@
+June 4th -
+
+
 Jun 3rd - Finally finished Messages the only thing i have to figure out now is how to make it so that
-instead of the user.id it shows the actual users name 
+instead of the user.id it shows the actual users name
 
 June 1st - Git took a long time today a few issues. Still working on messaging the biggest issue its making it to work with auth
 
