@@ -50,7 +50,11 @@ function ProfileForm() {
   }, [result, navigate]);
 
   if (userInfoError) {
-    console.log("Error:", userInfoError);
+    return <div>Error: {userInfoError}</div>;
+  }
+
+  if (isUserInfoLoading || isTokenLoading || !userInfoData) {
+    return <progress className="progress is-primary" max="100"></progress>;
   }
 
   if (result.isError) {

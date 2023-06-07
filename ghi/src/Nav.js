@@ -46,6 +46,12 @@ export default function Nav() {
           current: true,
           destination: "/resources/",
         },
+        {
+          name: "Pricing",
+          href: "#",
+          current: true,
+          destination: "/pricing/",
+        },
       ]);
     } else {
       setNavigation([]);
