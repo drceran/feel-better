@@ -5,4 +5,4 @@ pydantic==1.8.2
 jwtdown-fastapi>=0.5.0
 websockets==11.0.3
 pytest==7.3.1
-psycopg-pool==3.1.7
+psycopg-pool==3.1.9
