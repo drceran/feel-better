@@ -113,6 +113,17 @@ export const usersApi = createApi({
         credentials: "include",
       }),
     }),
+    buyPackage: builder.mutation({
+      query: (credits) => {
+        return {
+          url: "packages/buy",
+          method: "put",
+          body: { "credits": credits },
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["Jotter"],
+    }),
   }),
 });
 
@@ -127,4 +138,5 @@ export const {
   useGetUserInfoQuery,
   useLogoutMutation,
   useEditUserInfoMutation,
+  useBuyPackageMutation,
 } = usersApi;

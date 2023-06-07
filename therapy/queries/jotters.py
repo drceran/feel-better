@@ -3,6 +3,7 @@ from typing import Optional, List, Union
 from enum import Enum
 from queries.pool import pool
 from psycopg.rows import dict_row
+from queries.packages import PackageOut
 
 
 class Error(BaseModel):
@@ -89,6 +90,28 @@ class JottersRepository:
         except Exception as e:
             print(e)
             return None
+
+    def change_balance(self, jotter_id: int, change: int):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor(row_factory=dict_row) as db:
+                    result = db.execute(
+                        """
+                        UPDATE jotters
+                        SET balance = balance + %s
+                        WHERE id = %s
+                        RETURNING balance
+                        """,
+                        [change, jotter_id],
+                    )
+                    record = result.fetchone()
+                    pck_result = PackageOut(total_credit=record["balance"])
+                    return pck_result
+        except Exception as e:
+            print(e)
+            error = Error()
+            error.message = "Your balance could not be updated."
+            return error
 
     def update_jotter(
         self, jotter_id: int, jotter: JottersIn

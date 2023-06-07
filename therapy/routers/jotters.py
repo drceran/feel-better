@@ -8,6 +8,10 @@ from queries.jotters import (
 )
 from authenticator import authenticator
 
+from queries.packages import PackageIn
+
+from queries.packages import PackageOut
+
 router = APIRouter()
 
 
@@ -62,3 +66,15 @@ def get_one_jotter(
     if jotter is None:
         response.status_code = 404
     return jotter
+
+
+@router.put(
+    "/packages/buy",
+    response_model=Union[PackageOut, Error],
+)
+def buy_package(
+    package: PackageIn,
+    jotter_repo: JottersRepository = Depends(),
+    user_data: Dict = Depends(authenticator.get_current_account_data),
+) -> Union[PackageOut, Error]:
+    return jotter_repo.change_balance(user_data["id"], package.credits)
