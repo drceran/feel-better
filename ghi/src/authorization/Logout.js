@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useLogoutMutation, usersApi } from "../store/usersApi";
-import { useLogoutMutation, usersApi } from "../store/usersApi";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../store/authSlice";

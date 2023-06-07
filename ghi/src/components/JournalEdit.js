@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEditJournalMutation, useDeleteJournalMutation, useGetOneJournalQuery } from '../store/journalsAPI';
-import { useEditJournalMutation, useDeleteJournalMutation, useGetOneJournalQuery } from '../store/journalsAPI';
 import ErrorNotification from '../ErrorNotification';
 import { useGetTokenQuery } from '../store/usersApi';
 import { useParams } from 'react-router-dom';
@@ -26,15 +25,6 @@ function JournalFormEdit() {
         "ambitious",
         "carefree",
     ]
-    const options = [
-        "happy",
-        "sad",
-        "angry",
-        "anxious",
-        "neutral",
-        "ambitious",
-        "carefree",
-    ]
 
     useEffect(() => {
         let dateObj = new Date(journal.date_time);
@@ -50,7 +40,6 @@ function JournalFormEdit() {
     }, [journal]);
 
     const [editJournal, result] = useEditJournalMutation(id);
-    const [deleteJournal, deleteResult] = useDeleteJournalMutation();
     const [deleteJournal, deleteResult] = useDeleteJournalMutation();
     const { data } = useGetTokenQuery();
 
