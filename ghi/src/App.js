@@ -24,6 +24,7 @@ import MessagesEdit from "./MessagesEdit";
 // import ResourceForm from "./components/ResourceForm";
 import { Spotify } from "./Spotify";
 import SpotifyPlayer from "./SpotifyPlayer";
+import HomePage from "./home";
 
 
 const domain = /https:\/\/[^/]+/;
@@ -37,11 +38,12 @@ function App() {
         <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
           <Routes>
             <Route exact path="/" element={<Main />} />
+            <Route exact path="/home" element={<HomePage />} />
             <Route exact path="/signup" element={<SignupForm />} />
             <Route exact path="/login" element={<LoginForm />}></Route>
             <Route exact path="/logout" element={<Logout />}></Route>
-            <Route exact path="/jotters/:id" element={<UserProfile />}></Route>
-            <Route exact path="/editProfile/:id" element={<ProfileForm />}></Route>
+            <Route exact path="/jotters/" element={<UserProfile />}></Route>
+            <Route exact path="/editProfile/" element={<ProfileForm />}></Route>
             <Route exact path="/" element={<Main />} />
             <Route exact path="/signup" element={<SignupForm />} />
             <Route exact path="/messages" element={<MessagesList />} />

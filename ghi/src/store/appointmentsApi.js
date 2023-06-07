@@ -17,48 +17,48 @@ export const appointmentsApi = createApi({
     }),
     endpoints: (builder) => ({
         getAppointments: builder.query({
-        query: () => "/appointments/",
-    }),
-    createAppointment: builder.mutation({
-        query: (data) => ({
-            url: "/appointments/",
-            body: data,
-            method: "post",
+            query: () => "/appointments/",
         }),
-    }),
-    getClientAppointmentDetail: builder.query({
-        query: (id) => ({
-            url: "/appointments" + id,
-            method: "get",
-            credentials: "include",
+        createAppointment: builder.mutation({
+            query: (data) => ({
+                url: "/appointments/",
+                body: data,
+                method: "post",
+            }),
         }),
-    }),
-    getClientAppointments: builder.query({
-        query: (id) => ({
-            url: `/appointments`,
-            method: "get",
-            credentials: "include",
+        getClientAppointmentDetail: builder.query({
+            query: (id) => ({
+                url: "/appointments" + id,
+                method: "get",
+                credentials: "include",
+            }),
         }),
-    }),
-    getTherapistAppointments: builder.query({
-        query: (id) => ({
-            url: `/therapistappointments/${id}`,
-            method: 'get',
+        getClientAppointments: builder.query({
+            query: (id) => ({
+                url: `/appointments`,
+                method: "get",
+                credentials: "include",
+            }),
         }),
-    }),
-    editAppointment: builder.mutation({
-        query: ({ id, ...appointment }) => ({
-            url: `/appointments/${id}`,
-            method: "put",
-            body: appointment,
+        getTherapistAppointments: builder.query({
+            query: (id) => ({
+                url: `/therapistappointments/${id}`,
+                method: 'get',
+            }),
         }),
-    }),
-    deleteAppointment: builder.mutation({
-        query: (id) => ({
-            url: `/appointments/${id}`,
-            method: "delete",
+        editAppointment: builder.mutation({
+            query: ({ id, ...appointment }) => ({
+                url: `/appointments/${id}`,
+                method: "put",
+                body: appointment,
+            }),
         }),
-    }),
+        deleteAppointment: builder.mutation({
+            query: (id) => ({
+                url: `/appointments/${id}`,
+                method: "delete",
+            }),
+        }),
     }),
 });
 

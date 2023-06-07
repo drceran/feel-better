@@ -1,24 +1,28 @@
-import { useEditUserInfoMutation, useGetUserInfoQuery } from "../store/usersApi";
+import { useEditUserInfoMutation, useGetTokenQuery, useGetUserInfoQuery } from "../store/usersApi";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 
 
 function ProfileForm() {
-
-  const { id } = useParams();
-  const { data, isLoading } = useGetUserInfoQuery(id);
+  const { data: tokenData, isLoading: isTokenLoading } = useGetTokenQuery();
+  const { data: userInfoData, error: userInfoError, isLoading: isUserInfoLoading } = useGetUserInfoQuery(isTokenLoading || !tokenData ? undefined : tokenData.account.id);
 
   const navigate = useNavigate();
-  const [formData, setFormData] = useState(data || {});
-  console.log(data);
+  const [formData, setFormData] = useState(userInfoData || {});
+
+
+
+
+
   useEffect(() => {
-    setFormData(data || {});
-  }, [data]);
+    setFormData(userInfoData || {});
+  }, [userInfoData]);
   const [setError] = useState("");
 
   const [editUSer, result] = useEditUserInfoMutation();
+
+
 
   const handleFormChange = (e) => {
     const value = e.target.value;
@@ -32,7 +36,7 @@ function ProfileForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      await editUSer({ id, formData });
+      await editUSer({ id: tokenData?.account.id, formData });
 
     } catch (err) {
       setError(err);
@@ -41,18 +45,26 @@ function ProfileForm() {
 
   useEffect(() => {
     if (result.isSuccess) {
-      navigate("/jotters/" + data.id);
+      navigate("/jotters/");
     }
-  }, [result, data.id, navigate]);
+  }, [result, navigate]);
+
+  if (userInfoError) {
+    return <div>Error: {userInfoError}</div>;
+  }
+
+  if (isUserInfoLoading || isTokenLoading || !userInfoData) {
+    return <progress className="progress is-primary" max="100"></progress>;
+  }
 
   if (result.isError) {
     setError(result.error);
   }
-  if (isLoading || !data) {
+  if (isUserInfoLoading || !userInfoData) {
     return <progress className="progress is-primary" max="100"></progress>;
   }
 
-  if (data.type === "therapist") {
+  if (userInfoData.type === "therapist") {
     return (
       <div className="card text-bg-light mb-3">
         <h5 className="card-header">Please edit your page</h5>
@@ -174,7 +186,7 @@ function ProfileForm() {
         </div>
       </div>
     );
-  } else if (data.type === "client") {
+  } else if (userInfoData.type === "client") {
     return (
       <div className="card text-bg-light mb-3">
         <h5 className="card-header">Please edit your page</h5>
