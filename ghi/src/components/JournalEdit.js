@@ -58,7 +58,6 @@ function JournalFormEdit() {
                 is_private: privacy,
                 mood: mood
             }
-            console.log(journ);
             const result = await editJournal(journ);
 
             if (result) {

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { useGetResourcesQuery, useGetResourceDetailQuery, useEditResourceMutation,
-  useCreateResourceMutation, useDeleteResourceMutation  } from "../store/resourcesApi";
+import {
+  useGetResourcesQuery, useGetResourceDetailQuery, useEditResourceMutation,
+  useCreateResourceMutation, useDeleteResourceMutation
+} from "../store/resourcesApi";
 import { useParams } from "react-router-dom";
 import ResourceForm from "./ResourceForm";
 import TherapistList from "./TherapistList";
@@ -80,13 +82,13 @@ function ResourcesList() {
                 {editMode ? ( //shows a form of what values you can edit
                   <>
                     <textarea type="text" value={editedResource.title} onChange={(e
-                      ) => setEditedResource({ ...editedResource, title: e.target.value })} />
+                    ) => setEditedResource({ ...editedResource, title: e.target.value })} />
                     <textarea value={editedResource.body} onChange={(e
-                      ) => setEditedResource({ ...editedResource, body: e.target.value })}></textarea>
+                    ) => setEditedResource({ ...editedResource, body: e.target.value })}></textarea>
                     <textarea type="text" value={editedResource.picture} onChange={(e
-                      ) => setEditedResource({ ...editedResource, picture: e.target.value })} />
+                    ) => setEditedResource({ ...editedResource, picture: e.target.value })} />
                     <textarea type="text" value={editedResource.url_link} onChange={(e
-                      ) => setEditedResource({ ...editedResource, url_link: e.target.value })} />
+                    ) => setEditedResource({ ...editedResource, url_link: e.target.value })} />
                     <button onClick={handleSaveResource}>Save</button>
                     <button onClick={handleDeleteResource}>Delete</button>
                   </>

@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useGetTokenQuery } from "./store/usersApi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import logo from './images/logo.png';
 
 function classNames(...classes) {
@@ -74,8 +74,7 @@ export default function Nav() {
                   <img
                     className="block h-8 w-auto lg:hidden"
                     src={logo}
-                    alt="JournalJotter logo"
-                  />
+                    alt="JournalJotter logo" />
                   <img
                     className="hidden h-8 w-auto lg:block"
                     src={logo}

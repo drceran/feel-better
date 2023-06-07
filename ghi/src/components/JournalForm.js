@@ -39,7 +39,6 @@ function JournalForm() {
             const result = await createJournal(journ);
             if (result) {
                 navigate("/journals/");
-                console.log(result);
 
             } else if (result.isError) {
                 setError(result.error);
