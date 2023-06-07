@@ -20,7 +20,6 @@ function WebPlayback(props) {
     <>
       <div className="container">
         <div className="main-wrapper">
-          {/* Rest of your component code */}
         </div>
       </div>
     </>

@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { usersApi } from './usersApi';
 
-
 export const messagesApi = createApi({
     reducerPath: 'messages',
     baseQuery: fetchBaseQuery({
@@ -27,8 +26,27 @@ export const messagesApi = createApi({
                 method: 'post',
             }),
         }),
+        getOneMessage: builder.query({
+            query: (id) => ({
+                url: `/messages/${id}`,
+                method: 'get',
+            }),
+        }),
+        editMessage: builder.mutation({
+            query: ({ id, ...message }) => ({
+                url: `/messages/${id}`,
+                method: 'put',
+                body: message,
+            }),
+        }),
+        deleteMessage: builder.mutation({
+            query: (id) => ({
+                url: `/messages/${id}`,
+                method: 'delete',
+            }),
+        }),
     }),
 });
 
 
-export const { useGetMessagesQuery, useCreateMessagesMutation } = messagesApi;
+export const { useGetMessagesQuery, useCreateMessagesMutation, useEditMessageMutation, useGetOneMessageQuery, useDeleteMessageMutation } = messagesApi;

@@ -1,37 +1,34 @@
 import React from 'react';
-import { selectMessage } from './store/messagesSlice';
+import { Link, useParams } from 'react-router-dom';
+import { useGetOneMessageQuery } from './store/messagesAPI';
+
 
 function MessageDetails() {
-    console.log(selectMessage);
+  const { id } = useParams();
+  const { data: message, error, isLoading } = useGetOneMessageQuery(id);
 
-    if (!selectMessage) {
-        return <p>No message found.</p>;
-    }
+  if (isLoading) {
+    return <h1>Loading page...</h1>;
+  }
 
-    return (
-        <div>
-            <h2>Message Details</h2>
-            <p>
-                <strong>Sender:</strong> {selectMessage.sender}
-            </p>
-            <p>
-                <strong>Recipient:</strong> {selectMessage.recipient}
-            </p>
-            <p>
-                <strong>Subject:</strong> {selectMessage.subject}
-            </p>
-            <p>
-                <strong>Body:</strong> {selectMessage.body}
-            </p>
-            <p>
-                <strong>Cost:</strong> {selectMessage.cost}
-            </p>
-            <p>
-                <strong>Date/Time:</strong>{' '}
-                {new Date(selectMessage.timestamp).toLocaleString()}
-            </p>
-        </div>
-    );
+  if (error) {
+    return <h1>Error occurred! {error.message}</h1>;
+  }
+
+  return (
+    <div>
+      <div style={{ marginBottom: '10px' }}>
+        <Link to="/home">Home</Link> {' '}
+        <Link to="/messages">Back to Messages</Link> {' '}
+        <Link to={`/messages/${id}/edit`}>Edit</Link>
+      </div>
+      <h2>{message.subject}</h2>
+      <p>Body: {message.body}</p>
+      <p>Cost: {message.cost}</p>
+      <p>Recipient: {message.recipient}</p>
+      <p>Date and Time: {new Date(message.datetime).toLocaleString()}</p>
+    </div>
+  );
 }
 
 export default MessageDetails;
