@@ -73,7 +73,7 @@ api-unit-tests-job:
   needs:
     - lint-test-job
   script:
-    - cd sample_service
+    - cd therapy
     - pip install -r requirements.txt
     - python -m pytest
 # # Build Sample Service:
