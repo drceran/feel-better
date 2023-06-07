@@ -21,9 +21,10 @@ import MessageDetails from "./MessageDetails";
 import JournalFormEdit from "./components/JournalEdit";
 import ProfileForm from "./authorization/ProfileForm";
 import MessagesEdit from "./MessagesEdit";
+// import Spotify2 from "./Spotify2";
 // import ResourceForm from "./components/ResourceForm";
-import Spotify from "./Spotify";
-import SpotifyPlayer from "./SpotifyPlayer";
+// import Spotify from "./Spotify";
+// import SpotifyPlayer from "./SpotifyPlayer";
 
 
 const domain = /https:\/\/[^/]+/;
@@ -53,8 +54,8 @@ function App() {
             <Route exact path="/journals/new" element={<JournalForm />} />
             <Route exact path="/pricing" element={<Pricing />} />
             <Route exact path="/messages/:id" element={<MessageDetails />} />
-            <Route exact path="/spotify" element={<Spotify />} />
-            <Route exact path="/spotifyPlayer" element={<SpotifyPlayer />} />
+            {/* <Route exact path="/spotify" element={<Spotify2 />} /> */}
+            {/* <Route exact path="/spotifyPlayer" element={<SpotifyPlayer />} />  */}
             <Route exact path="/resources" element={<ResourcesList />}></Route>
             <Route exact path="/appointments" element={<AppointmentList />}></Route>
             <Route exact path="/appointments/create" element={<AppointmentForm />}></Route>
