@@ -22,7 +22,7 @@ import JournalFormEdit from "./components/JournalEdit";
 import ProfileForm from "./authorization/ProfileForm";
 import MessagesEdit from "./MessagesEdit";
 // import ResourceForm from "./components/ResourceForm";
-import { Spotify } from "./Spotify";
+import Spotify from "./Spotify";
 import SpotifyPlayer from "./SpotifyPlayer";
 
 
