@@ -17,7 +17,6 @@ function Logout() {
     if (data) {
       dispatch(logout());
       dispatch(usersApi.util.resetApiState());
-      console.log("logout dispatched!", data)
     }
   }, [data, dispatch]);
 

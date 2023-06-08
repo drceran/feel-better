@@ -26,6 +26,8 @@ import MessagesEdit from "./MessagesEdit";
 import HomePage from "./home";
 import Spotify from "./Spotify";
 import UpdateResource from "./components/UpdateResource";
+// import Hamburger_Menu from "./components/LandingPage";
+import HomePage from "./home";
 
 
 const domain = /https:\/\/[^/]+/;
