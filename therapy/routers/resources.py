@@ -48,4 +48,7 @@ def update_resource(
     resource: ResourceIn,
     repo: ResourceRepository = Depends(),
 ) -> Union[Error, ResourceOut]:
-    return repo.update(resource_id, resource)
+    try:
+        return repo.update(resource_id, resource)
+    except Exception as e:
+        print(e)

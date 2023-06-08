@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function AppointmentForm() {
     const { data: getTherapist, isLoading } = useGetTherapistsQuery();
-    const [createAppointment] = useCreateAppointmentMutation();
+    const [createAppointment, result] = useCreateAppointmentMutation();
     const [setError] = useState("");
     const { data } = useGetTokenQuery();
     const navigate = useNavigate();
@@ -30,8 +30,6 @@ export default function AppointmentForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(appointmentData)
-        console.log(data)
         try {
             const appt = {
                 user_id: data.account.id,
@@ -41,19 +39,25 @@ export default function AppointmentForm() {
                 cost: (data.account.balance),
             };
             const result = await createAppointment(appt);
-            if (result.isSuccess) {
+            if (result) {
                 navigate("/appointments");
+                console.log(result);
+
             } else if (result.isError) {
                 setError(result.error);
+                console.log(result.error);
             }
         } catch (err) {
             setError(err);
         }
-    };
+        if (result.isSuccess) {
+            navigate("/appointments");
+        };
+    }
 
 
     if (isLoading) {
-        return <progress className="progress is-primary" max="100"></progress>;
+        return <progress className="progress is-primary" max="100">Loading appointments</progress>;
     }
     return (
         <div>

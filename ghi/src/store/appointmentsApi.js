@@ -25,6 +25,7 @@ export const appointmentsApi = createApi({
                 body: data,
                 method: "post",
             }),
+            invalidates: [{ type: 'getAppointments', endpoint: 'appointments' }]
         }),
         getClientAppointmentDetail: builder.query({
             query: (id) => ({
@@ -52,12 +53,14 @@ export const appointmentsApi = createApi({
                 method: "put",
                 body: appointment,
             }),
+            invalidates: [{ type: 'getAppointments', endpoint: 'appointments' }]
         }),
         deleteAppointment: builder.mutation({
             query: (id) => ({
                 url: `/appointments/${id}`,
                 method: "delete",
             }),
+            invalidates: [{ type: 'getAppointments', endpoint: 'appointments' }]
         }),
     }),
 });
