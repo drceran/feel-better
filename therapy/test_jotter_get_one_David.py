@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from authenticator import authenticator
 client = TestClient(app)
 
+
 class JottersIn(BaseModel):
     first_name: str
     last_name: str
@@ -19,6 +20,7 @@ class JottersIn(BaseModel):
     profile_picture: Optional[str] = None
     about_me: Optional[str] = None
     password: Optional[str] = None
+
 
 class JottersOut(BaseModel):
     id: int
@@ -35,6 +37,7 @@ class JottersOut(BaseModel):
     profile_picture: Optional[str] = None
     about_me: Optional[str] = None
     password: Optional[str] = None
+
 
 def fake_get_current_jotters_data():
     return JottersOut(
@@ -54,6 +57,7 @@ def fake_get_current_jotters_data():
         password="password123",
     )
 
+
 def fake_jotters_in(jotter):
     return JottersIn(
         first_name=jotter.first_name,
@@ -70,6 +74,7 @@ def fake_jotters_in(jotter):
         about_me=jotter.about_me,
         password=jotter.password,
     )
+
 
 def test_get_one_jotters():
     app.dependency_overrides[authenticator.get_current_account_data] = (
