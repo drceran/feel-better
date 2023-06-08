@@ -1,13 +1,11 @@
+import { useEffect } from "react";
 import { useLoginMutation } from "../store/usersApi";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [login, result] = useLoginMutation();
-  //   const { data: tokenData, error: tokenError } = useGetTokenQuery();
   const navigate = useNavigate();
 
-  //   console.log("Token Data:", tokenData);
-  //   console.log("Token Error:", tokenError);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,9 +19,13 @@ const LoginForm = () => {
     e.target.reset();
   };
 
-  if (result.isSuccess) {
-    navigate("/home");
-  } else if (result.isError) {
+  useEffect(() => {
+    if (result.isSuccess) {
+      navigate("/home");
+    }
+  }, [result.isSuccess, navigate])
+
+  if (result.isError) {
     return "Can't log in.";
   }
 

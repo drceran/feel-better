@@ -3,15 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import ErrorNotification from './ErrorNotification';
 import { useCreateMessagesMutation } from './store/messagesAPI';
 import { useGetTokenQuery } from './store/usersApi';
-
-
 function MessagesForm() {
   const navigate = useNavigate();
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState('');
   const [recipient, setRecipient] = useState('');
   const [error, setError] = useState('');
-
   const [createMessage, result] = useCreateMessagesMutation();
   const { data } = useGetTokenQuery();
 
@@ -69,5 +66,4 @@ function MessagesForm() {
     </div>
   );
 }
-
 export default MessagesForm;

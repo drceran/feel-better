@@ -24,24 +24,21 @@ export default function ResourceForm() {
                 user_id: data.account.id,
                 title: title,
                 body: body,
-                writer: writer,
+                writer: data.account.id,
                 picture: picture,
                 url_link: url_link,
             };
             const result = await createResource(resource);
-        if (result) {
-            navigate("/resources");
-            console.log(result);
-
-        } else if (result.isError) {
-            setError(result.error);
-            console.log(result.error);
-        }
+            if (result) {
+                navigate("/resources");
+            } else if (result.isError) {
+                setError(result.error);
+            }
         } catch (err) {
         setError(err);
         }
         if (result.isSuccess) {
-        navigate("/resources");
+            navigate("/resources");
         };
     }
 

@@ -5,7 +5,7 @@ stages:
 
 # Run flake8 to check for code quality
 lint-test-job:
-  image: python:3-bullseye
+  image: python:3.10-bullseye
   stage: test
   script:
     - pip install flake8
@@ -65,10 +65,28 @@ pages:
   artifacts:
     paths:
       - public
+api-unit-tests-job:
+  image: python:3.10-bullseye
+  services:
+    - name: postgres:14.5-bullseye
+      alias: db
+  variables:
+    POSTGRES_PASSWORD: test
+    POSTGRES_USER: example
+    POSTGRES_DB: therapy
+    DATABASE_URL: postgresql://example:test@db:15432/therapy
+  stage: test
+  needs:
+    - lint-test-job
+  script:
+    - cd therapy
+    - pip install -r requirements.txt
+    - python -m pytest
+  
 #
 # # Run the unit tests
 # api-unit-tests-job:
-#   image: python:3-bullseye
+#   image: python:3.10-bullseye
 #   stage: test
 #   needs:
 #     - lint-test-job

@@ -58,3 +58,7 @@ worked on trying to make sure that all of the endpoints didn't use the "ID" for 
 
 ## June 7, 2023
 The app was having issues with the data not being cleared after logging out or creating new journal entries. Looks like it is working now!
+Worked a lot on setting up the variables in gitlab and going through the gitlab.yml file for errors and anything we missed in setting it up correctly. 
+
+## June 8, 2023
+Helped Melody find a small bug on the updateResource form. 

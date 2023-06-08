@@ -4,7 +4,6 @@ import {
 } from "../store/resourcesApi";
 import { useNavigate } from "react-router-dom";
 import TherapistList from "./TherapistList";
-import UpdateResource from "./UpdateResource";
 import { useGetTokenQuery } from "../store/usersApi";
 
 function ResourcesList() {
@@ -14,9 +13,11 @@ function ResourcesList() {
   const [selectedResourceId, setSelectedResourceId] = useState();
   const navigate = useNavigate();
 
+
   useEffect(() => {
     refetch();
   }, [refetch]);
+
 
   const handleResourceClick = (id) => {
     setSelectedResourceId(id);
@@ -46,7 +47,18 @@ function ResourcesList() {
           <div key={resource.id}>
             <h3 onClick={() => handleResourceClick(resource.id)}> {resource.title}</h3>
             <p> Author: {resource.writer} | Posted on: {new Date(resource.posted_date).toLocaleString()}</p>
-            {selectedResourceId === resource.id && <UpdateResource resource={resource} clearSelection={() => setSelectedResourceId(null)} />}
+            {selectedResourceId === resource.id && (
+              <div>
+                <h3>{resource.title}</h3>
+                <p>Author: {resource.writer}</p>
+                <p>{resource.body}</p>
+                <img src={resource.picture} alt={resource.title} />
+                <p>Posted on: {new Date(resource.posted_date).toLocaleString()}</p>
+                <button onClick={() => navigate(`/resources/${resource.id}/edit`)}>
+                  Edit Resource
+                </button>
+              </div>
+            )}
             <hr />
           </div>
         ))}
@@ -58,7 +70,6 @@ function ResourcesList() {
     return (
       <div>
         <h2>Resources</h2>
-        <div>Hotline bling</div>
         <input type="text" value={searchTerm} onChange={handleSearchChange} placeholder="Search..." />
         {
           filteredResources.map((resource) => (

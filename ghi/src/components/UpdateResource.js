@@ -1,55 +1,103 @@
-import React, { useState } from "react";
-import { useEditResourceMutation, useDeleteResourceMutation } from "../store/resourcesApi";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+    useEditResourceMutation,
+    useDeleteResourceMutation,
+    useGetResourceDetailQuery,
+} from "../store/resourcesApi";
+import ErrorNotification from "../ErrorNotification";
+import { useGetTokenQuery } from "../store/usersApi";
+import { useParams } from "react-router-dom";
 
 
-export default function UpdateResource({ resource, clearSelection }) {
-    const [editResource] = useEditResourceMutation();
-    const [deleteResource] = useDeleteResourceMutation();
-    const [editMode, setEditMode] = useState(false);
-    const [editedResource, setEditedResource] = useState(null);
+export default function UpdateResource() {
+    const navigate = useNavigate();
+    const { id } = useParams();
+    const { data: resource } = useGetResourceDetailQuery(id);
+    const { data } = useGetTokenQuery();
+    const [title, setTitle] = useState("");
+    const [body, setBody] = useState("");
+    const [picture, setPicture] = useState("");
+    const [url_link, setUrl] = useState("");
+    const [error, setError] = useState("");
+    const [editResource, editResult] = useEditResourceMutation(id);
+    const [deleteResource, deleteResult] = useDeleteResourceMutation();
 
-    const handleEditResource = async (e) => {
-        e.stopPropagation();
-        setEditMode(true); // activates edit mode
-        setEditedResource({ ...resource }); // stores the resource being edited
-    };
 
-    const handleSaveResource = async (e) => {
-        e.stopPropagation();
-        if (editedResource) {
-            await editResource(editedResource); // saves edited resource
+    useEffect(() => {
+        if (resource) {
+            setTitle(resource.title);
+            setBody(resource.body);
+            setPicture(resource.picture);
+            setUrl(resource.url_link);
         }
-        setEditMode(false);
-        setEditedResource(null);
-    };
+    }, [resource]);
 
-    const handleDeleteResource = async (e) => {
-        e.stopPropagation();
-        await deleteResource(resource.id);
-        clearSelection();
-    };
+    async function handleSubmit(e) {
+        e.preventDefault();
+        try {
+            const updatedResource = {
+                id: resource.id,
+                writer: data.account.id,
+                title: title,
+                body: body,
+                picture: picture,
+                url_link: url_link,
+            };
 
-    return editMode ? ( //shows a form of what values you can edit
-        <>
-            <textarea type="text" value={editedResource.title} onChange={(e
-            ) => setEditedResource({ ...editedResource, title: e.target.value })} />
-            <textarea value={editedResource.body} onChange={(e
-            ) => setEditedResource({ ...editedResource, body: e.target.value })}></textarea>
-            <textarea type="text" value={editedResource.picture} onChange={(e
-            ) => setEditedResource({ ...editedResource, picture: e.target.value })} />
-            <textarea type="text" value={editedResource.url_link} onChange={(e
-            ) => setEditedResource({ ...editedResource, url_link: e.target.value })} />
-            <button onClick={handleSaveResource}>Save</button>
-            <button onClick={handleDeleteResource}>Delete</button>
-        </>
-    ) : ( // just shows the details of the clicked selected resource
-        <>
-            <h3>{resource.title}</h3>
-            <p>Author: {resource.writer}</p>
-            <p>{resource.body}</p>
-            <img src={resource.picture} alt={resource.title} />
-            <p>Posted on: {new Date(resource.posted_date).toLocaleString()}</p>
-            <button onClick={handleEditResource}>Edit Resource</button>
-        </>
-    )
+            const result = await editResource(updatedResource);
+
+            if (result) {
+                navigate("/resources");
+            } else if (result) {
+                setError(result.error);
+                console.log(error, "catch 1st")
+            }
+        } catch (err) {
+            setError(err.message);
+        }
+    }
+
+
+    async function handleDelete() {
+        try {
+            await deleteResource(id);
+            navigate("/resources/");
+        } catch (err) {
+            setError(err);
+        }
+    }
+
+    return (
+        <div>
+            {error && <ErrorNotification error={error} />}
+            <form onSubmit={handleSubmit}>
+                <label>
+                    Title:
+                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                </label>
+                <br />
+                <label>
+                    Body:
+                    <input type="text" value={body} onChange={(e) => setBody(e.target.value)} />
+                </label>
+                <br />
+                <label>
+                    Picture:
+                    <input type="text" value={picture} onChange={(e) => setPicture(e.target.value)} />
+                </label>
+                <br />
+                <label>
+                    URL Link:
+                    <input type="text" value={url_link} onChange={(e) => setUrl(e.target.value)} />
+                </label>
+                <button type="submit" disabled={editResult.isLoading}>
+                    Submit
+                </button>
+                <button type="button" onClick={handleDelete} disabled={deleteResult.isLoading}>
+                    Delete
+                </button>
+            </form>
+        </div>
+    );
 }
