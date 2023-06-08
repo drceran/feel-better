@@ -89,28 +89,30 @@ const Spotify = () => {
 
     return (
         <div className="container">
-            <form onSubmit={buttonClicked}>
-                <Dropdown label="Genre :" options={genres.listOfGenresFromAPI} selectedValue={genres.selectedGenre} changed={genreChanged} />
-                <Dropdown label="Playlist :" options={playlist.listOfPlaylistFromAPI} selectedValue={playlist.selectedPlaylist} changed={playlistChanged} />
-                <div className="col-sm-6 row form-group px-0">
-                    <button type='submit' className="btn btn-success col-sm-12">
-                        Search
-                    </button>
-                </div>
-                <div className="row">
-                    <Listbox items={tracks.listOfTracksFromAPI} clicked={listboxClicked} />
-                    {trackDetail && (
-                        <div className="offset-md-1 col-sm-4">
-                            <SpotifyPlayer
-                                uri={trackDetail.uri}
-                                size="large"
-                                view="coverart"
-                                theme="black"
-                            />
+            <div className="row">
+                <div className="col-md-6">
+                    <form onSubmit={buttonClicked}>
+                        <Dropdown label="Genre :" options={genres.listOfGenresFromAPI} selectedValue={genres.selectedGenre} changed={genreChanged} />
+                        <Dropdown label="Playlist :" options={playlist.listOfPlaylistFromAPI} selectedValue={playlist.selectedPlaylist} changed={playlistChanged} />
+                        <div className="col-sm-6 row form-group px-0">
+                            <button type='submit' className="btn btn-success col-sm-12">
+                                Search
+                            </button>
                         </div>
-                    )}
+                    </form>
+                    <Listbox items={tracks.listOfTracksFromAPI} clicked={listboxClicked} />
                 </div>
-            </form>
+                {trackDetail && (
+                    <div className="col-md-6">
+                        <SpotifyPlayer
+                            uri={trackDetail.uri}
+                            size="large"
+                            view="coverart"
+                            theme="black"
+                        />
+                    </div>
+                )}
+            </div>
         </div>
     );
 };

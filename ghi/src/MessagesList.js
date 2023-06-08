@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useGetMessagesQuery, useDeleteMessageMutation } from './store/messagesAPI';
 import MessageDetails from './MessageDetails';
 import { selectMessage } from './store/messagesSlice';
-import { useGetClientDetailQuery } from "../store/usersApi";
 
 function MessagesList() {
     const { data: messages, error, isLoading } = useGetMessagesQuery();
@@ -12,8 +11,6 @@ function MessagesList() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [deleteMessage] = useDeleteMessageMutation();
-    const { data: clientDetails } = useGetClientDetailQuery(selectedMessage?.user_id);
-
 
     useEffect(() => {
         if (deleteMessage.isSuccess) {
@@ -72,7 +69,6 @@ function MessagesList() {
                                     <th>Recipient</th>
                                     <th>Subject</th>
                                     <th>Body</th>
-                                    <th>Cost</th>
                                     <th>Date/Time</th>
                                     <th>Actions</th>
                                 </tr>
@@ -92,7 +88,6 @@ function MessagesList() {
                                         <td>{message.recipient}</td>
                                         <td>{message.subject}</td>
                                         <td>{message.body}</td>
-                                        <td>{message.cost}</td>
                                         <td>{new Date(message.datetime).toLocaleString()}</td>
                                         <td>
                                             <button onClick={() => handleDelete(message.id)}>Delete</button>

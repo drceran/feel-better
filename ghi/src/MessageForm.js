@@ -9,13 +9,10 @@ function MessagesForm() {
   const navigate = useNavigate();
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState('');
-  const [cost, setCost] = useState('');
   const [recipient, setRecipient] = useState('');
   const [error, setError] = useState('');
-
   const [createMessage, result] = useCreateMessagesMutation();
   const { data } = useGetTokenQuery();
-
   async function handleSubmit(e) {
     e.preventDefault();
     try {
@@ -23,7 +20,6 @@ function MessagesForm() {
         user_id: data.account.id,
         subject: subject,
         body: body,
-        cost: cost,
         recipient: recipient,
         datetime: new Date().toISOString(),
       }
@@ -31,7 +27,6 @@ function MessagesForm() {
       if (result) {
         navigate("/messages/");
         console.log(result);
-
       } else if (result.isError) {
         setError(result.error);
         console.log(result.error);
@@ -43,8 +38,6 @@ function MessagesForm() {
       navigate("/messages/");
     };
   };
-
-
   return (
     <div>
       {error && <ErrorNotification message={error} />}
@@ -58,10 +51,6 @@ function MessagesForm() {
           <input type="text" value={body} onChange={(e) => setBody(e.target.value)} required />
         </label>
         <label>
-          Cost:
-          <input type="text" value={cost} onChange={(e) => setCost(e.target.value)} required />
-        </label>
-        <label>
           Recipient:
           <input type="text" value={recipient} onChange={(e) => setRecipient(e.target.value)} required />
         </label>
@@ -70,5 +59,4 @@ function MessagesForm() {
     </div>
   );
 }
-
 export default MessagesForm;

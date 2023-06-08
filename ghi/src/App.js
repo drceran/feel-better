@@ -24,9 +24,8 @@ import JournalFormEdit from "./components/JournalEdit";
 import ProfileForm from "./authorization/ProfileForm";
 import MessagesEdit from "./MessagesEdit";
 // import ResourceForm from "./components/ResourceForm";
-import { Spotify } from "./Spotify";
-import SpotifyPlayer from "./SpotifyPlayer";
 import HomePage from "./home";
+import Spotify from "./Spotify";
 
 
 const domain = /https:\/\/[^/]+/;
@@ -41,6 +40,7 @@ function App() {
           <Routes>
             {/* <Route exact path="/learning" element={<Hamburger_Menu />} /> */}
             <Route exact path="/" element={<Main />} />
+            <Route exact path="/spotify" element={<Spotify />} />
             <Route exact path="/home" element={<HomePage />} />
             <Route exact path="/signup" element={<SignupForm />} />
             <Route exact path="/login" element={<LoginForm />}></Route>
