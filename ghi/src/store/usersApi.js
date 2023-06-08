@@ -122,7 +122,7 @@ export const usersApi = createApi({
           credentials: "include",
         };
       },
-      invalidatesTags: ["Jotter"],
+      invalidatesTags: ["Jotter", "Token"],
     }),
   }),
 });
