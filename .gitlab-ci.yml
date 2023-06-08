@@ -23,7 +23,7 @@ build-therapy-service-image:
 lint-test-job:
   image: python:3.10-bullseye
   stage: test
-  needs:
+  dependencies:
     - build-therapy-service-image
   script:
     - pip install flake8
@@ -40,7 +40,7 @@ api-unit-tests-job:
     POSTGRES_DB: therapy
     DATABASE_URL: postgresql://example:test@db:15432/therapy
   stage: test
-  needs:
+  dependencies:
     - build-therapy-service-image
   script:
     - cd therapy
@@ -51,7 +51,7 @@ api-unit-tests-job:
 build-front-end-job:
   stage: build
   image: node:lts-bullseye
-  needs:
+  dependencies:
     - lint-test-job
     - api-unit-tests-job
   variables:
@@ -72,8 +72,6 @@ pages:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   dependencies:
-    - build-front-end-job
-  needs:
     - build-front-end-job
   script:
     - mv ghi/build/ public
