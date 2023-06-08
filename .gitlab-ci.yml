@@ -1,10 +1,31 @@
 stages:
-  - build
   - test
+  - build
   - deploy
+
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+  DATABASE_URL: "postgresql://example:test@db/therapy"
+  SIGNING_KEY: "<your signing key here>"
+
+# Run flake8 to check for code quality
+lint-test-job:
+  image: python:3.10-bullseye
+  stage: test
+  script:
+    - pip install flake8
+    - flake8
 
 services:
   - docker:dind
+
+test:
+  stage: test
+  script:
+    - docker-compose up -d
+    - chmod +x ./wait-for-postgres.sh
+    - ./wait-for-postgres.sh db python -m pytest
+    - docker-compose down
 
 build-therapy-service-image:
   stage: build
@@ -20,19 +41,14 @@ build-therapy-service-image:
   only:
     - main
 
-# # Build the React/JavaScript front-end
+# Build the React/JavaScript front-end
 build-front-end-job:
   stage: build
   image: node:lts-bullseye
   needs:
     - lint-test-job
   variables:
-    #     # If either of these variables is defined in the GitLab
-    #     # CI/CD variables, that value will override the value here.
-    #     # You need to substitute in your real values for
-    #     # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
     PUBLIC_URL: "https://team-feeling-good.gitlab.io/module3-project-gamma/"
-    #    # PUBLIC_URL: https://GROUP_NAME.gitlab.io/PROJECT_NAME/
     REACT_APP_SAMPLE_SERVICE_API_HOST: "https://feb-23-pt-13-therapy.mod3projects.com/"
   script:
     - cd ghi
@@ -42,16 +58,8 @@ build-front-end-job:
   artifacts:
     paths:
       - ghi/build/
-      
-# Run flake8 to check for code quality
-lint-test-job:
-  image: python:3.10-bullseye
-  stage: test
-  script:
-    - pip install flake8
-    - flake8
 
-# # Deploy the React/JavaScript front-end to GitLab pages
+# Deploy the React/JavaScript front-end to GitLab pages
 pages:
   stage: deploy
   rules:
@@ -65,58 +73,3 @@ pages:
   artifacts:
     paths:
       - public
-api-unit-tests-job:
-  image: python:3.10-bullseye
-  services:
-    - name: postgres:14.5-bullseye
-      alias: db
-  variables:
-    POSTGRES_PASSWORD: test
-    POSTGRES_USER: example
-    POSTGRES_DB: therapy
-    DATABASE_URL: postgresql://example:test@db:15432/therapy
-  stage: test
-  needs:
-    - lint-test-job
-  script:
-    - cd therapy
-    - pip install -r requirements.txt
-    - python -m pytest
-  
-#
-# # Run the unit tests
-# api-unit-tests-job:
-#   image: python:3.10-bullseye
-#   stage: test
-#   needs:
-#     - lint-test-job
-#   script:
-#     - cd therapy
-#     - pip install -r requirements.txt
-#     - python -m pytest
-
-# # Build Sample Service:
-# build-back-end-job:
-#   image: docker:20-dind
-#   stage: build
-#   services:
-#     - docker:20-dind
-#   before_script:
-#     - export DOCKER_REGISTRY_USER=$CI_REGISTRY_USER # built-in GitLab Registry User
-#     - export DOCKER_REGISTRY_PASSWORD=$CI_REGISTRY_PASSWORD # built-in GitLab Registry Password
-#     - export DOCKER_REGISTRY_URL=$CI_REGISTRY # built-in GitLab Registry URL
-#     - export COMMIT_HASH=$CI_COMMIT_SHA # Your current commit sha
-#     - export IMAGE_NAME_WITH_REGISTRY_PREFIX=$CI_REGISTRY_IMAGE # Your repository prefixed with GitLab Registry URL
-#     - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" $DOCKER_REGISTRY_URL # Instructs GitLab to login to its registry
-#   script:
-#     - cd sample_service
-#     - echo "Building... " # MAKE SURE NO SPACE ON EITHER SIDE OF = IN THE FOLLOWING LINE
-#     - export CONTAINER_FULL_IMAGE_NAME_WITH_TAG=$IMAGE_NAME_WITH_REGISTRY_PREFIX/sample_service_image:$COMMIT_HASH
-#     - docker build -f ./Dockerfile --pull -t built-sample_service .
-#     - docker tag built-sample_service "$CONTAINER_FULL_IMAGE_NAME_WITH_TAG"
-#     - docker push "$CONTAINER_FULL_IMAGE_NAME_WITH_TAG"
-#     - echo $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
-#     - echo "Deploying on CapRover..."
-#     - docker run caprover/cli-caprover caprover deploy --caproverUrl $CAPROVER_URL --caproverPassword $CAPROVER_PASSWORD --caproverApp $CAPROVER_APP --imageName $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
-#   only:
-#     - main
