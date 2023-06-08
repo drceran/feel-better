@@ -13,7 +13,6 @@ import JournalList from "./components/JournalList";
 import JournalForm from "./components/JournalForm";
 import ResourcesList from "./components/ResourcesList";
 import ResourceForm from "./components/ResourceForm";
-// import UpdateResource from "./components/UpdateResource";
 import AppointmentList from "./components/AppointmentList";
 import AppointmentForm from "./components/AppointmentForm"
 import UserProfile from "./authorization/UserProfile";
@@ -25,9 +24,9 @@ import ProfileForm from "./authorization/ProfileForm";
 import MessagesEdit from "./MessagesEdit";
 import { Spotify } from "./Spotify";
 import SpotifyPlayer from "./SpotifyPlayer";
+import UpdateResource from "./components/UpdateResource";
 // import Hamburger_Menu from "./components/LandingPage";
 import HomePage from "./home";
-
 
 const domain = /https:\/\/[^/]+/;
 const basename = process.env.PUBLIC_URL.replace(domain, "");
@@ -39,7 +38,6 @@ function App() {
         <Nav />
         <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
           <Routes>
-            {/* <Route exact path="/learning" element={<Hamburger_Menu />} /> */}
             <Route exact path="/" element={<Main />} />
             <Route exact path="/home" element={<HomePage />} />
             <Route exact path="/signup" element={<SignupForm />} />
@@ -62,6 +60,7 @@ function App() {
             <Route exact path="/spotifyPlayer" element={<SpotifyPlayer />} />
             <Route exact path="/resources" element={<ResourcesList />}></Route>
             <Route exact path="/resources/create" element={<ResourceForm />}></Route>
+            <Route exact path="/resources/:id/edit" element={<UpdateResource />}></Route>
             <Route exact path="/appointments" element={<AppointmentList />}></Route>
             <Route exact path="/appointments/create" element={<AppointmentForm />}></Route>
           </Routes >
