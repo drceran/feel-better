@@ -5,7 +5,7 @@ stages:
 
 # Run flake8 to check for code quality
 lint-test-job:
-  image: python:3-bullseye
+  image: python:3.10-bullseye
   stage: test
   script:
     - pip install flake8
@@ -68,7 +68,7 @@ pages:
 #
 # # Run the unit tests
 api-unit-tests-job:
-  image: python:3-bullseye
+  image: python:3.10-bullseye
   stage: test
   needs:
     - lint-test-job
