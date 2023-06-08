@@ -33,6 +33,8 @@ def fake_message_data():
         datetime=datetime.now(),
     )
     return message.dict
+
+
 def test_get_all_messages():
     app.dependency_overrides[MessageRepository] = emptyRepo
     app.dependency_overrides[
