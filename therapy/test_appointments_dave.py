@@ -65,9 +65,6 @@ def fake_appointment_data():
 
 def test_get_appointments():
     app.dependency_overrides[AppointmentRepository] = EmptyAppointmentRepo
-    app.dependency_overrides[
-        authenticator.get_current_account_data
-    ] = fake_appointment_data
     response = client.get("/appointments/1")
     app.dependency_overrides = {}
     assert response.status_code == 200

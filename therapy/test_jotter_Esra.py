@@ -52,9 +52,6 @@ def fake_jotters_account_data():
 
 def test_get_one_jotters():
     app.dependency_overrides[JottersRepository] = EmptyJotterRepo
-    app.dependency_overrides[
-        authenticator.get_current_account_data
-    ] = fake_jotters_account_data
     response = client.get("/jotters/1")
     app.dependency_overrides = {}
     assert response.status_code == 200
