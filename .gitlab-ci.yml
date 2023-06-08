@@ -3,6 +3,11 @@ stages:
   - build
   - deploy
 
+check-signing-key:
+  stage: test
+  script:
+    - if [ -z "$SIGNING_KEY" ]; then echo "SIGNING_KEY is not set"; else echo "SIGNING_KEY is set"; fi
+
 # Run flake8 to check for code quality
 lint-test-job:
   image: python:3.10-bullseye
