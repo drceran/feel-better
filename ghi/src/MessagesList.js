@@ -5,6 +5,7 @@ import { useGetMessagesQuery, useDeleteMessageMutation } from './store/messagesA
 import MessageDetails from './MessageDetails';
 import { selectMessage } from './store/messagesSlice';
 
+
 function MessagesList() {
     const { data: messages, error, isLoading } = useGetMessagesQuery();
     const selectedMessage = useSelector((state) => state.messages.selectedMessage);
