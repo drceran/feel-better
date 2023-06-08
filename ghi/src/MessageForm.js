@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ErrorNotification from './ErrorNotification';
 import { useCreateMessagesMutation } from './store/messagesAPI';
@@ -11,9 +11,11 @@ function MessagesForm() {
   const [body, setBody] = useState('');
   const [recipient, setRecipient] = useState('');
   const [error, setError] = useState('');
+  const [cost, setCost] = useState();
 
   const [createMessage, result] = useCreateMessagesMutation();
   const { data } = useGetTokenQuery();
+
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -24,21 +26,25 @@ function MessagesForm() {
         body: body,
         recipient: recipient,
         datetime: new Date().toISOString(),
-        cost: (data.account.balance),
+        cost: 1,
       }
       const result = await createMessage(message);
-      if (result.isSuccess) {
-        navigate('/messages');
-      } else if (result.isError) {
-        setError(result.error);
-      }
+
     } catch (err) {
       setError(err);
     }
-    if (result.isSuccess) {
-      navigate('/messages');
-    };
+
   };
+
+  useEffect(() => {
+    if (result.isSuccess) {
+      navigate("/messages/");
+    }
+  }, [result, navigate]);
+
+  if (result.isError) {
+    setError(result.error);
+  }
 
   return (
     <div>

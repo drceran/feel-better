@@ -36,7 +36,7 @@ export default function AppointmentForm() {
                 therapist_id: appointmentData.therapist_id,
                 appointment_date: appointmentData.appointment_date,
                 appointment_time: appointmentData.appointment_time,
-                cost: (data.account.balance),
+                cost: 10,
             };
             const result = await createAppointment(appt);
             if (result) {

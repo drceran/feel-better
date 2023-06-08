@@ -24,8 +24,8 @@ const Pricing = () => {
                     </p>
                 </div>
                 {buyPackageResult ? (<div className="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">
-                    <p class="font-bold">Your purchase is successful</p>
-                    <p class="text-sm">Your new balance is {buyPackageResult.total_credit}</p>
+                    <p className="font-bold">Your purchase is successful</p>
+                    <p className="text-sm">Your new balance is {buyPackageResult.total_credit}</p>
                 </div>) : (<div />)}
 
                 <div className="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
