@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline";
 import { useGetTokenQuery } from "./store/usersApi";
 import { useNavigate } from "react-router-dom";
 import logo from './images/logo.png';
@@ -115,14 +115,21 @@ export default function Nav() {
                 {/* Profile dropdown */}
                 {data ? (
                   <>
-                    <p className="text-slate-100">
-                      Welcome {data?.account.first_name}
-                    </p>
+
 
                     <Menu as="div" className="relative ml-3">
                       <div>
-                        <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <Menu.Button className="flex rounded-full bg-gray-800 text-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                           <span className="sr-only">Open user menu</span>
+                          <span className="text-slate-100 m-2">
+                            {data?.account.first_name}
+                          </span>
+                          <div>
+                            <CurrencyDollarIcon className="block text-amber-300 m-2 h-6 w-6" />
+                          </div>
+                          <span className="text-amber-300 m-2">
+                            {data?.account.balance}
+                          </span>
                           <img
                             className="h-8 w-8 rounded-full"
                             src={data?.account.profile_picture}

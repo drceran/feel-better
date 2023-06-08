@@ -11,18 +11,12 @@ function ProfileForm() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(userInfoData || {});
 
-
-
-
-
   useEffect(() => {
     setFormData(userInfoData || {});
   }, [userInfoData]);
   const [setError] = useState("");
 
   const [editUSer, result] = useEditUserInfoMutation();
-
-
 
   const handleFormChange = (e) => {
     const value = e.target.value;
@@ -133,7 +127,7 @@ function ProfileForm() {
                   value={formData.profile_picture || ''}
                 />
               </div>
-              <div>
+              {/* <div>
                 <label htmlFor="email">Email:</label>
                 <input
                   onChange={handleFormChange}
@@ -142,7 +136,7 @@ function ProfileForm() {
                   name="email"
                   value={formData.email || ''}
                 />
-              </div>
+              </div> */}
               <div>
                 <label htmlFor="city">City:</label>
                 <input
@@ -224,7 +218,7 @@ function ProfileForm() {
                   value={formData.profile_picture || ''}
                 />
               </div>
-              <div>
+              {/* <div>
                 <label htmlFor="email">Email:</label>
                 <input
                   onChange={handleFormChange}
@@ -233,7 +227,7 @@ function ProfileForm() {
                   name="email"
                   value={formData.email || ''}
                 />
-              </div>
+              </div> */}
               <div>
                 <label htmlFor="about_me">About Me:</label>
                 <textarea
