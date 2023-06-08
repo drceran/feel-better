@@ -80,8 +80,7 @@ export default function Nav() {
                   <img
                     className="block h-8 w-auto lg:hidden"
                     src={logo}
-                    alt="JournalJotter logo"
-                  />
+                    alt="JournalJotter logo" />
                   <img
                     className="hidden h-8 w-auto lg:block"
                     src={logo}

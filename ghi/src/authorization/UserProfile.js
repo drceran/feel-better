@@ -2,14 +2,10 @@ import { useGetTokenQuery, useGetUserInfoQuery } from "../store/usersApi";
 
 function UserProfile() {
   const { data: tokenData, isLoading: isTokenLoading } = useGetTokenQuery();
-  const { data: userInfoData, error: userInfoError, isLoading: isUserInfoLoading } = useGetUserInfoQuery(isTokenLoading || !tokenData ? undefined : tokenData.account.id);
+  const { data: userInfoData, error: userInfoError } = useGetUserInfoQuery(isTokenLoading || !tokenData ? undefined : tokenData.account.id);
 
   if (userInfoError) {
-    return <div>Error: {userInfoError}</div>;
-  }
-
-  if (isUserInfoLoading || isTokenLoading || !userInfoData) {
-    return <progress className="progress is-primary" max="100"></progress>;
+    console.log("Error:", userInfoError);
   }
 
   return (

@@ -49,6 +49,7 @@ function JournalFormEdit() {
 
         try {
             setDateTime(journal?.date_time);
+            setDateTime(journal?.date_time);
             const journ = {
                 user_id: data.account.id,
                 id: parseInt(id),
@@ -58,8 +59,8 @@ function JournalFormEdit() {
                 is_private: privacy,
                 mood: mood
             }
-            console.log(journ);
             const result = await editJournal(journ);
+
 
             if (result) {
                 navigate("/journals/");
@@ -82,6 +83,7 @@ function JournalFormEdit() {
         } catch (err) {
             setError(err);
         }
+
     }
 
 
