@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useGetMessagesQuery, useDeleteMessageMutation } from './store/messagesAPI';
 import MessageDetails from './MessageDetails';
 import { selectMessage } from './store/messagesSlice';
+import { useGetClientDetailQuery } from "../store/usersApi";
 
 function MessagesList() {
     const { data: messages, error, isLoading } = useGetMessagesQuery();
@@ -11,6 +12,8 @@ function MessagesList() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [deleteMessage] = useDeleteMessageMutation();
+    const { data: clientDetails } = useGetClientDetailQuery(selectedMessage?.user_id);
+
 
     useEffect(() => {
         if (deleteMessage.isSuccess) {

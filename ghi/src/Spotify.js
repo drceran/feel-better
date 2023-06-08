@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Player from './Player';
+import Dropdown from './Dropdown';
+import Listbox from './Listbox';
 import { Credentials } from './Credentials';
+import axios from 'axios';
+import SpotifyPlayer from 'react-spotify-player';
 
 const Spotify = () => {
     const spotify = Credentials();
@@ -32,11 +34,9 @@ const Spotify = () => {
                         setGenres({
                             selectedGenre: genres.selectedGenre,
                             listOfGenresFromAPI: genreResponse.data.categories.items
-                        });
+                        })
                     });
-
             });
-
     }, [genres.selectedGenre, spotify.ClientId, spotify.ClientSecret]);
 
     const genreChanged = val => {
@@ -90,63 +90,27 @@ const Spotify = () => {
     return (
         <div className="container">
             <form onSubmit={buttonClicked}>
-                <div className="col-sm-6 form-group row px-0">
-                    <label className="form-label col-sm-2">Genre :</label>
-                    <select
-                        value={genres.selectedGenre}
-                        onChange={(e) => genreChanged(e.target.value)}
-                        className="form-control form-control-sm col-sm-10"
-                    >
-                        <option>Select...</option>
-                        {genres.listOfGenresFromAPI.map((item, idx) => (
-                            <option key={idx + 1} value={item.id}>
-                                {item.name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-
-                <div className="col-sm-6 form-group row px-0">
-                    <label className="form-label col-sm-2">Playlist :</label>
-                    <select
-                        value={playlist.selectedPlaylist}
-                        onChange={(e) => playlistChanged(e.target.value)}
-                        className="form-control form-control-sm col-sm-10"
-                    >
-                        <option>Select...</option>
-                        {playlist.listOfPlaylistFromAPI.map((item, idx) => (
-                            <option key={idx + 1} value={item.id}>
-                                {item.name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-
+                <Dropdown label="Genre :" options={genres.listOfGenresFromAPI} selectedValue={genres.selectedGenre} changed={genreChanged} />
+                <Dropdown label="Playlist :" options={playlist.listOfPlaylistFromAPI} selectedValue={playlist.selectedPlaylist} changed={playlistChanged} />
                 <div className="col-sm-6 row form-group px-0">
-                    <button type="submit" className="btn btn-success col-sm-12">
+                    <button type='submit' className="btn btn-success col-sm-12">
                         Search
                     </button>
                 </div>
+                <div className="row">
+                    <Listbox items={tracks.listOfTracksFromAPI} clicked={listboxClicked} />
+                    {trackDetail && (
+                        <div className="offset-md-1 col-sm-4">
+                            <SpotifyPlayer
+                                uri={trackDetail.uri}
+                                size="large"
+                                view="coverart"
+                                theme="black"
+                            />
+                        </div>
+                    )}
+                </div>
             </form>
-
-            <div className="row">
-                <div className="col-sm-6 px-0">
-                    <div className="list-group">
-                        {tracks.listOfTracksFromAPI.map((item, idx) => (
-                            <button
-                                key={idx}
-                                onClick={() => listboxClicked(item.track.id)}
-                                className="list-group-item list-group-item-action list-group-item-light"
-                            >
-                                {item.track.name}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-                <div className="col-sm-6">
-                    {trackDetail && <Player track={trackDetail} />}
-                </div>
-            </div>
         </div>
     );
 };

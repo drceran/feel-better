@@ -95,3 +95,4 @@ def test_get_one_jotters():
     app.dependency_overrides = {}
     assert response.status_code == 200
     assert isinstance(response.json(), dict)
+    
