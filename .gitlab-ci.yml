@@ -69,7 +69,7 @@ api-unit-tests-job:
   image: python:3.10-bullseye
   services:
     - name: postgres:14.5-bullseye
-      alias: localdbhost
+      alias: db
   variables:
     POSTGRES_PASSWORD: test
     POSTGRES_USER: example
