@@ -54,10 +54,6 @@ function MessagesForm() {
           <input type="text" value={body} onChange={(e) => setBody(e.target.value)} required />
         </label>
         <label>
-          Cost:
-          <input type="text" value={cost} onChange={(e) => setCost(e.target.value)} required />
-        </label>
-        <label>
           Recipient:
           <input type="text" value={recipient} onChange={(e) => setRecipient(e.target.value)} required />
         </label>
