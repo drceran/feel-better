@@ -18,6 +18,7 @@ class MessageIn(BaseModel):
     subject: str
     body: str
 
+
 class MessageOut(BaseModel):
     id: int
     user_id: int
