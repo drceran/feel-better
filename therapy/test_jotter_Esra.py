@@ -1,26 +1,11 @@
 from fastapi.testclient import TestClient
 from main import app
-from typing import Optional
+from queries.jotters import JottersRepository
 from pydantic import BaseModel
 from authenticator import authenticator
+from typing import Optional
 
 client = TestClient(app)
-
-
-class JottersIn(BaseModel):
-    first_name: str
-    last_name: str
-    email: str
-    type: str
-    phone_number: Optional[str] = None
-    city: Optional[str] = None
-    state: Optional[str] = None
-    balance: Optional[int] = None
-    certification: Optional[str] = None
-    graduated_college: Optional[str] = None
-    profile_picture: Optional[str] = None
-    about_me: Optional[str] = None
-    password: Optional[str] = None
 
 
 class JottersOut(BaseModel):
@@ -33,15 +18,20 @@ class JottersOut(BaseModel):
     city: Optional[str] = None
     state: Optional[str] = None
     balance: Optional[int] = None
-    certification: Optional[str] = None
-    graduated_college: Optional[str] = None
-    profile_picture: Optional[str] = None
-    about_me: Optional[str] = None
-    password: Optional[str] = None
+    certification: Optional[str]
+    graduated_college: Optional[str]
+    profile_picture: Optional[str]
+    about_me: Optional[str]
+    password: Optional[str]
 
 
-def fake_get_current_jotters_data():
-    return JottersOut(
+class EmptyJotterRepo:
+    def get_all_jotters(self, id=None):
+        return []
+
+
+def fake_jotters_account_data():
+    jotter = JottersOut(
         id=1,
         first_name="Test",
         last_name="Account",
@@ -57,13 +47,15 @@ def fake_get_current_jotters_data():
         about_me="Test",
         password="password123",
     )
+    return jotter.__dict__
 
 
-def test_get_all_jotters():
+def test_get_one_jotters():
+    app.dependency_overrides[JottersRepository] = EmptyJotterRepo
     app.dependency_overrides[
         authenticator.get_current_account_data
-    ] = fake_get_current_jotters_data
-    response = client.get("/jotters")
+    ] = fake_jotters_account_data
+    response = client.get("/jotters/1")
     app.dependency_overrides = {}
     assert response.status_code == 200
-    assert isinstance(response.json(), list)
+    assert response.json() == []
