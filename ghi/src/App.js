@@ -13,7 +13,6 @@ import JournalList from "./components/JournalList";
 import JournalForm from "./components/JournalForm";
 import ResourcesList from "./components/ResourcesList";
 import ResourceForm from "./components/ResourceForm";
-// import UpdateResource from "./components/UpdateResource";
 import AppointmentList from "./components/AppointmentList";
 import AppointmentForm from "./components/AppointmentForm"
 import UserProfile from "./authorization/UserProfile";
@@ -26,6 +25,7 @@ import MessagesEdit from "./MessagesEdit";
 // import ResourceForm from "./components/ResourceForm";
 import HomePage from "./home";
 import Spotify from "./Spotify";
+import UpdateResource from "./components/UpdateResource";
 
 
 const domain = /https:\/\/[^/]+/;
@@ -38,7 +38,6 @@ function App() {
         <Nav />
         <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
           <Routes>
-            {/* <Route exact path="/learning" element={<Hamburger_Menu />} /> */}
             <Route exact path="/" element={<Main />} />
             <Route exact path="/spotify" element={<Spotify />} />
             <Route exact path="/home" element={<HomePage />} />
@@ -47,7 +46,6 @@ function App() {
             <Route exact path="/logout" element={<Logout />}></Route>
             <Route exact path="/jotters/" element={<UserProfile />}></Route>
             <Route exact path="/editProfile/" element={<ProfileForm />}></Route>
-            <Route exact path="/" element={<Main />} />
             <Route exact path="/signup" element={<SignupForm />} />
             <Route exact path="/messages" element={<MessagesList />} />
             <Route exact path="/messages/new" element={<MessagesForm />} />
@@ -60,6 +58,7 @@ function App() {
             <Route exact path="/messages/:id" element={<MessageDetails />} />
             <Route exact path="/resources" element={<ResourcesList />}></Route>
             <Route exact path="/resources/create" element={<ResourceForm />}></Route>
+            <Route exact path="/resources/:id/edit" element={<UpdateResource />}></Route>
             <Route exact path="/appointments" element={<AppointmentList />}></Route>
             <Route exact path="/appointments/create" element={<AppointmentForm />}></Route>
           </Routes >
