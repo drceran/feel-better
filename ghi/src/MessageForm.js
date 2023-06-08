@@ -11,7 +11,6 @@ function MessagesForm() {
   const [body, setBody] = useState('');
   const [recipient, setRecipient] = useState('');
   const [error, setError] = useState('');
-  const [cost, setCost] = useState();
 
   const [createMessage, result] = useCreateMessagesMutation();
   const { data } = useGetTokenQuery();
@@ -29,6 +28,9 @@ function MessagesForm() {
         cost: 1,
       }
       const result = await createMessage(message);
+      if (!result) {
+        console.log("some text")
+      }
 
     } catch (err) {
       setError(err);
