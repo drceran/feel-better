@@ -24,7 +24,6 @@ function MessageDetails() {
       </div>
       <h2>{message.subject}</h2>
       <p>Body: {message.body}</p>
-      <p>Cost: {message.cost}</p>
       <p>Recipient: {message.recipient}</p>
       <p>Date and Time: {new Date(message.datetime).toLocaleString()}</p>
     </div>

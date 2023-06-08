@@ -1,107 +1,120 @@
-    import React, { useEffect, useState } from "react";
-    import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import Dropdown from './Dropdown';
+import Listbox from './Listbox';
+import { Credentials } from './Credentials';
+import axios from 'axios';
+import SpotifyPlayer from 'react-spotify-player';
 
-    export function Spotify() {
-        const CLIENT_ID = "c7543eda9c9b4e4a8fd6bcdb7f7d7f41";
-        const REDIRECT_URI = "http://localhost:3000/spotify";
-        const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-        const RESPONSE_TYPE = "token";
+const Spotify = () => {
+    const spotify = Credentials();
 
-        const [token, setToken] = useState("");
-        const [searchKey, setSearchKey] = useState("");
-        const [artists, setArtists] = useState([]);
+    const [token, setToken] = useState('');
+    const [genres, setGenres] = useState({ selectedGenre: '', listOfGenresFromAPI: [] });
+    const [playlist, setPlaylist] = useState({ selectedPlaylist: '', listOfPlaylistFromAPI: [] });
+    const [tracks, setTracks] = useState({ selectedTrack: '', listOfTracksFromAPI: [] });
+    const [trackDetail, setTrackDetail] = useState(null);
 
-        useEffect(() => {
-            const hash = window.location.hash;
-            let token = window.localStorage.getItem("token");
+    useEffect(() => {
+        axios('https://accounts.spotify.com/api/token', {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'Basic ' + btoa(spotify.ClientId + ':' + spotify.ClientSecret)
+            },
+            data: 'grant_type=client_credentials',
+            method: 'POST'
+        })
+            .then(tokenResponse => {
+                setToken(tokenResponse.data.access_token);
 
-            if (!token && hash) {
-                token = hash
-                    .substring(1)
-                    .split("&")
-                    .find((elem) => elem.startsWith("access_token"))
-                    .split("=")[1];
+                axios('https://api.spotify.com/v1/browse/categories?locale=sv_US', {
+                    method: 'GET',
+                    headers: { 'Authorization': 'Bearer ' + tokenResponse.data.access_token }
+                })
+                    .then(genreResponse => {
+                        setGenres({
+                            selectedGenre: genres.selectedGenre,
+                            listOfGenresFromAPI: genreResponse.data.categories.items
+                        })
+                    });
+            });
+    }, [genres.selectedGenre, spotify.ClientId, spotify.ClientSecret]);
 
-                window.location.hash = "";
-                window.localStorage.setItem("token", token);
+    const genreChanged = val => {
+        setGenres({
+            selectedGenre: val,
+            listOfGenresFromAPI: genres.listOfGenresFromAPI
+        });
+
+        axios(`https://api.spotify.com/v1/browse/categories/${val}/playlists?limit=10`, {
+            method: 'GET',
+            headers: { 'Authorization': 'Bearer ' + token }
+        })
+            .then(playlistResponse => {
+                setPlaylist({
+                    selectedPlaylist: playlist.selectedPlaylist,
+                    listOfPlaylistFromAPI: playlistResponse.data.playlists.items
+                });
+            });
+    };
+
+    const playlistChanged = val => {
+        setPlaylist({
+            selectedPlaylist: val,
+            listOfPlaylistFromAPI: playlist.listOfPlaylistFromAPI
+        });
+    };
+
+    const buttonClicked = e => {
+        e.preventDefault();
+
+        axios(`https://api.spotify.com/v1/playlists/${playlist.selectedPlaylist}/tracks?limit=10`, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token
             }
-            setToken(token);
-        }, []);
-
-        const logout = () => {
-            setToken("");
-            window.localStorage.removeItem("token");
-        };
-
-        const searchArtists = async (e) => {
-            e.preventDefault();
-            const { data } = await axios.get("https://api.spotify.com/v1/search", {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-                params: {
-                    q: searchKey,
-                    type: "artist",
-                },
+        })
+            .then(tracksResponse => {
+                setTracks({
+                    selectedTrack: tracks.selectedTrack,
+                    listOfTracksFromAPI: tracksResponse.data.items
+                });
             });
-            setArtists(data.artists.items);
-        };
+    };
 
-        const renderArtists = () => {
-            return artists.map((artist) => (
-                <div key={artist.id}>
-                    {artist.images.length ? (
-                        <img width={"80%"} src={artist.images[0].url} alt="" />
-                    ) : (
-                        <div>No Image</div>
-                    )}
-                    {artist.name}
+    const listboxClicked = val => {
+        const currentTracks = [...tracks.listOfTracksFromAPI];
+        const trackInfo = currentTracks.filter(t => t.track.id === val);
+        setTrackDetail(trackInfo[0].track);
+    };
+
+    return (
+        <div className="container">
+            <div className="row">
+                <div className="col-md-6">
+                    <form onSubmit={buttonClicked}>
+                        <Dropdown label="Genre :" options={genres.listOfGenresFromAPI} selectedValue={genres.selectedGenre} changed={genreChanged} />
+                        <Dropdown label="Playlist :" options={playlist.listOfPlaylistFromAPI} selectedValue={playlist.selectedPlaylist} changed={playlistChanged} />
+                        <div className="col-sm-6 row form-group px-0">
+                            <button type='submit' className="btn btn-success col-sm-12">
+                                Search
+                            </button>
+                        </div>
+                    </form>
+                    <Listbox items={tracks.listOfTracksFromAPI} clicked={listboxClicked} />
                 </div>
-            ));
-        };
-
-        window.onSpotifyWebPlaybackSDKReady = () => {
-            const player = new Spotify.Player({
-                name: "Journal Jotters",
-                getOAuthToken: (callback) => {
-                    callback(token);
-                },
-            });
-
-            player.connect();
-        };
-
-        return (
-            <div className="App">
-                <header className="App-header">
-                    <h1>Spotify</h1>
-                    <script src="https://sdk.scdn.co/spotify-player.js"></script>
-                    {!token ? (
-                        <a
-                            href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}
-                        >
-                            Login to Spotify
-                        </a>
-                    ) : (
-                        <button onClick={logout}>Logout</button>
-                    )}
-
-                    {token ? (
-                        <form onSubmit={searchArtists}>
-                            <input
-                                type="text"
-                                onChange={(e) => setSearchKey(e.target.value)}
-                                style={{ color: "black" }}
-                            />
-                            <button type="submit">Search</button>
-                        </form>
-                    ) : (
-                        <h2>Welcome</h2>
-                    )}
-
-                    {renderArtists()}
-                </header>
+                {trackDetail && (
+                    <div className="col-md-6">
+                        <SpotifyPlayer
+                            uri={trackDetail.uri}
+                            size="large"
+                            view="coverart"
+                            theme="black"
+                        />
+                    </div>
+                )}
             </div>
-        );
-    }
+        </div>
+    );
+};
 
+export default Spotify;
