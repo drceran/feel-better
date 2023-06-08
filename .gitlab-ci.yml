@@ -3,14 +3,6 @@ stages:
   - test
   - deploy
 
-# Run flake8 to check for code quality
-lint-test-job:
-  image: python:3.10-bullseye
-  stage: test
-  script:
-    - pip install flake8
-    - flake8
-
 services:
   - docker:dind
 
@@ -50,6 +42,14 @@ build-front-end-job:
   artifacts:
     paths:
       - ghi/build/
+      
+# Run flake8 to check for code quality
+lint-test-job:
+  image: python:3.10-bullseye
+  stage: test
+  script:
+    - pip install flake8
+    - flake8
 
 # # Deploy the React/JavaScript front-end to GitLab pages
 pages:
