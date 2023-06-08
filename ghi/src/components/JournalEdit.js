@@ -85,18 +85,6 @@ function JournalFormEdit() {
         }
 
     }
-    async function handleDelete() {
-        try {
-            const result = await deleteJournal(id);
-            if (result) {
-                navigate("/journals/");
-            } else if (deleteResult.isError) {
-                setError(deleteResult.error);
-            }
-        } catch (err) {
-            setError(err);
-        }
-    }
 
 
 

@@ -2,7 +2,7 @@ import { useGetTokenQuery, useGetUserInfoQuery } from "../store/usersApi";
 
 function UserProfile() {
   const { data: tokenData, isLoading: isTokenLoading } = useGetTokenQuery();
-  const { data: userInfoData, error: userInfoError, isLoading: isUserInfoLoading } = useGetUserInfoQuery(isTokenLoading || !tokenData ? undefined : tokenData.account.id);
+  const { data: userInfoData, error: userInfoError } = useGetUserInfoQuery(isTokenLoading || !tokenData ? undefined : tokenData.account.id);
 
   if (userInfoError) {
     console.log("Error:", userInfoError);
