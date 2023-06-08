@@ -7,6 +7,7 @@ from typing import Optional
 
 client = TestClient(app)
 
+
 class AppointmentsOut(BaseModel):
     id: int
     jotter_id: int
@@ -43,9 +44,11 @@ class AppointmentsOut(BaseModel):
     client_about_me: Optional[str]
     client_password: Optional[str]
 
+
 class EmptyAppointmentRepo:
     def get_all_appointments(self, id=None):
         return []
+
 
 def fake_appointment_data():
     appointment = AppointmentsOut(
@@ -58,6 +61,7 @@ def fake_appointment_data():
         price=1,
     )
     return appointment.__dict__
+
 
 def test_get_appointments():
     app.dependency_overrides[AppointmentRepository] = EmptyAppointmentRepo
