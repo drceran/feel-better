@@ -27,7 +27,7 @@ def create_appointment(
             message="Your balance is insufficient to make an appointment"
         )
     result = repo.create(appointment)
-    jotter_repo.change_balance(-10)
+    jotter_repo.change_balance(user_data["id"], -10)
     return result
 
 
@@ -40,7 +40,7 @@ def get_all_appointments_for_user(
     return repo.get_all_appointments_for_user(user_id)
 
 
-@router.get("/therapistappointments/{therapist_id}",
+@router.get("/therapistappointments",
             response_model=Union[List[AppointmentOut], Error])
 def get_all_appointments_for_therapist(
     repo: AppointmentRepository = Depends(),

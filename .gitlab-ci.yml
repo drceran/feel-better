@@ -73,10 +73,9 @@ pages:
 #   needs:
 #     - lint-test-job
 #   script:
-#     - cd sample_service
+#     - cd therapy
 #     - pip install -r requirements.txt
 #     - python -m pytest
-
 # # Build Sample Service:
 # build-back-end-job:
 #   image: docker:20-dind

@@ -29,8 +29,8 @@ function TherapistAppointment({ appointment, handleCancelAppointment }) {
 
 export default function AppointmentList() {
     const { data } = useGetTokenQuery();
-    const { data: appointments, refetch } = useGetClientAppointmentsQuery(data?.account.id);
-    const { data: therapistsappointments } = useGetTherapistAppointmentsQuery(data?.account.id)
+    const { data: appointments, refetch } = useGetClientAppointmentsQuery();
+    const { data: therapistsappointments } = useGetTherapistAppointmentsQuery()
     const [createAppointment] = useCreateAppointmentMutation();
     const [deleteAppointment] = useDeleteAppointmentMutation();
     const navigate = useNavigate();

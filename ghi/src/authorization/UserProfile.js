@@ -17,7 +17,7 @@ function UserProfile() {
       <h1> User Profile</h1>
       <img src={userInfoData?.profile_picture} alt={userInfoData?.first_name} />
       <p>
-        Name: {userInfoData?.first_name}
+        Name: {userInfoData?.first_name}{" "}
         {userInfoData?.last_name}
       </p>
       <p>About Me: {userInfoData?.about_me}</p>
