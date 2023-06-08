@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useGetClientAppointmentsQuery, useCreateAppointmentMutation, useDeleteAppointmentMutation, useGetTherapistAppointmentsQuery } from "../store/appointmentsApi";
 import { useGetTokenQuery, useGetTherapistDetailQuery, useGetClientDetailQuery } from "../store/usersApi";
 import { useNavigate } from "react-router-dom";
@@ -29,11 +29,17 @@ function TherapistAppointment({ appointment, handleCancelAppointment }) {
 
 export default function AppointmentList() {
     const { data } = useGetTokenQuery();
-    const { data: appointments } = useGetClientAppointmentsQuery(data?.account.id);
+    const { data: appointments, refetch } = useGetClientAppointmentsQuery(data?.account.id);
     const { data: therapistsappointments } = useGetTherapistAppointmentsQuery(data?.account.id)
     const [createAppointment] = useCreateAppointmentMutation();
     const [deleteAppointment] = useDeleteAppointmentMutation();
     const navigate = useNavigate();
+
+
+    useEffect(() => {
+        refetch();
+    }, [refetch])
+
 
     const handleScheduleAppointment = () => {
         navigate("/appointments/create");
