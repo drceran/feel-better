@@ -9,7 +9,7 @@ const HomePage = () => {
     if (isFetching || !data) {
         return <h1>Loading...</h1>;
     }
-    if (userType) {
+    if (!userType) {
         console.log("userType is: ", userType);
     }
 

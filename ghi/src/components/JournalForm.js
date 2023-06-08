@@ -17,6 +17,7 @@ function JournalForm() {
     const { data } = useGetTokenQuery();
 
     const options = [
+        "choose",
         "happy",
         "sad",
         "angry",
