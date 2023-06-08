@@ -8,6 +8,7 @@ from datetime import date, time
 
 client = TestClient(app)
 
+
 class AppointmentOut(BaseModel):
     id: int
     user_id: int
@@ -16,12 +17,14 @@ class AppointmentOut(BaseModel):
     appointment_time: time
     cost: float
 
+
 class EmptyRepo:
     def get_all_appointments(self, id=None):
         return []
 
     def get_all_appointments_for_user(self, user_id):
         return []
+
 
 def fake_appointment_data():
     appointment = AppointmentOut(
