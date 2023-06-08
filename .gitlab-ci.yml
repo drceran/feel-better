@@ -65,10 +65,16 @@ pages:
   artifacts:
     paths:
       - public
-#
-# # Run the unit tests
 api-unit-tests-job:
   image: python:3.10-bullseye
+  services:
+    - name: postgres:14.5-bullseye
+      alias: localhost
+  variables:
+    POSTGRES_PASSWORD: test
+    POSTGRES_USER: example
+    POSTGRES_DB: therapy
+    DATABASE_URL: postgresql://example:test@localhost:15432/therapy
   stage: test
   needs:
     - lint-test-job
@@ -76,6 +82,18 @@ api-unit-tests-job:
     - cd therapy
     - pip install -r requirements.txt
     - python -m pytest
+  
+#
+# # Run the unit tests
+# api-unit-tests-job:
+#   image: python:3.10-bullseye
+#   stage: test
+#   needs:
+#     - lint-test-job
+#   script:
+#     - cd therapy
+#     - pip install -r requirements.txt
+#     - python -m pytest
 
 # # Build Sample Service:
 # build-back-end-job:
