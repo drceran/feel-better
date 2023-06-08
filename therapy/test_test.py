@@ -14,19 +14,19 @@ class JottersOut(BaseModel):
     last_name: str
     email: str
     type: str
-    phone_number: Optional[str] = None
-    city: Optional[str] = None
-    state: Optional[str] = None
-    balance: Optional[int] = None
-    certification: Optional[str] = None
-    graduated_college: Optional[str] = None
-    profile_picture: Optional[str] = None
-    about_me: Optional[str] = None
-    password: Optional[str] = None
+    phone_number: Optional[str]
+    city: Optional[str]
+    state: Optional[str]
+    balance: Optional[int]
+    certification: Optional[str]
+    graduated_college: Optional[str]
+    profile_picture: Optional[str]
+    about_me: Optional[str]
+    password: Optional[str]
 
 
 class EmptyJotterRepo:
-    def get_all_jotters(self, id=None):
+    def get_all_jotters(self):
         return []
 
 
