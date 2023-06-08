@@ -2,7 +2,6 @@ from fastapi.testclient import TestClient
 from main import app
 from queries.appointments import AppointmentRepository
 from pydantic import BaseModel
-from authenticator import authenticator
 from typing import Optional
 
 client = TestClient(app)
