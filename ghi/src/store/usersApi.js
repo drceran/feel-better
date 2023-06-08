@@ -6,7 +6,6 @@ export const usersApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_SAMPLE_SERVICE_API_HOST,
   }),
-  tagTypes: ["Token", "Jotter"],
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (info) => {
