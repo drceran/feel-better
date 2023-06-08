@@ -24,6 +24,7 @@ function MessagesForm() {
         body: body,
         recipient: recipient,
         datetime: new Date().toISOString(),
+        cost: (data.account.balance),
       }
       const result = await createMessage(message);
       if (result.isSuccess) {
