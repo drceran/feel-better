@@ -23,7 +23,7 @@ import JournalFormEdit from "./components/JournalEdit";
 import ProfileForm from "./authorization/ProfileForm";
 import MessagesEdit from "./MessagesEdit";
 // import ResourceForm from "./components/ResourceForm";
-import HomePage from "./home";
+import HomePage from "./HomePage";
 import Spotify from "./Spotify";
 import UpdateResource from "./components/UpdateResource";
 // import Hamburger_Menu from "./components/LandingPage";
