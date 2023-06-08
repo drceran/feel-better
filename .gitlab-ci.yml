@@ -42,6 +42,7 @@ build-front-end-job:
     PUBLIC_URL: "https://team-feeling-good.gitlab.io/module3-project-gamma/"
     #    # PUBLIC_URL: https://GROUP_NAME.gitlab.io/PROJECT_NAME/
     REACT_APP_SAMPLE_SERVICE_API_HOST: "https://feb-23-pt-13-therapy.mod3projects.com/"
+
   script:
     - cd ghi
     - npm install

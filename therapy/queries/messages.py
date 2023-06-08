@@ -17,7 +17,6 @@ class MessageIn(BaseModel):
     recipient: int
     subject: str
     body: str
-    cost: float
 
 
 class MessageOut(BaseModel):
@@ -26,7 +25,6 @@ class MessageOut(BaseModel):
     recipient: int
     subject: str
     body: str
-    cost: float
     datetime: datetime
 
 
@@ -55,8 +53,7 @@ class MessageRepository:
                             recipient=record[2],
                             subject=record[3],
                             body=record[4],
-                            cost=record[5],
-                            datetime=record[6],
+                            datetime=record[5],
                         )
                     return message
         except Exception as e:
@@ -92,7 +89,6 @@ class MessageRepository:
                         , recipient = %s
                         , subject = %s
                         , body = %s
-                        , cost = %s
                         WHERE id = %s
                         """,
                         [
@@ -100,11 +96,9 @@ class MessageRepository:
                             message.recipient,
                             message.subject,
                             message.body,
-                            message.cost,
                             message_id,
                         ],
                     )
-                    # Fetch the updated message from the database
                     db.execute(
                         """
                         SELECT * FROM messages
@@ -122,8 +116,7 @@ class MessageRepository:
                             recipient=record[2],
                             subject=record[3],
                             body=record[4],
-                            cost=record[5],
-                            datetime=record[6],
+                            datetime=record[5],
                         )
                     return message_out
         except Exception as e:
@@ -139,7 +132,7 @@ class MessageRepository:
                     result = db.execute(
                         """
                         SELECT id, user_id, recipient,
-                          subject, body, cost, datetime
+                          subject, body, datetime
                         FROM messages
                         WHERE user_id = %s
                         """,
@@ -153,8 +146,7 @@ class MessageRepository:
                             recipient=row[2],
                             subject=row[3],
                             body=row[4],
-                            cost=row[5],
-                            datetime=row[6],
+                            datetime=row[5],
                         )
                         messages.append(message)
                     return messages
@@ -165,7 +157,6 @@ class MessageRepository:
     def create(self, message: MessageIn) -> Union[MessageOut, Error]:
         with pool.connection() as conn:
             with conn.cursor() as db:
-                # Check if the user_id exists in the jotters table
                 db.execute(
                     "SELECT id FROM jotters WHERE id = %s", [message.user_id]
                 )
@@ -173,12 +164,11 @@ class MessageRepository:
                 if record is None:
                     return {"message": "User not found with the given user_id"}
 
-                # User exists, proceed with message creation
                 result = db.execute(
                     """
                     INSERT INTO messages (user_id, recipient,
-                      subject, body, cost)
-                    VALUES (%s, %s, %s, %s, %s)
+                      subject, body)
+                    VALUES (%s, %s, %s, %s)
                     RETURNING id, datetime;
                     """,
                     [
@@ -186,7 +176,6 @@ class MessageRepository:
                         message.recipient,
                         message.subject,
                         message.body,
-                        message.cost,
                     ],
                 )
                 id, datetime = result.fetchone()

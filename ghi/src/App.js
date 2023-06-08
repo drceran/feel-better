@@ -22,11 +22,11 @@ import MessageDetails from "./MessageDetails";
 import JournalFormEdit from "./components/JournalEdit";
 import ProfileForm from "./authorization/ProfileForm";
 import MessagesEdit from "./MessagesEdit";
-import { Spotify } from "./Spotify";
-import SpotifyPlayer from "./SpotifyPlayer";
+// import ResourceForm from "./components/ResourceForm";
+import HomePage from "./home";
+import Spotify from "./Spotify";
 import UpdateResource from "./components/UpdateResource";
 // import Hamburger_Menu from "./components/LandingPage";
-import HomePage from "./home";
 
 const domain = /https:\/\/[^/]+/;
 const basename = process.env.PUBLIC_URL.replace(domain, "");
@@ -39,13 +39,13 @@ function App() {
         <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
           <Routes>
             <Route exact path="/" element={<Main />} />
+            <Route exact path="/spotify" element={<Spotify />} />
             <Route exact path="/home" element={<HomePage />} />
             <Route exact path="/signup" element={<SignupForm />} />
             <Route exact path="/login" element={<LoginForm />}></Route>
             <Route exact path="/logout" element={<Logout />}></Route>
             <Route exact path="/jotters/" element={<UserProfile />}></Route>
             <Route exact path="/editProfile/" element={<ProfileForm />}></Route>
-            <Route exact path="/" element={<Main />} />
             <Route exact path="/signup" element={<SignupForm />} />
             <Route exact path="/messages" element={<MessagesList />} />
             <Route exact path="/messages/new" element={<MessagesForm />} />
@@ -56,8 +56,6 @@ function App() {
             <Route exact path="/journals/new" element={<JournalForm />} />
             <Route exact path="/pricing" element={<Pricing />} />
             <Route exact path="/messages/:id" element={<MessageDetails />} />
-            <Route exact path="/spotify" element={<Spotify />} />
-            <Route exact path="/spotifyPlayer" element={<SpotifyPlayer />} />
             <Route exact path="/resources" element={<ResourcesList />}></Route>
             <Route exact path="/resources/create" element={<ResourceForm />}></Route>
             <Route exact path="/resources/:id/edit" element={<UpdateResource />}></Route>
