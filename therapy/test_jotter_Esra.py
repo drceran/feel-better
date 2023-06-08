@@ -4,6 +4,7 @@ from typing import Optional
 from pydantic import BaseModel
 from authenticator import authenticator
 
+
 client = TestClient(app)
 
 
@@ -66,4 +67,5 @@ def test_get_all_jotters():
     response = client.get("/jotters")
     app.dependency_overrides = {}
     assert response.status_code == 200
+    # assert response.json() == []
     assert isinstance(response.json(), list)
