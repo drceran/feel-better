@@ -25,7 +25,7 @@ async def create_message(
     if current_balance < 1:
         return Error(message="Your balance is insufficient to send a message")
     result = repo.create(message)
-    jotter_repo.change_balance(-1)
+    jotter_repo.change_balance(message_data["id"], -1)
     return result
 
 

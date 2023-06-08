@@ -15,7 +15,7 @@ export const appointmentsApi = createApi({
             return headers
         }
     }),
-    tagTypes: ["Appointments", "AppointmentDetail", "Jotter"],
+    tagTypes: ["Appointments", "AppointmentDetail"],
     endpoints: (builder) => ({
         getAppointments: builder.query({
             query: () => "/appointments/",
@@ -27,7 +27,11 @@ export const appointmentsApi = createApi({
                 body: data,
                 method: "post",
             }),
-            invalidatesTags: ["Appointments", "Jotter"]
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                await queryFulfilled;
+                dispatch(usersApi.util.invalidateTags(["Token"]));
+            },
+            invalidatesTags: ["Appointments"]
         }),
         getClientAppointmentDetail: builder.query({
             query: (id) => ({
