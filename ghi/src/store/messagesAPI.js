@@ -15,9 +15,11 @@ export const messagesApi = createApi({
             return headers;
         },
     }),
+    tagTypes: ["Messages", "MessageDetail"],
     endpoints: (builder) => ({
         getMessages: builder.query({
             query: () => '/messages/',
+            providesTags: ["Messages"]
         }),
         createMessages: builder.mutation({
             query: (data) => ({
@@ -25,13 +27,17 @@ export const messagesApi = createApi({
                 body: data,
                 method: 'post',
             }),
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                await queryFulfilled;
+                dispatch(usersApi.util.invalidateTags(["Token"]));
+            }, invalidatesTags: ["Messages"]
         }),
         getOneMessage: builder.query({
             query: (id) => ({
                 url: `/messages/${id}`,
                 method: 'get',
             }),
-            invalidates: [{ type: "getMessages", endpoint: "messages" }]
+            providesTags: ["MessageDetail"]
         }),
         editMessage: builder.mutation({
             query: ({ id, ...message }) => ({
@@ -39,14 +45,14 @@ export const messagesApi = createApi({
                 method: 'put',
                 body: message,
             }),
-            invalidates: [{ type: "getMessages", endpoint: "messages" }]
+            invalidatesTags: ["Messages", "MessageDetail"]
         }),
         deleteMessage: builder.mutation({
             query: (id) => ({
                 url: `/messages/${id}`,
                 method: 'delete',
             }),
-            invalidates: [{ type: "getMessages", endpoint: "messages" }]
+            invalidatesTags: ["Messages"]
         }),
     }),
 });
