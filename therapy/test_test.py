@@ -7,6 +7,7 @@ from typing import Optional
 
 client = TestClient(app)
 
+
 class JottersOut(BaseModel):
     id: int
     first_name: str
@@ -48,11 +49,12 @@ def fake_jotters_account_data():
     )
     return jotter.__dict__
 
+
 def test_get_all_jotters():
     app.dependency_overrides[JottersRepository] = EmptyJotterRepo
     app.dependency_overrides[
         authenticator.get_current_account_data
-        ] = fake_jotters_account_data
+    ] = fake_jotters_account_data
     response = client.get("/jotters")
     app.dependency_overrides = {}
     assert response.status_code == 200
