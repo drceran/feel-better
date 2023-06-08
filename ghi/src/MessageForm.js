@@ -9,7 +9,6 @@ function MessagesForm() {
   const navigate = useNavigate();
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState('');
-  const [cost, setCost] = useState('');
   const [recipient, setRecipient] = useState('');
   const [error, setError] = useState('');
 
@@ -23,7 +22,6 @@ function MessagesForm() {
         user_id: data.account.id,
         subject: subject,
         body: body,
-        cost: cost,
         recipient: recipient,
         datetime: new Date().toISOString(),
       }
