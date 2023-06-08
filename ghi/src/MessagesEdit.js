@@ -9,7 +9,6 @@ function MessagesFormEdit() {
     const { id } = useParams();
     const [subject, setSubject] = useState('');
     const [body, setBody] = useState('');
-    const [cost, setCost] = useState('');
     const [recipient, setRecipient] = useState('');
     const [error, setError] = useState('');
     const [dateTime, setDateTime] = useState('');
@@ -21,7 +20,6 @@ function MessagesFormEdit() {
         if (message) {
             setSubject(message.subject);
             setBody(message.body);
-            setCost(message.cost);
             setRecipient(message.recipient);
             setDateTime(message.datetime);
         }
@@ -38,7 +36,6 @@ function MessagesFormEdit() {
                 user_id: data.account.id,
                 subject: subject,
                 body: body,
-                cost: cost,
                 recipient: recipient,
                 datetime: dateTime,
             };
@@ -66,10 +63,6 @@ function MessagesFormEdit() {
                 <label>
                     Body:
                     <input type="text" value={body} onChange={(e) => setBody(e.target.value)} required />
-                </label>
-                <label>
-                    Cost:
-                    <input type="text" value={cost} onChange={(e) => setCost(e.target.value)} required />
                 </label>
                 <label>
                     Recipient:
