@@ -15,9 +15,11 @@ export const appointmentsApi = createApi({
             return headers
         }
     }),
+    tagTypes: ["Appointments", "AppointmentDetail", "Jotter"],
     endpoints: (builder) => ({
         getAppointments: builder.query({
             query: () => "/appointments/",
+            providesTags: ["Appointments"]
         }),
         createAppointment: builder.mutation({
             query: (data) => ({
@@ -25,7 +27,7 @@ export const appointmentsApi = createApi({
                 body: data,
                 method: "post",
             }),
-            invalidates: [{ type: 'getAppointments', endpoint: 'appointments' }]
+            invalidatesTags: ["Appointments", "Jotter"]
         }),
         getClientAppointmentDetail: builder.query({
             query: (id) => ({
@@ -33,34 +35,40 @@ export const appointmentsApi = createApi({
                 method: "get",
                 credentials: "include",
             }),
+            providesTags: ["AppointmentDetail"]
         }),
         getClientAppointments: builder.query({
-            query: (id) => ({
+            query: () => ({
                 url: `/appointments`,
                 method: "get",
                 credentials: "include",
             }),
+            providesTags: ["Appointments"]
         }),
         getTherapistAppointments: builder.query({
-            query: (id) => ({
-                url: `/therapistappointments/${id}`,
+            query: () => ({
+                url: `/therapistappointments`,
                 method: 'get',
+                credentials: "include",
             }),
+            providesTags: ["Appointments"]
         }),
         editAppointment: builder.mutation({
             query: ({ id, ...appointment }) => ({
                 url: `/appointments/${id}`,
                 method: "put",
                 body: appointment,
+                credentials: "include",
             }),
-            invalidates: [{ type: 'getAppointments', endpoint: 'appointments' }]
+            invalidatesTags: ["Appointments", "AppointmentDetail"]
         }),
         deleteAppointment: builder.mutation({
             query: (id) => ({
                 url: `/appointments/${id}`,
                 method: "delete",
+                credentials: "include",
             }),
-            invalidates: [{ type: 'getAppointments', endpoint: 'appointments' }]
+            invalidatesTags: ["Appointments"]
         }),
     }),
 });

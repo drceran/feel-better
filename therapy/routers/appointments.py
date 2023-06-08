@@ -40,7 +40,7 @@ def get_all_appointments_for_user(
     return repo.get_all_appointments_for_user(user_id)
 
 
-@router.get("/therapistappointments/{therapist_id}",
+@router.get("/therapistappointments",
             response_model=Union[List[AppointmentOut], Error])
 def get_all_appointments_for_therapist(
     repo: AppointmentRepository = Depends(),
