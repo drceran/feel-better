@@ -16,6 +16,7 @@ const HomePage = () => {
     return (
         <>
             <div>
+                <h1>Hello {data?.account.first_name}!</h1>
                 <JournalList />
             </div>
         </>
