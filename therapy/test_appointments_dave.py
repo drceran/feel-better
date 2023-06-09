@@ -40,7 +40,7 @@ def test_get_all_messages():
     app.dependency_overrides[
         authenticator.get_current_account_data
     ] = fake_message_data
-    response = client.get("/messages/")
+    response = client.get("/messages")
     app.dependency_overrides = {}
     assert response.status_code == 200
     assert response.json() == []
