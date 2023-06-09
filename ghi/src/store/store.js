@@ -15,7 +15,6 @@ export const store = configureStore({
         [journalsApi.reducerPath]: journalsApi.reducer,
         [resourcesApi.reducerPath]: resourcesApi.reducer,
         [appointmentsApi.reducerPath]: appointmentsApi.reducer,
-
         [authSlice.name]: authSlice.reducer,
 
     },

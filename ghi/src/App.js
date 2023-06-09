@@ -46,16 +46,15 @@ function App() {
             <Route exact path="/logout" element={<Logout />}></Route>
             <Route exact path="/jotters/" element={<UserProfile />}></Route>
             <Route exact path="/editProfile/" element={<ProfileForm />}></Route>
-            <Route exact path="/signup" element={<SignupForm />} />
             <Route exact path="/messages" element={<MessagesList />} />
             <Route exact path="/messages/new" element={<MessagesForm />} />
+            <Route exact path="/messages/:id" element={<MessageDetails />} />
             <Route exact path="/messages/:id/edit" element={< MessagesEdit />} />
             <Route exact path="/journals/:id/edit" element={<JournalFormEdit />} />
             <Route exact path="/journals/:id" element={<JournalEntry />} />
             <Route exact path="/journals" element={<JournalList />} />
             <Route exact path="/journals/new" element={<JournalForm />} />
             <Route exact path="/pricing" element={<Pricing />} />
-            <Route exact path="/messages/:id" element={<MessageDetails />} />
             <Route exact path="/resources" element={<ResourcesList />}></Route>
             <Route exact path="/resources/create" element={<ResourceForm />}></Route>
             <Route exact path="/resources/:id/edit" element={<UpdateResource />}></Route>
