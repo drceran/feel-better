@@ -58,7 +58,7 @@ class MessageRepository:
                             cost=record[5],
                             datetime=record[6],
                         )
-                        print("------message--------: ",message)
+                        print("------message--------: ", message)
                     return message
         except Exception as e:
             print(e)
@@ -185,4 +185,6 @@ class MessageRepository:
                 )
                 id, datetime = result.fetchone()
                 cost = 1
-                return MessageOut(id=id, **message.dict(), cost=cost, datetime=datetime)
+                return MessageOut(
+                    id=id, **message.dict(), cost=cost, datetime=datetime
+                )
