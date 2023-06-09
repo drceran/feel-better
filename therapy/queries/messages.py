@@ -33,7 +33,6 @@ class MessageRepository:
     def get_one_message(
         self, user_id: int, message_id: int
     ) -> Union[Error, MessageOut]:
-        print("---------user_id: ", user_id)
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -57,7 +56,6 @@ class MessageRepository:
                             cost=record[5],
                             datetime=record[6],
                         )
-                        print("------message--------: ", message)
                     return message
         except Exception as e:
             print(e)
