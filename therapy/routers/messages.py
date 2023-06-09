@@ -65,7 +65,9 @@ async def get_one_message(
     response: Response,
     repo: MessageRepository = Depends(),
     message_data: dict = Depends(authenticator.get_current_account_data),
-) -> MessageOut:
+):
+    print("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW")
+    print("message data:", message_data, "message id: ", message_id)
     if message_data and authenticator.cookie_name:
         user_id = message_data["id"]
         return repo.get_one_message(user_id, message_id)

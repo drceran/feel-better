@@ -25,6 +25,7 @@ class MessageOut(BaseModel):
     recipient: int
     subject: str
     body: str
+    cost: int
     datetime: datetime
 
 
@@ -32,6 +33,7 @@ class MessageRepository:
     def get_one_message(
         self, user_id: int, message_id: int
     ) -> Union[Error, MessageOut]:
+        print("---------user_id: ", user_id)
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -43,7 +45,7 @@ class MessageRepository:
                         [message_id, user_id],
                     )
                     record = db.fetchone()
-                    print(record)
+                    print("----record----", record)
                     if record is None:
                         return {"message": "No message found with this id"}
                     else:
@@ -53,8 +55,10 @@ class MessageRepository:
                             recipient=record[2],
                             subject=record[3],
                             body=record[4],
-                            datetime=record[5],
+                            cost=record[5],
+                            datetime=record[6],
                         )
+                        print("------message--------: ", message)
                     return message
         except Exception as e:
             print(e)
@@ -132,7 +136,7 @@ class MessageRepository:
                     result = db.execute(
                         """
                         SELECT id, user_id, recipient,
-                          subject, body, datetime
+                          subject, body, cost, datetime
                         FROM messages
                         WHERE user_id = %s
                         """,
@@ -146,7 +150,8 @@ class MessageRepository:
                             recipient=row[2],
                             subject=row[3],
                             body=row[4],
-                            datetime=row[5],
+                            cost=row[5],
+                            datetime=row[6],
                         )
                         messages.append(message)
                     return messages
@@ -179,4 +184,7 @@ class MessageRepository:
                     ],
                 )
                 id, datetime = result.fetchone()
-                return MessageOut(id=id, datetime=datetime, **message.dict())
+                cost = 1
+                return MessageOut(
+                    id=id, **message.dict(), cost=cost, datetime=datetime
+                )
