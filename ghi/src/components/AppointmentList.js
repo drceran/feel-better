@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useGetClientAppointmentsQuery, useCreateAppointmentMutation, useDeleteAppointmentMutation, useGetTherapistAppointmentsQuery } from "../store/appointmentsApi";
+import { useGetClientAppointmentsQuery, useDeleteAppointmentMutation, useGetTherapistAppointmentsQuery } from "../store/appointmentsApi";
 import { useGetTokenQuery, useGetTherapistDetailQuery, useGetClientDetailQuery } from "../store/usersApi";
 import { useNavigate } from "react-router-dom";
 
@@ -31,7 +31,6 @@ export default function AppointmentList() {
     const { data } = useGetTokenQuery();
     const { data: appointments, refetch } = useGetClientAppointmentsQuery();
     const { data: therapistsappointments } = useGetTherapistAppointmentsQuery()
-    const [createAppointment] = useCreateAppointmentMutation();
     const [deleteAppointment] = useDeleteAppointmentMutation();
     const navigate = useNavigate();
 
@@ -53,11 +52,10 @@ export default function AppointmentList() {
         }
     };
 
-    const handleRescheduleAppointment = async (id, newAppointmentData) => {
-        navigate("/appointments/create")
+    const handleRescheduleAppointment = async (id) => {
         try {
             await deleteAppointment(id);
-            await createAppointment(newAppointmentData);
+            navigate("/appointments/create")
         } catch (error) {
             console.error(error);
         }

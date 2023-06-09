@@ -22,7 +22,8 @@ app.add_middleware(
             "http://localhost:3000"
         ),
         "https://team-feeling-good.gitlab.io",
-        "https://feb-23-pt-13-therapy.mod3projects.com"],
+        "https://feb-23-pt-13-therapy.mod3projects.com",
+        "localhost:8000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
