@@ -13,9 +13,8 @@ export const store = configureStore({
         [usersApi.reducerPath]: usersApi.reducer,
         [messagesApi.reducerPath]: messagesApi.reducer,
         [journalsApi.reducerPath]: journalsApi.reducer,
-    [resourcesApi.reducerPath]: resourcesApi.reducer,
-    [appointmentsApi.reducerPath]: appointmentsApi.reducer,
-
+        [resourcesApi.reducerPath]: resourcesApi.reducer,
+        [appointmentsApi.reducerPath]: appointmentsApi.reducer,
         [authSlice.name]: authSlice.reducer,
 
     },

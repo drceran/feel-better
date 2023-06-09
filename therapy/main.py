@@ -16,9 +16,11 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[os.environ.get(
-        "CORS_HOST",
-        "http://localhost:3000"),
+    allow_origins=[
+        os.environ.get(
+            "CORS_HOST",
+            "http://localhost:3000"
+        ),
         "https://team-feeling-good.gitlab.io",
         "https://feb-23-pt-13-therapy.mod3projects.com"],
     allow_credentials=True,
