@@ -117,7 +117,8 @@ class MessageRepository:
                             recipient=record[2],
                             subject=record[3],
                             body=record[4],
-                            datetime=record[5],
+                            cost=record[5],
+                            datetime=record[6],
                         )
                     return message_out
         except Exception as e:
