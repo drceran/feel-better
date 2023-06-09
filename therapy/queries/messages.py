@@ -122,6 +122,7 @@ class MessageRepository:
                         )
                     return message_out
         except Exception as e:
+            print(e)
             return {
                 "message": "Something went wrong while updating the message"
             }
