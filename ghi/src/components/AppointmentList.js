@@ -31,7 +31,6 @@ export default function AppointmentList() {
     const { data } = useGetTokenQuery();
     const { data: appointments, refetch } = useGetClientAppointmentsQuery();
     const { data: therapistsappointments } = useGetTherapistAppointmentsQuery()
-    const [createAppointment] = useCreateAppointmentMutation();
     const [deleteAppointment] = useDeleteAppointmentMutation();
     const navigate = useNavigate();
 
