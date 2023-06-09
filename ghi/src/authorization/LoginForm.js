@@ -1,6 +1,7 @@
-import { useEffect } from "react";
 import { useLoginMutation } from "../store/usersApi";
 import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+
 
 const LoginForm = () => {
   const [login, result] = useLoginMutation();
@@ -9,7 +10,6 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const formData = new FormData(e.target);
     const email = formData.get("email");
     const password = formData.get("password");
@@ -23,11 +23,12 @@ const LoginForm = () => {
     if (result.isSuccess) {
       navigate("/home");
     }
-  }, [result.isSuccess, navigate])
+  }, [result.isSuccess, navigate]);
 
   if (result.isError) {
     return "Can't log in.";
   }
+
 
   return (
     <div className="card text-bg-light mb-3">
