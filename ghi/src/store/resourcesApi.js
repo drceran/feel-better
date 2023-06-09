@@ -6,40 +6,40 @@ export const resourcesApi = createApi({
         baseUrl: process.env.REACT_APP_SAMPLE_SERVICE_API_HOST,
     }),
     endpoints: (builder) => ({
-    getResources: builder.query({
-        query: () => "/resources/",
-    }),
-    createResource: builder.mutation({
-        query: (data) => ({
-            url: "/resources/",
-            body: data,
-            method: "post",
+        getResources: builder.query({
+            query: () => "/resources",
         }),
-        invalidates: [{ type: 'getResources', endpoint: 'resources' }]
-    }),
-    getResourceDetail: builder.query({
-        query: (id) => ({
-            url: "/resources/" + id,
-            method: "get",
-            credentials: "include",
+        createResource: builder.mutation({
+            query: (data) => ({
+                url: "/resources",
+                body: data,
+                method: "post",
+            }),
+            invalidates: [{ type: 'getResources', endpoint: 'resources' }]
         }),
-        invalidates: [{ type: 'getResources', endpoint: 'resources' }]
-    }),
-    editResource: builder.mutation({
-        query: ({ id, ...resource }) => ({
-            url: `/resources/${id}`,
-            method: 'put',
-            body: resource,
+        getResourceDetail: builder.query({
+            query: (id) => ({
+                url: "/resources/" + id,
+                method: "get",
+                credentials: "include",
+            }),
+            invalidates: [{ type: 'getResources', endpoint: 'resources' }]
         }),
-        invalidates: [{ type: 'getResources', endpoint: 'resources' }]
-    }),
-    deleteResource: builder.mutation({
-        query: (id) => ({
-            url: `/resources/${id}`,
-            method: 'delete',
+        editResource: builder.mutation({
+            query: ({ id, ...resource }) => ({
+                url: `/resources/${id}`,
+                method: 'put',
+                body: resource,
+            }),
+            invalidates: [{ type: 'getResources', endpoint: 'resources' }]
         }),
-        invalidates: [{ type: 'getResources', endpoint: 'resources' }]
-    })
+        deleteResource: builder.mutation({
+            query: (id) => ({
+                url: `/resources/${id}`,
+                method: 'delete',
+            }),
+            invalidates: [{ type: 'getResources', endpoint: 'resources' }]
+        })
     }),
 });
 
