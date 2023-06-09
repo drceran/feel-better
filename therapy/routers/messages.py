@@ -12,7 +12,7 @@ from queries.jotters import JottersRepository
 router = APIRouter()
 
 
-@router.post("/messages/", response_model=Union[MessageOut, Error])
+@router.post("/messages", response_model=Union[MessageOut, Error])
 async def create_message(
     message: MessageIn,
     response: Response,
