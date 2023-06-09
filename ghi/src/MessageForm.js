@@ -21,8 +21,8 @@ function MessagesForm() {
         subject: subject,
         body: body,
         recipient: recipient,
-        datetime: new Date().toISOString(),
         cost: 1,
+        datetime: new Date().toISOString(),
       }
       const result = await createMessage(message);
       if (!result) {
