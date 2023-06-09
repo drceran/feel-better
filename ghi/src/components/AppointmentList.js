@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useGetClientAppointmentsQuery, useCreateAppointmentMutation, useDeleteAppointmentMutation, useGetTherapistAppointmentsQuery } from "../store/appointmentsApi";
+import { useGetClientAppointmentsQuery, useDeleteAppointmentMutation, useGetTherapistAppointmentsQuery } from "../store/appointmentsApi";
 import { useGetTokenQuery, useGetTherapistDetailQuery, useGetClientDetailQuery } from "../store/usersApi";
 import { useNavigate } from "react-router-dom";
 
