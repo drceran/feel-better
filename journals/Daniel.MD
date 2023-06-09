@@ -1,4 +1,18 @@
-June 4th -
+June 9th -
+
+June 8th - Doing some finishing touches error handling and general bug fixes also trying to make it so spotify work for everyone
+not just me.Got the pipelines passing for the unit tests for me and my teammates trying to figure out
+a CORS error on our deployed website
+
+June 7th - Finally got spotify music player working. After alot of trying and restarting that aspect of my project
+also helping my teammates with their unit tests as they were having the same problems.
+
+June 6th - Working on unit testing having issues it works on my docker container but not when it gets pushed up.
+
+June 5th- More spotify and trying to figure out how unit testing works and how to create one
+
+June 4th - Having issues with spotify it has become a pain in my side ive tried alot of different options but
+i cannot for the life of me get it to run/
 
 
 Jun 3rd - Finally finished Messages the only thing i have to figure out now is how to make it so that

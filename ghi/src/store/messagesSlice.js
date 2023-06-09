@@ -1,23 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-
-// const initialState = {
-//     messages: [],
-//     sender : '',
-//     recipient : '',
-//     subject : '',
-//     body : '',
-//     cost : '',
-//     timestamp : '',
-// };
-
-// const messagesSlice = createSlice({
-//     name: 'messages',
-//     initialState,
-// });
-
-// export default messagesSlice.reducer;
-
 const messagesSlice = createSlice({
     name: 'messages',
     initialState: {

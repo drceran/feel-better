@@ -3,20 +3,21 @@ import React from 'react';
 const Detail = ({ album, artists, name }) => {
 
     return (
-        <div className="offset-md-1 col-sm-4" >
-            <div className="row col-sm-12 px-0">
+        <div style={{ marginLeft: '20px', width: 'calc(33.33% - 20px)' }}>
+            <div style={{ width: '100%' }}>
                 <img
                     src={album.images[0].url}
-                    alt={name}>
-                </img>
+                    alt={name}
+                    style={{ width: '100%' }}
+                />
             </div>
-            <div className="row col-sm-12 px-0">
-                <label htmlFor={name} className="form-label col-sm-12">
+            <div style={{ width: '100%' }}>
+                <label htmlFor={name} style={{ width: '100%' }}>
                     {name}
                 </label>
             </div>
-            <div className="row col-sm-12 px-0">
-                <label htmlFor={artists[0].name} className="form-label col-sm-12">
+            <div style={{ width: '100%' }}>
+                <label htmlFor={artists[0].name} style={{ width: '100%' }}>
                     {artists[0].name}
                 </label>
             </div>
