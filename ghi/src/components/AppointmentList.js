@@ -53,11 +53,10 @@ export default function AppointmentList() {
         }
     };
 
-    const handleRescheduleAppointment = async (id, newAppointmentData) => {
-        navigate("/appointments/create")
+    const handleRescheduleAppointment = async (id) => {
         try {
             await deleteAppointment(id);
-            await createAppointment(newAppointmentData);
+            navigate("/appointments/create")
         } catch (error) {
             console.error(error);
         }
