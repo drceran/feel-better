@@ -193,5 +193,29 @@ I will work on unit testing and the balance-cost-packages functionality. When I 
 
 # Wednesday (6/11/2023)
 
-Yesterday I worked on the backend for the packages/buy, I completed the back end, tested in the bumblebee. It was working. And today, I worked on the front end. I tested and it went well. I wrote my first test. wow. I used tailwindcss template for pricing stuff, that David created last week. By using a mutation I send a request to the backend, and with the response, I can buy a package. And if we are in the process of the getting the data, the button is getting disabled. I tested using time.sleep(20), tested in the bumblebee. According to the message comes from backend, if user successfully bought the message, they are getting a notification saying: "your current balance is: this amount"
+Yesterday I worked on the backend for the packages/buy, I completed the back end, tested in the bumblebee. It was working. And today, I worked on the front end. I tested and it went well. I wrote my first test. wow. I used tailwindcss template for pricing stuff, that Daniel created last week. By using a mutation I send a request to the backend, and with the response, I can buy a package. And if we are in the process of the getting the data, the button is getting disabled. I tested using time.sleep(20), tested in the bumblebee. According to the message comes from backend, if user successfully bought the message, they are getting a notification saying: "your current balance is: this amount"
 I wanted to implement the purchasing part, too. So I started to test it in the messages, but create message was giving me error. My teammate and I are gonna work on that. And once I pull from main, I will test appointments in the frontend too.
+
+# Thursday (6/12/2023)
+
+Today I worked fixed three things:
+
+- [ ] Appointment page- cancel feature- after cancel it does not update the current page-
+- [ ] Balance- with message and appointment- if we cannot create the new appointment or message bc of balance is not enough- the page will let us know with an alert.
+- [ ] Unit tests does not success in gitlab
+
+For the unit tests, we made some changes of the versions of the libraries we use.
+For the state management, I deep dived into providetags/ invalidatetags features. I also added the current balance to the navbar, so that users can see the current balance whenever they need. There was one really helpful post in stackoverflow, it shows how you can use the tags in between the different files, I adapted that code suggested in the post, and with that I was able to fix the appointment and messages cost issues. also I fixed my friend's code, as older version was not correctly works for cacheing the data for appointments and messages. I also fixed the frontend code for messages, as it is not supposed to ask the cost of a message to the user.
+
+I though everything was working perfectly, without error, however when I woke up, I tested again the code I pulled from main, and I encountered three issues:
+
+- [x] When you buy a package, it is not updating the balance in navbar
+- [x] Message cost - I need to bring the message cost from message.cost
+- [x] You need to click twice to take you to the list of messages as you create msg
+      For the first one, I used invalidate tag functionality, and with token is being invalidating, the issue is fixed. For the second one, I reread my code, since I already defining the cost of the message/ appointment in the backend, in the frontend, I only needed a value, since it is defined as not null in the db and the model. So in the front end, I only give the predefined costs of the messages/ appointments.
+
+For the third one, I edit my friend's code, and I move the if x.isSuccess- do this, part to the outside of the handleSubmit function.
+
+Today, I learned more about the correct way for CI/CD process from Rosheen. She mentioned for us to succes for the deployment process, a person needs to test the project in the cloud after each MR. I reset our project a few times as we all created MRs today.
+
+We also encountered issues related w/ different operating systems. It turns out cloud can act different in different environments. Our project was not very responsive in Windows and in incognito.

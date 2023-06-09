@@ -18,12 +18,12 @@ export const appointmentsApi = createApi({
     tagTypes: ["Appointments", "AppointmentDetail"],
     endpoints: (builder) => ({
         getAppointments: builder.query({
-            query: () => "/appointments/",
+            query: () => "/appointments",
             providesTags: ["Appointments"]
         }),
         createAppointment: builder.mutation({
             query: (data) => ({
-                url: "/appointments/",
+                url: "/appointments",
                 body: data,
                 method: "post",
             }),

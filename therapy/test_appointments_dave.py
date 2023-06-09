@@ -15,7 +15,6 @@ class MessageOut(BaseModel):
     recipient: int
     subject: str
     body: str
-    cost: int
     datetime: datetime
 
 
@@ -31,7 +30,6 @@ def fake_message_data():
         recipient=2,
         subject="Hello",
         body="goodbye!",
-        cost=0,
         datetime=datetime.now(),
     )
     return message.dict()

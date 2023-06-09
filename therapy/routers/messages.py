@@ -29,7 +29,7 @@ async def create_message(
     return result
 
 
-@router.get("/messages", response_model=Union[List[MessageOut], Error])
+@router.get("/messages/", response_model=Union[List[MessageOut], Error])
 async def get_all_messages(
     repo: MessageRepository = Depends(),
     message_data: dict = Depends(authenticator.get_current_account_data),

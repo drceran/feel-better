@@ -127,16 +127,6 @@ function ProfileForm() {
                   value={formData.profile_picture || ''}
                 />
               </div>
-              {/* <div>
-                <label htmlFor="email">Email:</label>
-                <input
-                  onChange={handleFormChange}
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email || ''}
-                />
-              </div> */}
               <div>
                 <label htmlFor="city">City:</label>
                 <input
@@ -218,16 +208,6 @@ function ProfileForm() {
                   value={formData.profile_picture || ''}
                 />
               </div>
-              {/* <div>
-                <label htmlFor="email">Email:</label>
-                <input
-                  onChange={handleFormChange}
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email || ''}
-                />
-              </div> */}
               <div>
                 <label htmlFor="about_me">About Me:</label>
                 <textarea
