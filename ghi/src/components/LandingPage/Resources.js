@@ -4,12 +4,12 @@ import {
   useCreateResourceMutation, useDeleteResourceMutation
 } from "../../store/resourcesApi";
 import { useParams } from "react-router-dom";
-import ResourceForm from "../ResourceForm";
+import ResourceForm from "../Resources/ResourceForm";
 import TherapistList from "../TherapistList";
 import { useGetTokenQuery } from "../../store/usersApi";
 
 
-function ResourcesList() {
+function ResourcesList({ back }) {
   // const { id } = useParams();
   const { data } = useGetTokenQuery();
   const { data: resources, isLoading } = useGetResourcesQuery();
@@ -142,6 +142,8 @@ function ResourcesList() {
   } else {
     return (
       <div>
+        <button
+          onClick={back}>back</button>
         <h2>Resources</h2>
         <input type="text" value={searchTerm} onChange={handleSearchChange} placeholder="Search..." />
         {filteredResources.map((resource) => (

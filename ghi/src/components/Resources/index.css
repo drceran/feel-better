@@ -1,0 +1,24 @@
+.background {
+  margin: 0;
+  padding-top: 100px;
+  background-image: url("../../../public/static/2.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
+  background-color: #E0D7D3;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  padding: 20px; /* Add padding for spacing */
+  box-sizing: border-box; /* Include padding in element width */
+}
+
+
+.content {
+    align-items: center; /* Center horizontally */
+    justify-content: center;
+}

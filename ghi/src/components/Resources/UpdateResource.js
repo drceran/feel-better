@@ -4,9 +4,9 @@ import {
     useEditResourceMutation,
     useDeleteResourceMutation,
     useGetResourceDetailQuery,
-} from "../store/resourcesApi";
-import ErrorNotification from "../ErrorNotification";
-import { useGetTokenQuery } from "../store/usersApi";
+} from "../../store/resourcesApi";
+import ErrorNotification from "../../ErrorNotification";
+import { useGetTokenQuery } from "../../store/usersApi";
 import { useParams } from "react-router-dom";
 
 

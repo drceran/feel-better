@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import {
   useGetResourcesQuery
-} from "../store/resourcesApi";
+} from "../../store/resourcesApi";
 import { useNavigate } from "react-router-dom";
-import TherapistList from "./TherapistList";
-import { useGetTokenQuery } from "../store/usersApi";
+import TherapistList from "../TherapistList";
+import { useGetTokenQuery } from "../../store/usersApi";
+import './index.css';
 
 function ResourcesList() {
   const { data } = useGetTokenQuery();
@@ -40,9 +41,10 @@ function ResourcesList() {
 
   if (data && data.access_token && data.account.type === "therapist") {
     return (
-      <div>
-        <h2>Resources</h2>
-        <input type="text" value={searchTerm} onChange={handleSearchChange} placeholder="Search..." />
+      <div className="background">
+        <div className="content">
+        <h1>Resources</h1>
+        <input type="text" className="search"value={searchTerm} onChange={handleSearchChange} placeholder="Search..." />
         {filteredResources.map((resource) => (
           <div key={resource.id}>
             <h3 onClick={() => handleResourceClick(resource.id)}> {resource.title}</h3>
@@ -64,6 +66,7 @@ function ResourcesList() {
         ))}
         <h2 onClick={() => navigate("/resources/create")}>Add A Resource</h2>
         <TherapistList />
+        </div>
       </div>
     );
   } else if (data && data.access_token && data.account.type === "client") {

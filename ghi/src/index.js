@@ -12,7 +12,7 @@ ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <Provider store={store}>
       <App />
-      <Spotify />
+      {/* <Spotify /> */}
     </Provider>
   </React.StrictMode>
 );
