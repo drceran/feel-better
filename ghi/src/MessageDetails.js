@@ -19,9 +19,17 @@ function MessageDetails() {
   return (
     <div>
       <div style={{ marginBottom: '10px' }}>
-        <Link to="/home">Home</Link> {' '}
-        <Link to="/messages">Back to Messages</Link> {' '}
-        <Link to={`/messages/${id}/edit`}>Edit</Link>
+        <button className="bg-sheer hover:bg-sheer text-billow font-bold py-1 px-4 rounded" style={{ backgroundColor: '#BEC6C3' }}>
+          <Link to="/home">Home</Link>
+        </button>
+        {' '}
+        <button className="bg-sheer hover:bg-sheer text-billow font-bold py-1 px-4 rounded" style={{ backgroundColor: '#BEC6C3' }}>
+          <Link to="/messages">Back to Messages</Link>
+        </button>
+        {' '}
+        <button className="bg-sheer hover:bg-sheer text-billow font-bold py-1 px-4 rounded" style={{ backgroundColor: '#BEC6C3' }}>
+          <Link to={`/messages/${id}/edit`}>Edit</Link>
+        </button>
       </div>
       <div className="px-4 sm:px-0">
         <h3 className="text-base font-semibold leading-7 text-gray-900">Message Information</h3>
@@ -52,6 +60,7 @@ function MessageDetails() {
     </div>
   );
 }
+
 
 
     // <div>
