@@ -1,4 +1,4 @@
-.background {
+.background-page {
   margin: 0;
   padding-top: 100px;
   background-image: url("../../../public/static/2.svg");
@@ -13,8 +13,6 @@
   flex-direction: column;
   align-items: center; /* Center horizontally */
   justify-content: center; /* Center vertically */
-  padding: 20px; /* Add padding for spacing */
-  box-sizing: border-box; /* Include padding in element width */
 }
 
 

@@ -18,7 +18,6 @@ function TherapistList() {
         {therapists.map((therapist) => (
             <div key={therapist.id}>
                 <p> Name: {therapist.first_name} {therapist.last_name} Email: {therapist.email} </p>
-            <hr />
             </div>
         ))}
         </div>
