@@ -39,11 +39,15 @@ def fake_appointment_data():
 
 
 def test_get_all_appointments():
+    #Arrange
     app.dependency_overrides[AppointmentRepository] = EmptyRepo
     app.dependency_overrides[
         authenticator.get_current_account_data
     ] = fake_appointment_data
+    # Act
     response = client.get("/appointments")
+    # Clean up
     app.dependency_overrides = {}
+    # Assert
     assert response.status_code == 200
     assert response.json() == []
