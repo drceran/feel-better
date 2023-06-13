@@ -98,7 +98,7 @@ function MessagesForm() {
             ))}
           </select>
         </div>
-        <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
+        <button className="bg-sheer hover:bg-sheer text-billow font-bold py-1 px-4 rounded" style={{ backgroundColor: '#BEC6C3', color: '#626670' }}>
           Submit
         </button>
       </form>

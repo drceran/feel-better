@@ -57,7 +57,9 @@ function MessagesList() {
     return (
         <div>
             <h1>Messages</h1>
-            <button onClick={handleGoToAnotherPage}>Create New Message</button>
+            <button onClick={handleGoToAnotherPage} className="bg-sheer hover:bg-sheer text-billow font-bold py-1 px-4 rounded" style={{ backgroundColor: '#BEC6C3', color: '#626670' }}>
+                Create New Message
+            </button>
             {selectedMessage ? (
                 <MessageDetails message={selectedMessage} />
             ) : (
@@ -91,7 +93,9 @@ function MessagesList() {
                                         <td>{message.body}</td>
                                         <td>{new Date(message.datetime).toLocaleString()}</td>
                                         <td>
-                                            <button onClick={() => handleDelete(message.id)}>Delete</button>
+                                            <button onClick={() => handleDelete(message.id)} className="bg-sheer hover:bg-sheer text-candyfloss font-bold py-1 px-4 rounded" style={{ backgroundColor: '#BEC6C3', color: '#fcdfce' }}>
+                                                Delete
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}

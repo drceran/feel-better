@@ -19,15 +19,15 @@ function MessageDetails() {
   return (
     <div>
       <div style={{ marginBottom: '10px' }}>
-        <button className="bg-sheer hover:bg-sheer text-billow font-bold py-1 px-4 rounded" style={{ backgroundColor: '#BEC6C3' }}>
+        <button className="bg-sheer hover:bg-sheer text-billow font-bold py-1 px-4 rounded" style={{ backgroundColor: '#BEC6C3', color: '#626670' }}>
           <Link to="/home">Home</Link>
         </button>
         {' '}
-        <button className="bg-sheer hover:bg-sheer text-billow font-bold py-1 px-4 rounded" style={{ backgroundColor: '#BEC6C3' }}>
+        <button className="bg-sheer hover:bg-sheer text-billow font-bold py-1 px-4 rounded" style={{ backgroundColor: '#BEC6C3', color: '#626670' }}>
           <Link to="/messages">Back to Messages</Link>
         </button>
         {' '}
-        <button className="bg-sheer hover:bg-sheer text-billow font-bold py-1 px-4 rounded" style={{ backgroundColor: '#BEC6C3' }}>
+        <button className="bg-sheer hover:bg-sheer text-billow font-bold py-1 px-4 rounded" style={{ backgroundColor: '#BEC6C3', color: '#626670' }}>
           <Link to={`/messages/${id}/edit`}>Edit</Link>
         </button>
       </div>
