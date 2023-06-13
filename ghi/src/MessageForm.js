@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ErrorNotification from './ErrorNotification';
 import { useCreateMessagesMutation } from './store/messagesAPI';
-import { useGetTokenQuery } from './store/usersApi';
+import { useGetTokenQuery, useGetTherapistsQuery } from './store/usersApi';
+
 function MessagesForm() {
+  const { data: getTherapist, isLoading } = useGetTherapistsQuery();
   const navigate = useNavigate();
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState('');
@@ -12,6 +14,7 @@ function MessagesForm() {
   const [createMessage, result] = useCreateMessagesMutation();
   const { data } = useGetTokenQuery();
 
+  const therapists = getTherapist?.filter((therapist) => therapist.type === "therapist") || [];
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -23,21 +26,19 @@ function MessagesForm() {
         recipient: recipient,
         cost: 1,
         datetime: new Date().toISOString(),
-      }
+      };
       const result = await createMessage(message);
       if (!result) {
-        console.log("some text")
+        console.log('some text');
       }
-
     } catch (err) {
       setError(err);
     }
-
-  };
+  }
 
   useEffect(() => {
     if (result.isSuccess) {
-      navigate("/messages/");
+      navigate('/messages/');
     }
   }, [result, navigate]);
 
@@ -45,25 +46,64 @@ function MessagesForm() {
     setError(result.error);
   }
 
+  if (isLoading) {
+    return <progress className="progress is-primary" max="100">Loading therapists</progress>;
+  }
+
   return (
-    <div>
+    <div className="max-w-md mx-auto">
       {error && <ErrorNotification message={error} />}
       <form onSubmit={handleSubmit}>
-        <label>
-          Subject:
-          <textarea value={subject} onChange={(e) => setSubject(e.target.value)} required />
-        </label>
-        <label>
-          Body:
-          <input type="text" value={body} onChange={(e) => setBody(e.target.value)} required />
-        </label>
-        <label>
-          Recipient:
-          <input type="text" value={recipient} onChange={(e) => setRecipient(e.target.value)} required />
-        </label>
-        <button type="submit">Submit</button>
+        <div className="mb-4">
+          <label htmlFor="subject" className="block mb-1">
+            Subject:
+          </label>
+          <textarea
+            id="subject"
+            className="w-full p-2 border border-gray-300 rounded"
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="body" className="block mb-1">
+            Body:
+          </label>
+          <input
+            type="text"
+            id="body"
+            className="w-full p-2 border border-gray-300 rounded"
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="recipient" className="block mb-1">
+            Recipient:
+          </label>
+          <select
+            id="recipient"
+            className="w-full p-2 border border-gray-300 rounded"
+            value={recipient}
+            onChange={(e) => setRecipient(e.target.value)}
+            required
+          >
+            <option value="">Select a recipient</option>
+            {therapists.map((therapist) => (
+              <option key={therapist.id} value={therapist.id}>
+                {therapist.first_name} {therapist.last_name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
+          Submit
+        </button>
       </form>
     </div>
   );
 }
+
 export default MessagesForm;

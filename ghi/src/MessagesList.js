@@ -91,7 +91,12 @@ function MessagesList() {
                                         <td>{message.body}</td>
                                         <td>{new Date(message.datetime).toLocaleString()}</td>
                                         <td>
-                                            <button onClick={() => handleDelete(message.id)}>Delete</button>
+                                            <button
+                                                onClick={() => handleDelete(message.id)}
+                                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+                                            >
+                                                Delete
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}
