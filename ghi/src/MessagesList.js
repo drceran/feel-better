@@ -3,14 +3,17 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGetMessagesQuery, useDeleteMessageMutation } from './store/messagesAPI';
 import { selectMessage } from './store/messagesSlice';
-import { useGetUserInfoQuery } from './store/usersApi';
+import { useGetUserInfoQuery, useGetTokenQuery } from './store/usersApi';
+
 
 function MessagesList() {
     const { data: messages, error, isLoading } = useGetMessagesQuery();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [deleteMessage] = useDeleteMessageMutation();
-    const { data: userInfo } = useGetUserInfoQuery();
+    const { data: tokenData, isLoading: isTokenLoading } = useGetTokenQuery();
+    const { data: userInfoData } = useGetUserInfoQuery(isTokenLoading || !tokenData ? undefined : tokenData.account.id);
+
 
     useEffect(() => {
         if (deleteMessage.isSuccess) {
@@ -64,11 +67,11 @@ function MessagesList() {
                             {/* USER DETAILS */}
                             <div className="sm:pl-4 pr-8 flex sm:items-center">
                                 {/* User Picture */}
-                                <img src={messages.profile_picture} alt="Profile" className="mr-3 w-8 sm:w-12 h-8 sm:h-12 rounded-full" />
+                                <img src={userInfoData.profile_picture} alt="Profile" className="mr-3 w-8 sm:w-12 h-8 sm:h-12 rounded-full" />
                                 {/* User Infos */}
                                 <div className="space-y-1">
                                     {/* Name */}
-                                    <p className="text-base text-gray-700 font-bold tracking-wide">${userInfo?.first_name}</p>
+                                    <p className="text-base text-gray-700 font-bold tracking-wide">{userInfoData.first_name}  {userInfoData.last_name}</p>
                                     {/* Role */}
                                     <p className="text-sm text-gray-500 font-medium">{messages.subject}</p>
                                     <p className="text-sm text-gray-500 font-medium">{messages.body}</p>
