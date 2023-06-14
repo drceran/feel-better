@@ -26,10 +26,10 @@ export default function Carousel() {
         }
     };
 
-    const isDisabled = (direction) => {
-        if (direction === 'prev') {
-            return currentIndex <= 0;
-        }
+    // const isDisabled = (direction) => {
+    //     if (direction === 'prev') {
+    //         return currentIndex <= 0;
+    //     }
 
         if (direction === 'next' && carousel.current !== null) {
             return (
@@ -125,7 +125,7 @@ export default function Carousel() {
                                 <p className="h-3/4 w-full aspect-square block bg-origin-padding bg-left-top bg-cover bg-no-repeat z-0">
                                     {therapist.first_name} {therapist.last_name}
                                     <img
-                                        src={therapist.profile_picture}
+                                        src={therapist.profile_picture} alt="profilepic"
                                         onClick={() => navigateToProfile(therapist.id)}
                                     />
                                 </p>

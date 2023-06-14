@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import useToken from "@galvanize-inc/jwtdown-for-react";
 import LoginForm from "../../authorization/LoginForm";
 import SignupForm from "../../authorization/SignupForm"
 
@@ -36,6 +35,7 @@ switch (content) {
 return(
     <div className="landing-form">
         <SignupForm />
+        <LoginForm />
     </div>
 )
 }
