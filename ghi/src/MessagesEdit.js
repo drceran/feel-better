@@ -37,13 +37,14 @@ function MessagesEdit() {
                 subject: subject,
                 body: body,
                 recipient: recipient,
+                cost: 1,
                 datetime: dateTime,
-            };
+            };;
 
             const result = await editMessage(updatedMessage);
 
-            if (result.isSuccess) {
-                navigate('/messages');
+            if (result) {
+                navigate('/messages/');
             } else if (result.isError) {
                 setError(result.error);
             }

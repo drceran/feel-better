@@ -33,7 +33,6 @@ class MessageRepository:
     def get_one_message(
         self, user_id: int, message_id: int
     ) -> Union[Error, MessageOut]:
-        print("---------user_id: ", user_id)
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -45,7 +44,6 @@ class MessageRepository:
                         [message_id, user_id],
                     )
                     record = db.fetchone()
-                    print("----record----", record)
                     if record is None:
                         return {"message": "No message found with this id"}
                     else:
@@ -58,7 +56,6 @@ class MessageRepository:
                             cost=record[5],
                             datetime=record[6],
                         )
-                        print("------message--------: ", message)
                     return message
         except Exception as e:
             print(e)
@@ -120,7 +117,8 @@ class MessageRepository:
                             recipient=record[2],
                             subject=record[3],
                             body=record[4],
-                            datetime=record[5],
+                            cost=record[5],
+                            datetime=record[6],
                         )
                     return message_out
         except Exception as e:

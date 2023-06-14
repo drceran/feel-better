@@ -15,7 +15,7 @@ steps = [
         RETURNS TRIGGER AS $$
         BEGIN
             IF (SELECT type FROM jotters WHERE id = NEW.writer)
-              != 'therapist' THEN
+            != 'therapist' THEN
             RAISE EXCEPTION 'Writer must be a therapist';
         END IF;
         RETURN NEW;
