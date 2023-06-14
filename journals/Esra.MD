@@ -7,7 +7,7 @@ David told us about how he likes to see different kind of sources to help people
 I drafted the excalidraw our ideas and shared the link with my teammates so they also can contribute.
 We started to draw a draft.
 
-![Screenshot 2023-05-12 at 6.17.16 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ba7c4cbd-c50f-4193-8827-32eb977f717a/Screenshot_2023-05-12_at_6.17.16_PM.png)
+![Screenshot 2023-05-12 at 6.17.16 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ba7c4cbd-c50f-4193-8827-32eb977f717a/Screenshot_2023-05-12_at_6.17.16_PM.png) !/Users/esraceran/module3-project-gamma/visuals for journals/Screenshot 2023-05-12 at 6.17.16 PM.png
 
 At first, we thought it would be great to have the professional and client users separately. But then, we thought we might not handle it.
 We also thought that if we have a calendar,, and a user would be able to add tasks and goals, it might be a good guide for people. But we were not able to make a concrete plan with the creating a solid relationship between these features.
@@ -16,7 +16,7 @@ Also we had this idea of newsfeed but, we didn’t really think about if this is
 
 We worked a bit more and we created this:
 
-![Screenshot 2023-05-16 at 12.22.24 AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e2909c93-1c9c-4581-bb6a-1c1358cc901e/Screenshot_2023-05-16_at_12.22.24_AM.png)
+![Screenshot 2023-05-16 at 12.22.24 AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e2909c93-1c9c-4581-bb6a-1c1358cc901e/Screenshot_2023-05-16_at_12.22.24_AM.png) !/Users/esraceran/module3-project-gamma/visuals for journals/Screenshot 2023-05-16 at 12.22.24 AM.png
 
 Melody created a login mockup for us that has a journal entry.
 
@@ -48,6 +48,7 @@ When I was thinking about what problem our app is trying to solve. I thought we 
 Third, since this is our final project, we need to create something coherent and comprehensive.  If we would do this, we will show our experience in a good way and hopefully impress some potential employers.”
 
 ![Screenshot 2023-05-16 at 12.23.12 AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cd160ff1-6093-4c6f-bd1c-a5346eef8afe/Screenshot_2023-05-16_at_12.23.12_AM.png)
+!/Users/esraceran/module3-project-gamma/visuals for journals/Screenshot 2023-05-16 at 12.23.12 AM.png
 
 After some discussion, David also offered some ideas about how he envisioned the project. We discussed on his sketch. Eventually, we voted which project we are going to work on. We decided to move on with my design.
 
@@ -216,6 +217,6 @@ I though everything was working perfectly, without error, however when I woke up
 
 For the third one, I edit my friend's code, and I move the if x.isSuccess- do this, part to the outside of the handleSubmit function.
 
-Today, I learned more about the correct way for CI/CD process from Rosheen. She mentioned for us to succes for the deployment process, a person needs to test the project in the cloud after each MR. I reset our project a few times as we all created MRs today.
+Today, I learned more about the correct way for CI/CD process from Rosheen. She mentioned for us to success for the deployment process, a person needs to test the project in the cloud after each MR. I reset our project a few times as we all created MRs today.
 
 We also encountered issues related w/ different operating systems. It turns out cloud can act different in different environments. Our project was not very responsive in Windows and in incognito.
