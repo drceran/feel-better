@@ -44,7 +44,7 @@ export default function ResourceForm() {
 
 
     return (
-        <div>
+        <div className="container">
             {error && <ErrorNotification error={error} />}
             <form onSubmit={handleSubmit}>
                 <label>
@@ -55,10 +55,6 @@ export default function ResourceForm() {
                     Body: <input type="text" value={body} onChange={(e) => setBody(e.target.value)} required />
                 </label>
                 <br />
-                {/* <label>
-                    Writer: <input type="text" value={writer} onChange={(e) => setWriter(e.target.value)} required />
-                </label>
-                <br /> */}
                 <label>
                     Picture: <input type="text" value={picture} onChange={(e) => setPicture(e.target.value)} />
                 </label>

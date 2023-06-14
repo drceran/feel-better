@@ -17,7 +17,7 @@ function TherapistList() {
         <h2>Therapists</h2>
         {therapists.map((therapist) => (
             <div key={therapist.id}>
-                <p> Name: {therapist.first_name} {therapist.last_name} Email: {therapist.email} </p>
+                <p> Name: {therapist.first_name} {therapist.last_name} Email: {therapist.email} {therapist.profile_picture} </p>
             </div>
         ))}
         </div>
