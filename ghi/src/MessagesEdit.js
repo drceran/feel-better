@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ErrorNotification from './ErrorNotification';
 import { useEditMessageMutation, useGetOneMessageQuery } from './store/messagesAPI';
-import { useGetTokenQuery } from './store/usersApi';
+import { useGetTokenQuery, useGetTherapistsQuery } from './store/usersApi';
 
 function MessagesEdit() {
     const navigate = useNavigate();
@@ -12,6 +12,9 @@ function MessagesEdit() {
     const [recipient, setRecipient] = useState('');
     const [error, setError] = useState('');
     const [dateTime, setDateTime] = useState('');
+    const { data: getTherapist } = useGetTherapistsQuery();
+
+    const therapists = getTherapist?.filter((therapist) => therapist.type === "therapist") || [];
 
     const { data: message } = useGetOneMessageQuery(id);
     const { data } = useGetTokenQuery();
@@ -39,7 +42,7 @@ function MessagesEdit() {
                 recipient: recipient,
                 cost: 1,
                 datetime: dateTime,
-            };;
+            };
 
             const result = await editMessage(updatedMessage);
 
@@ -86,14 +89,20 @@ function MessagesEdit() {
                     <label htmlFor="recipient" className="block mb-1">
                         Recipient:
                     </label>
-                    <input
-                        type="text"
+                    <select
                         id="recipient"
                         className="w-full p-2 border border-gray-300 rounded"
                         value={recipient}
                         onChange={(e) => setRecipient(e.target.value)}
                         required
-                    />
+                    >
+                        <option value="">Select a recipient</option>
+                        {therapists.map((therapists) => (
+                            <option key={therapists.id} value={therapists.id}>
+                                {therapists.first_name} {therapists.last_name}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <button className="bg-sheer hover:bg-sheer text-billow font-bold py-1 px-4 rounded" style={{ backgroundColor: '#BEC6C3', color: '#626670' }}>
                     Submit

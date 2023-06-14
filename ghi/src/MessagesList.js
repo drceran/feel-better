@@ -3,14 +3,14 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGetMessagesQuery, useDeleteMessageMutation } from './store/messagesAPI';
 import { selectMessage } from './store/messagesSlice';
-import { useGetClientDetailQuery } from './store/usersApi';
+import { useGetUserInfoQuery } from './store/usersApi';
 
 function MessagesList() {
     const { data: messages, error, isLoading } = useGetMessagesQuery();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [deleteMessage] = useDeleteMessageMutation();
-    const { data: userInfo } = useGetClientDetailQuery();
+    const { data: userInfo } = useGetUserInfoQuery();
 
     useEffect(() => {
         if (deleteMessage.isSuccess) {
@@ -68,7 +68,7 @@ function MessagesList() {
                                 {/* User Infos */}
                                 <div className="space-y-1">
                                     {/* Name */}
-                                    <p className="text-base text-gray-700 font-bold tracking-wide">{userInfo?.first_name}</p>
+                                    <p className="text-base text-gray-700 font-bold tracking-wide">${userInfo?.first_name}</p>
                                     {/* Role */}
                                     <p className="text-sm text-gray-500 font-medium">{messages.subject}</p>
                                     <p className="text-sm text-gray-500 font-medium">{messages.body}</p>
