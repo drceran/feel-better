@@ -19,7 +19,7 @@ switch (content) {
                 </div>
                 <div>
                     <h1>Sign Up</h1>
-                    <p onClick={() => setContent(2)}>Learn More</p>
+                    <p onClick={() => setContent(2)}>Sign Up</p>
                 </div>
             </>
         );
@@ -36,7 +36,7 @@ switch (content) {
 
 return(
     <div className="landing-form">
-        <LoginForm />
+        <SignupForm />
     </div>
 )
 }

@@ -59,7 +59,7 @@ export default function Nav() {
   }, [data]);
 
   return (
-    <Disclosure as="nav" className="bg-[#8a7D80] w-screen">
+    <Disclosure as="nav" style={{ fontFamily: "Short Stack, cursive", fontSize: '20px'}} className="bg-[#8a7D80] w-screen">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
