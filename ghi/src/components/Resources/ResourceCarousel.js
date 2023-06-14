@@ -26,12 +26,12 @@ export default function Carousel() {
         }
     };
 
-    // const isDisabled = (direction) => {
-    //     if (direction === 'prev') {
-    //         return currentIndex <= 0;
-    //     }
+    const isDisabled = (direction) => {
+        if (direction === "prev") {
+            return currentIndex <= 0;
+        }
 
-        if (direction === 'next' && carousel.current !== null) {
+        if (direction === "next" && carousel.current !== null) {
             return (
                 carousel.current.offsetWidth * currentIndex >= maxScrollWidth.current
             );
@@ -58,9 +58,11 @@ export default function Carousel() {
 
     const navigateToProfile = (id) => {
         navigate(`/jotters/${id}`);
-    }
+    };
 
-    const therapists = userData.filter((therapist) => therapist.type === "therapist");
+    const therapists = userData.filter(
+        (therapist) => therapist.type === "therapist"
+    );
 
     return (
         <div className="carousel my-12 w-full mx-auto">
@@ -72,7 +74,7 @@ export default function Carousel() {
                     <button
                         onClick={movePrev}
                         className="hover:bg-blue-900/75 text-white w-10 h-1/2 pb-36 text-center opacity-75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300"
-                        // disabled={isDisabled('prev')}
+                    disabled={isDisabled('prev')}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -82,18 +84,14 @@ export default function Carousel() {
                             stroke="currentColor"
                             strokeWidth={2}
                         >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M15 19l-7-7 7-7"
-                            />
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                         </svg>
                         <span className="sr-only">Prev</span>
                     </button>
                     <button
                         onClick={moveNext}
                         className="hover:bg-blue-900/75 text-white w-10 h-1/2 pb-36 text-center opacity-75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300"
-                        // disabled={isDisabled('next')}
+                    disabled={isDisabled('next')}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -103,11 +101,7 @@ export default function Carousel() {
                             stroke="currentColor"
                             strokeWidth={2}
                         >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M9 5l7 7-7 7"
-                            />
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                         </svg>
                         <span className="sr-only">Next</span>
                     </button>
@@ -125,7 +119,8 @@ export default function Carousel() {
                                 <p className="h-3/4 w-full aspect-square block bg-origin-padding bg-left-top bg-cover bg-no-repeat z-0">
                                     {therapist.first_name} {therapist.last_name}
                                     <img
-                                        src={therapist.profile_picture} alt="profilepic"
+                                        src={therapist.profile_picture}
+                                        alt="profilepic"
                                         onClick={() => navigateToProfile(therapist.id)}
                                     />
                                 </p>
@@ -136,8 +131,7 @@ export default function Carousel() {
             </div>
         </div>
     );
-};
-
+}
 
 
 
@@ -276,4 +270,4 @@ export default function Carousel() {
 //             </div>
 //         </div>
 //     );
-// };
+// }
