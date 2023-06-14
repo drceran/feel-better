@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Short+Stack&display=swap');
+
+.background {
+    /* margin: 0; */
+    /* padding-top: 100; */
+    background-image: url("../../../public/static/1.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
+    background-color: #E0D7D3;
+    display: flex;
+}
+
+body {
+    overflow: hidden;
+}
+
+
+.login-form {
+    position: relative;
+    width: 50%;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+}
+
+.functionalities {
+    position: relative;
+    width: 50%;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-top: 80px;
+}
+
+* {
+    color: #626670;
+}
+
+
+.footer {
+    background-color: #8a7D80;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 65px;
+}
+
+
+.login-form,
+.functionalities {
+    width: 100%;
+    opacity: 0;
+}
+
+@media screen and (min-width: 400px) {
+    .landing-page
+    .login-form,
+    .functionalities {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .landing-page
+    .login-form,
+    .functionalities {
+        width: 100%;
+    }
+}
+
+.visible {
+    visibility: visible;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+/*
+@keyframes customFadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.background {
+    animation: 5s ease-in forwards;
+    animation-delay: 5s;
+} */
