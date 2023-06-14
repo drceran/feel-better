@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function Schedule_Info({ back }) {
-    const [toggle, setToggle] = useState(false)
+export default function ScheduleInfo({ back }) {
 
     return (
         <div style={{ fontFamily: "Short Stack, cursive" }}>

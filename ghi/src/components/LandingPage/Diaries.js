@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
-export default function Diaries_Info({back}) {
-    const [toggle, setToggle] = useState(false)
+export default function DiariesInfo({back}) {
 
     return (
         <div style={{ fontFamily: "Short Stack, cursive"}}>

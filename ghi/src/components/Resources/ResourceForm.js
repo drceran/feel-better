@@ -9,7 +9,6 @@ export default function ResourceForm() {
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
-    const [writer, setWriter] = useState("");
     const [picture, setPicture] = useState("");
     const [url_link, setUrl] = useState("");
     const [error, setError] = useState("");

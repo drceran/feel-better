@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import LoginForm from "../../authorization/LoginForm";
 import SignupForm from "../../authorization/SignupForm"
 
 export default function LandingForm() {
-    const { token } = useToken();
     const [content, setContent] = useState(0);
     const back = () => setContent(0);
     let context;

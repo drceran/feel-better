@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Diaries_Info from "./Diaries";
-import Schedule_Info from "./Schedule";
+import DiariesInfo from "./Diaries";
+import ScheduleInfo from "./Schedule";
 import Resources from "./Resources";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import LandingForm from "./SignUpSignIn";
@@ -45,10 +45,10 @@ export default function Main() {
       );
       break;
     case 1:
-      context = <Diaries_Info back={back} />;
+      context = <DiariesInfo back={back} />;
       break;
     case 2:
-      context = <Schedule_Info back={back} />;
+      context = <ScheduleInfo back={back} />;
       break;
     case 3:
       context = <Resources back={back} />;
