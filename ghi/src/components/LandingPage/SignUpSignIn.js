@@ -12,11 +12,9 @@ switch (content) {
         context = (
             <>
                 <div>
-                    <h1>Sign In</h1>
                     <p onClick={() => setContent(1)}>Sign In</p>
                 </div>
                 <div>
-                    <h1>Sign Up</h1>
                     <p onClick={() => setContent(2)}>Sign Up</p>
                 </div>
             </>
@@ -34,8 +32,7 @@ switch (content) {
 
 return(
     <div className="landing-form">
-        <SignupForm />
-        <LoginForm />
+        <div>{context}</div>
     </div>
 )
 }
