@@ -3,8 +3,6 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGetMessagesQuery, useDeleteMessageMutation } from './store/messagesAPI';
 import { selectMessage } from './store/messagesSlice';
-import { useGetUserInfoQuery } from './store/usersApi';
-
 
 function MessagesList() {
     const { data: messages, error, isLoading } = useGetMessagesQuery();
