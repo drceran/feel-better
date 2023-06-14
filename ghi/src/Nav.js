@@ -59,7 +59,7 @@ export default function Nav() {
   }, [data]);
 
   return (
-    <Disclosure as="nav" style={{ fontFamily: "Short Stack, cursive", fontSize: '20px'}} className="bg-[#8a7D80] w-screen">
+    <Disclosure as="nav" style={{ fontFamily: "Short Stack, cursive", fontSize: '20px' }} className="bg-[#8a7D80] w-screen">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -77,15 +77,17 @@ export default function Nav() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="block h-8 w-auto lg:hidden"
-                    src={logo}
-                    alt="JournalJotter logo" />
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src={logo}
-                    alt="JournalJotter logo"
-                  />
+                  <button onClick={() => navigate("/home")}>
+                    <img
+                      className="block h-8 w-auto lg:hidden"
+                      src={logo}
+                      alt="JournalJotter logo" />
+                    <img
+                      className="hidden h-8 w-auto lg:block"
+                      src={logo}
+                      alt="JournalJotter logo"
+                    />
+                  </button>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex items-center justify-center">
