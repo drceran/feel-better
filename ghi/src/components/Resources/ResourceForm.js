@@ -43,7 +43,7 @@ export default function ResourceForm() {
 
 
     return (
-        <div className="container">
+        <div className="form-container">
             {error && <ErrorNotification error={error} />}
             <form onSubmit={handleSubmit}>
                 <label>

@@ -10,14 +10,13 @@ export default function LandingForm() {
 switch (content) {
     case 0:
         context = (
-            <>
-                <div>
-                    <p onClick={() => setContent(1)}>Sign In</p>
+            <div style={{ fontFamily: "Short Stack, cursive", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <div style={{ display: "flex" }}>
+                    <p onClick={() => setContent(1)}>Sign In |</p>
+                    <p style={{ marginLeft: "8px" }} onClick={() => setContent(2)}>Sign Up</p>
                 </div>
-                <div>
-                    <p onClick={() => setContent(2)}>Sign Up</p>
-                </div>
-            </>
+                <LoginForm />
+            </div>
         );
         break;
     case 1:
