@@ -35,6 +35,7 @@ export default function ResourceForm() {
             }
         } catch (err) {
             setError(err);
+            setError(err);
         }
         if (result.isSuccess) {
             navigate("/resources");
@@ -43,7 +44,7 @@ export default function ResourceForm() {
 
 
     return (
-        <div className="container">
+        <div className="form-container">
             {error && <ErrorNotification error={error} />}
             <form onSubmit={handleSubmit}>
                 <label>

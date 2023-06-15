@@ -3,7 +3,7 @@ import React from "react";
 export default function ScheduleInfo({ back }) {
 
     return (
-        <div style={{ fontFamily: "Short Stack, cursive" }}>
+        <div className="diary-features" style={{ fontFamily: "Short Stack, cursive" }}>
             <button
                 onClick={back}>back</button>
             <h1 style={{ fontSize: '30px' }}>Schedule Appointments With Our <br></br>Certified Therapists</h1>
