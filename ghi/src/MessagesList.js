@@ -5,6 +5,7 @@ import { useGetMessagesQuery, useDeleteMessageMutation } from './store/messagesA
 import { selectMessage } from './store/messagesSlice';
 import { useGetUserInfoQuery, useGetTokenQuery } from './store/usersApi';
 import "./messages.css"
+import Spotify from "./Spotify";
 
 
 function MessagesList() {
@@ -57,12 +58,12 @@ function MessagesList() {
     };
 
     return (
-        <div className="messages-container">
+        <div className="overflow-y-auto max-h-auto messages-container">
             <div className="mx-auto w-full max-w-5xl bg-white">
                 <ul className="flex flex-col">
                     <button
                         onClick={() => handleGoToAnotherPage(messages)}
-                        className="bg-sheer hover:bg-sheer text-billow font-bold py-1 px-4 rounded"
+                        className="bg-sheer hover:bg-sheer text-billow font-bold text-2xl py-2 px-4 rounded"
                         style={{ backgroundColor: '#BEC6C3', color: '#626670' }}
                     >
                         Create a New Message
@@ -78,24 +79,24 @@ function MessagesList() {
                                             className="mr-3 w-8 sm:w-12 h-8 sm:h-12 rounded-full"
                                         />
                                         <div className="space-y-1">
-                                            <p className="text-base text-gray-700 font-bold tracking-wide">{userInfoData.first_name} {userInfoData.last_name}</p>
-                                            <p className="text-sm text-gray-500 font-medium">{message.subject}</p>
-                                            <p className="text-sm text-gray-500 font-medium">{message.body}</p>
+                                            <p className="text-3xl text-gray-700 font-bold tracking-wide">{userInfoData.first_name} {userInfoData.last_name}</p>
+                                            <p className="text-2xl text-gray-500 font-medium">{message.subject}</p>
+                                            <p className="text-xl text-gray-500 font-medium">{message.body}</p>
                                         </div>
                                     </div>
                                 )}
                                 <div className="pr-4 flex flex-col justify-between items-end">
-                                    <p className="text-sm text-gray-500 font-semibold">{message.datetime}</p>
+                                    <p className="text-lg text-gray-500 font-semibold">{message.datetime}</p>
                                     <Link
                                         to={`/messages/${message.id}`}
                                         onClick={() => handleOpenMessage(message)}
-                                        className="text-sm text-gray-500 font-semibold hover:underline hover:text-gray-700"
+                                        className="text-lg text-gray-500 font-semibold hover:underline hover:text-gray-700"
                                     >
                                         Details
                                     </Link>
                                     <button
                                         onClick={() => handleDelete(message.id)}
-                                        className="text-sm text-gray-500 font-semibold hover:underline hover:text-gray-700"
+                                        className="text-lg text-gray-500 font-semibold hover:underline hover:text-gray-700"
                                     >
                                         Delete
                                     </button>
@@ -105,6 +106,7 @@ function MessagesList() {
                     ))}
                 </ul>
             </div>
+            <div><Spotify /></div>
         </div>
         );
 }
