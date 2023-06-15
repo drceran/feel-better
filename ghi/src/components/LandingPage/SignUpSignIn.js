@@ -35,7 +35,7 @@ switch (content) {
 return(
     <div className="landing-form">
         <div className="signup-logo">Journal Jotter</div>
-        <img className="mx-auto h-1/6 w-1/6" src={process.env.PUBLIC_URL + "/static/JournalJotter.svg"}/>
+        <img className="mx-auto h-1/6 w-1/6" src={process.env.PUBLIC_URL + "/static/JournalJotter.svg"} alt=""/>
         {context}
     </div>
 )
