@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import LoginForm from "../../authorization/LoginForm";
 import SignupForm from "../../authorization/SignupForm"
 import './index.css'
-// import "../../../public/static/JournalJotter.svg"
+
+
 
 export default function LandingForm() {
     const [content, setContent] = useState(0);
@@ -33,9 +34,8 @@ switch (content) {
 
 return(
     <div className="landing-form">
-        <div className="signup-logo">Journal</div>
-        <div className="signup-logo">Jotter</div>
-        {/* <img src="../../../public/static/Journal Jotter.svg" alt="logo"></img> */}
+        <div className="signup-logo">Journal Jotter</div>
+        <img className="mx-auto h-1/6 w-1/6" src={process.env.PUBLIC_URL + "/static/JournalJotter.svg"} alt=""/>
         {context}
     </div>
 )

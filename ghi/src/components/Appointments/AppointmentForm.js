@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useCreateAppointmentMutation } from "../../store/appointmentsApi";
 import { useGetTherapistsQuery, useGetTokenQuery } from "../../store/usersApi";
 import { useNavigate } from "react-router-dom";
+import './appointments.css'
 
 
 export default function AppointmentForm() {
@@ -60,11 +61,12 @@ export default function AppointmentForm() {
         return <progress className="progress is-primary" max="100">Loading appointments</progress>;
     }
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="therapist_id">Schedule an appointment with:</label>
-                    <select id="therapist_id" name="therapist_id" value={appointmentData.therapist_id} onChange={handleChange}>
+        <div className="appointment-container flex items-center justify-center min-h-scree">
+        <div className="w-full max-w-xs mx-auto text-center">
+                <form onSubmit={handleSubmit} className="shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <div className="schedule mb-7">
+                    <label htmlFor="therapist_id" className="block text-gray-700 text-sm font-bold mb-9">Schedule an appointment with:</label>
+                    <select id="therapist_id" name="therapist_id" value={appointmentData.therapist_id} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         <option value="">Select a Therapist</option>
                         {therapists.map((therapist) => (
                             <option key={therapist.id} value={therapist.id}>
@@ -73,16 +75,19 @@ export default function AppointmentForm() {
                         ))}
                     </select>
                 </div>
-                <div>
-                    <label htmlFor="appointment_date">Date:</label>
-                    <input type="date" id="appointment_date" name="appointment_date" value={appointmentData.appointment_date} onChange={handleChange} />
+                <div className="schedule mb-7">
+                    <label htmlFor="appointment_date" className="block text-gray-700 text-sm font-bold mb-9">Date:</label>
+                    <input type="date" id="appointment_date" name="appointment_date" value={appointmentData.appointment_date} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                 </div>
-                <div>
-                    <label htmlFor="appointment_time">Time:</label>
-                    <input type="time" id="appointment_time" name="appointment_time" value={appointmentData.appointment_time} onChange={handleChange} />
+                <div className="schedule mb-7">
+                    <label htmlFor="appointment_time" className="block text-gray-700 text-sm font-bold mb-9">Time:</label>
+                    <input type="time" id="appointment_time" name="appointment_time" value={appointmentData.appointment_time} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                 </div>
-                <button type="submit">Create</button>
+                <div className="schedule flex items-center justify-center">
+                        <button type="submit" className="bg-[#FCDFCE] hover:bg-[#BEC6C3] text-[#626670] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Create</button>
+                </div>
             </form>
+        </div>
         </div>
     );
 }
