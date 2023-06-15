@@ -8,9 +8,9 @@ import SignupForm from "./authorization/SignupForm";
 import LoginForm from "./authorization/LoginForm";
 import MessagesForm from "./MessageForm";
 import MessagesList from "./MessagesList";
-import JournalEntry from "./components/JournalOne";
-import JournalList from "./components/JournalList";
-import JournalForm from "./components/JournalForm";
+import JournalEntry from "./components/Journal/JournalOne";
+import JournalList from "./components/Journal/JournalList";
+import JournalForm from "./components/Journal/JournalForm";
 import ResourcesList from "./components/Resources/ResourcesList";
 import ResourceForm from "./components/Resources/ResourceForm";
 import AppointmentList from "./components/Appointments/AppointmentList";
@@ -19,12 +19,13 @@ import UserProfile from "./authorization/UserProfile";
 import Logout from "./authorization/Logout";
 import Pricing from "./Pricing";
 import MessageDetails from "./MessageDetails";
-import JournalFormEdit from "./components/JournalEdit";
+import JournalFormEdit from "./components/Journal/JournalEdit";
 import ProfileForm from "./authorization/ProfileForm";
 import MessagesEdit from "./MessagesEdit";
 import HomePage from "./HomePage";
 import Spotify from "./Spotify";
-import UpdateResource from "./components/Resources/UpdateResource";
+// import UpdateResource from "./components/UpdateResource";
+// import Hamburger_Menu from "./components/LandingPage";
 
 const domain = /https:\/\/[^/]+/;
 const basename = process.env.PUBLIC_URL.replace(domain, "");
@@ -55,7 +56,7 @@ function App() {
             <Route exact path="/pricing" element={<Pricing />} />
             <Route exact path="/resources" element={<ResourcesList />}></Route>
             <Route exact path="/resources/create" element={<ResourceForm />}></Route>
-            <Route exact path="/resources/:id/edit" element={<UpdateResource />}></Route>
+            {/* <Route exact path="/resources/:id/edit" element={<UpdateResource />}></Route> */}
             <Route exact path="/appointments" element={<AppointmentList />}></Route>
             <Route exact path="/appointments/create" element={<AppointmentForm />}></Route>
           </Routes >

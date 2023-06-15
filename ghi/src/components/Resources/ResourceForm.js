@@ -41,34 +41,6 @@ export default function ResourceForm() {
             navigate("/resources");
         };
     }
-
-
-    // return (
-    //     <div className="resource-container">
-    //         {error && <ErrorNotification error={error} />}
-    //         <form onSubmit={handleSubmit}>
-    //             <label>
-    //                 Title: <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
-    //             </label>
-    //             <br />
-    //             <label>
-    //                 Body: <input type="text" value={body} onChange={(e) => setBody(e.target.value)} required />
-    //             </label>
-    //             <br />
-    //             <label>
-    //                 Picture: <input type="text" value={picture} onChange={(e) => setPicture(e.target.value)} />
-    //             </label>
-    //             <br />
-    //             <label>
-    //                 URL: <input type="text" value={url_link} onChange={(e) => setUrl(e.target.value)} required />
-    //             </label>
-    //             <br />
-    //             <button type="submit">
-    //                 Post Resource
-    //             </button>
-    //         </form>
-    //     </div>
-    // );
     return (
         <div className="resource-container flex items-center justify-center min-h-screen">
             <div className="w-full max-w-md mx-auto">

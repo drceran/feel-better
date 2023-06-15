@@ -4,6 +4,7 @@ import { useGetTokenQuery, useGetTherapistDetailQuery, useGetClientDetailQuery }
 import { useNavigate } from "react-router-dom";
 import './appointments.css'
 
+
 function Appointment({ appointment, handleCancelAppointment, handleRescheduleAppointment, data }) {
     const { data: therapistDetails } = useGetTherapistDetailQuery(appointment.therapist_id);
     return (

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import LoginForm from "../../authorization/LoginForm";
 import SignupForm from "../../authorization/SignupForm"
 import './index.css'
-// import "../../../public/static/JournalJotter.svg"
+
+
 
 export default function LandingForm() {
     const [content, setContent] = useState(0);
