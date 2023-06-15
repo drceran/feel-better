@@ -7,8 +7,8 @@ const Dropdown = (props) => {
 
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
-      <label style={{ marginRight: '0px' }}>{props.label}</label>
-      <select value={props.selectedValue} onChange={dropdownChanged} style={{ padding: '3px' }}>
+      <label style={{ marginRight: '4px' }}>{props.label}</label>
+      <select value={props.selectedValue} onChange={dropdownChanged} style={{ marginRight: "16px", padding: '25px' }}>
         <option key={0}>Select...</option>
         {props.options.map((item, idx) => (
           <option key={idx + 1} value={item.id}>
