@@ -1,5 +1,5 @@
 import React from "react";
-import JournalList from "./components/JournalList";
+import JournalList from "./components/Journal/JournalList";
 import { useGetTokenQuery } from "./store/usersApi";
 
 const HomePage = () => {
@@ -16,7 +16,7 @@ const HomePage = () => {
     return (
         <>
             <div>
-                <h1>Hello {data?.account.first_name}!</h1>
+                {/* <h1>Hello {data?.account.first_name}!</h1> */}
                 <JournalList />
             </div>
         </>
