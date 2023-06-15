@@ -4,6 +4,7 @@ import { Bars3Icon, XMarkIcon, CurrencyDollarIcon } from "@heroicons/react/24/ou
 import { useGetTokenQuery } from "./store/usersApi";
 import { useNavigate } from "react-router-dom";
 import logo from './images/logo.png';
+import "./Nav.css";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -59,7 +60,7 @@ export default function Nav() {
   }, [data]);
 
   return (
-    <Disclosure as="nav" style={{ fontFamily: "Short Stack, cursive", fontSize: '20px' }} className="bg-[#8a7D80] w-screen">
+    <Disclosure as="nav" style={{ fontFamily: "Short Stack, cursive", fontSize: '20px' }} className="navbar bg-[#8a7D80] w-screen">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -121,10 +122,10 @@ export default function Nav() {
 
                     <Menu as="div" className="relative ml-3">
                       <div>
-                        <Menu.Button className="flex rounded-full bg-gray-800 text-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <Menu.Button className="flex rounded-full bg-[#8A7D80] text-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                           <span className="sr-only">Open user menu</span>
                           <span className="text-slate-100 m-2">
-                            {data?.account.first_name}
+                            Welcome {data?.account.first_name}
                           </span>
                           <div>
                             <CurrencyDollarIcon className="block text-amber-300 m-2 h-6 w-6" />
