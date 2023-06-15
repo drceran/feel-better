@@ -22,10 +22,10 @@ const SignupForm = ({back}) => {
     <div style={{ fontFamily: "Short Stack" }} className="w-full ">
       <button style={{fontSize: '10px' }}
         onClick={back}>back</button>
-      <form className="shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
-        <div className="mb-4">
+      <form className="shadow-md rounded px-8 pt-1 pb-1 mb-4" onSubmit={handleSubmit}>
+        <div className="mb-1">
           <label
-            className="block text-[#626670] mb-2 text-4xl font-black"
+            className="block text-[#626670] mb-2 text-xs font-black"
             htmlFor="first_name"
           >
             First Name
@@ -38,9 +38,9 @@ const SignupForm = ({back}) => {
             placeholder="First Name"
           />
         </div>
-        <div className="mb-4">
+        <div className="mb-1">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-gray-700 text-xs font-bold mb-2"
             htmlFor="last_name"
           >
             Last Name
@@ -53,9 +53,9 @@ const SignupForm = ({back}) => {
             placeholder="Last Name"
           />
         </div>
-        <div className="mb-4">
+        <div className="mb-1">
           <label
-            className="block text-[#626670] text-4xl font-black mb-2"
+            className="block text-[#626670] text-xs font-black mb-2"
             htmlFor="email"
           >
             Email Address
@@ -68,9 +68,9 @@ const SignupForm = ({back}) => {
             placeholder="email@gmail.com"
           />
         </div>
-        <div className="mb-4">
+        <div className="mb-1">
           <label
-            className="block text-[#626670] text-4xl font-black mb-2"
+            className="block text-[#626670] text-xs font-black mb-2"
             htmlFor="type"
           >
             I am a
@@ -84,9 +84,9 @@ const SignupForm = ({back}) => {
             <option value="therapist">Therapist</option>
           </select>
         </div>
-        <div className="mb-6">
+        <div className="mb-1">
           <label
-            className="block text-[#626670] text-4xl font-black mb-2"
+            className="block text-[#626670] text-xs font-black mb-2"
             htmlFor="password"
           >
             Password
