@@ -45,7 +45,7 @@ const LoginForm = () => {
           </label>
           <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" name="password" type="password" required />
         </div>
-        <div className="flex items-center justify-center">
+        <div className="mb-12 items-center justify-center">
           <input style={{ fontFamily: "Short Stack, cursive", fontSize: '2rem' }} className="bg-[#BEC6C3] hover:bg-green-900 text-[#626670] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" type="submit" value="Login" />
         </div>
       </form>

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Short+Stack&display=swap');
 
-.background-page {
+.resource-container {
   margin: 0;
   padding-top: 100px;
   background-image: url("../../../public/static/2.svg");
@@ -18,16 +18,10 @@
 }
 
 
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-h1 {
-  justify-self: flex-start;
-  text-size-adjust: 100px;
+.page-title {
+  font-size: 3rem;
+  font-weight:900;
+  text-align: center;
 }
 
 @media screen and (min-width: 80rem) {
@@ -35,6 +29,12 @@ h1 {
     margin: 1em 2em;
   }
 
+}
+
+.source-form {
+  font-size: 2rem;
+  font-weight:900;
+  text-align: center;
 }
 
 * {

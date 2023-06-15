@@ -60,32 +60,6 @@ export default function AppointmentForm() {
     if (isLoading) {
         return <progress className="progress is-primary" max="100">Loading appointments</progress>;
     }
-    // return (
-    //     <div className="appointment-container">
-    //         <form onSubmit={handleSubmit}>
-    //             <div>
-    //                 <label htmlFor="therapist_id">Schedule an appointment with:</label>
-    //                 <select id="therapist_id" name="therapist_id" value={appointmentData.therapist_id} onChange={handleChange}>
-    //                     <option value="">Select a Therapist</option>
-    //                     {therapists.map((therapist) => (
-    //                         <option key={therapist.id} value={therapist.id}>
-    //                             {therapist.first_name} {therapist.last_name}
-    //                         </option>
-    //                     ))}
-    //                 </select>
-    //             </div>
-    //             <div>
-    //                 <label htmlFor="appointment_date">Date:</label>
-    //                 <input type="date" id="appointment_date" name="appointment_date" value={appointmentData.appointment_date} onChange={handleChange} />
-    //             </div>
-    //             <div>
-    //                 <label htmlFor="appointment_time">Time:</label>
-    //                 <input type="time" id="appointment_time" name="appointment_time" value={appointmentData.appointment_time} onChange={handleChange} />
-    //             </div>
-    //             <button type="submit">Create</button>
-    //         </form>
-    //     </div>
-    // );
     return (
         <div className="appointment-container flex items-center justify-center min-h-scree">
         <div className="w-full max-w-xs mx-auto text-center">

@@ -3,6 +3,7 @@
 * {
     color: #626670;
     box-sizing: border-box;
+    font-family: Short Stack;
 }
 
 .background {
@@ -50,7 +51,7 @@ body {
     align-content: center;
 }
 .diary-features {
-    font-size: 3rem;
+    font-size: 2.5rem;
     justify-content: space-between;
 }
 
@@ -85,7 +86,7 @@ body {
 }
 
 .signup-nav {
-    font-size: 4rem;
+    font-size: 3rem;
     display: flex;
     gap: 2rem;
 }
@@ -98,7 +99,7 @@ body {
 
 .signup-logo {
     font-weight: 900;
-    font-size: 5rem;
+    font-size: 3.5rem;
     line-height: 1rem;
     letter-spacing: .6rem;
     padding-bottom: 2rem;
@@ -135,4 +136,3 @@ body {
 .invisible {
     visibility: hidden;
 }
-
