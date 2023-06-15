@@ -40,7 +40,7 @@ const SignupForm = ({back}) => {
         </div>
         <div className="mb-4">
           <label
-            className="block text-[#626670] text-4xl font-black mb-2"
+            className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="last_name"
           >
             Last Name
@@ -106,7 +106,6 @@ const SignupForm = ({back}) => {
         <input type="hidden" name="city" value="undefined" />
         <input type="hidden" name="state" value="undefined" />
         <input type="hidden" name="balance" value="0" />
-        <div className="flex items-center justify-center">
         <div className="flex items-center justify-center">
           <button
             className="bg-[#BEC6C3] hover:bg-green-900 text-[#626670] text-5xl font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center"

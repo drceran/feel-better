@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { useCreateResourceMutation } from "../../store/resourcesApi";
 import { useGetTokenQuery } from "../../store/usersApi";
 import ErrorNotification from "../../ErrorNotification";
-import { useCreateResourceMutation } from "../../store/resourcesApi";
-import { useGetTokenQuery } from "../../store/usersApi";
-import ErrorNotification from "../../ErrorNotification";
 import { useNavigate } from "react-router-dom";
 
 

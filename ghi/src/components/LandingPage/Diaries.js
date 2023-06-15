@@ -1,7 +1,5 @@
 import React from "react";
-import React from "react";
 
-export default function DiariesInfo({back}) {
 export default function DiariesInfo({back}) {
 
     return (
