@@ -23,12 +23,7 @@
     "react-spotify-player": "^1.0.4",
     "react-spotify-web-playback": "^0.14.0",
     "spotify-web-api-node": "^5.0.2",
-    "web-vitals": "^2.1.4",
-    "@fortawesome/fontawesome-svg-core": "^6.4.0",
-    "@fortawesome/free-regular-svg-icons": "^6.4.0",
-    "@fortawesome/free-solid-svg-icons": "^6.4.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "date-fns": "^2.29.3"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "node ./windows-setup.js && react-scripts start",

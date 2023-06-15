@@ -8,6 +8,8 @@ function UserProfile() {
   if (userInfoError) {
     console.log("Error:", userInfoError);
   }
+  // if (userInfoData.type === "therapist") {
+  //   return (
 
 
   // if (userInfoData.type === "therapist") {
