@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGetMessagesQuery, useDeleteMessageMutation } from './store/messagesAPI';
-import MessageDetails from './MessageDetails';
 import { selectMessage } from './store/messagesSlice';
+import { useGetUserInfoQuery, useGetTokenQuery } from './store/usersApi';
+import "./messages.css"
+import Spotify from "./Spotify";
 
 
 function MessagesList() {
     const { data: messages, error, isLoading } = useGetMessagesQuery();
-    const selectedMessage = useSelector((state) => state.messages.selectedMessage);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [deleteMessage] = useDeleteMessageMutation();
+    const { data: tokenData, isLoading: isTokenLoading } = useGetTokenQuery();
+    const { data: userInfoData } = useGetUserInfoQuery(isTokenLoading || !tokenData ? undefined : tokenData.account.id);
 
     useEffect(() => {
         if (deleteMessage.isSuccess) {
@@ -33,7 +36,7 @@ function MessagesList() {
     }
 
     if (error) {
-        return <h1>Error occurred! {error.message}</h1>;
+        return <h1>Error occurred! {error.messages}</h1>;
     }
 
     const sortedMessages = Array.from(messages).sort((a, b) => {
@@ -55,60 +58,57 @@ function MessagesList() {
     };
 
     return (
-        <div>
-            <h1>Messages</h1>
-            <button onClick={handleGoToAnotherPage}>Create New Message</button>
-            {selectedMessage ? (
-                <MessageDetails message={selectedMessage} />
-            ) : (
-                <div>
-                    {messages && messages.length > 0 ? (
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Sender</th>
-                                    <th>Recipient</th>
-                                    <th>Subject</th>
-                                    <th>Body</th>
-                                    <th>Date/Time</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {recentMessages.map((message, index) => (
-                                    <tr key={index}>
-                                        <td>
-                                            <Link
-                                                to={`/messages/${message.id}`}
-                                                onClick={() => handleOpenMessage(message)}
-                                                style={{ textDecoration: 'underline', color: 'blue' }}
-                                            >
-                                                {message.user_id}
-                                            </Link>
-                                        </td>
-                                        <td>{message.recipient}</td>
-                                        <td>{message.subject}</td>
-                                        <td>{message.body}</td>
-                                        <td>{new Date(message.datetime).toLocaleString()}</td>
-                                        <td>
-                                            <button
-                                                onClick={() => handleDelete(message.id)}
-                                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
-                                            >
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    ) : (
-                        <p>No messages found.</p>
-                    )}
-                </div>
-            )}
+        <div className="overflow-y-auto max-h-auto messages-container">
+            <div className="mx-auto w-full max-w-5xl bg-white">
+                <ul className="flex flex-col">
+                    <button
+                        onClick={() => handleGoToAnotherPage(messages)}
+                        className="bg-sheer hover:bg-sheer text-billow font-bold text-2xl py-2 px-4 rounded"
+                        style={{ backgroundColor: '#BEC6C3', color: '#626670' }}
+                    >
+                        Create a New Message
+                    </button>
+                    {recentMessages.map((message) => (
+                        <li key={message.id} className="border-b-2 border-gray-100">
+                            <div className={`py-5 px-4 flex justify-between border-l-4 border-transparent bg-transparent ${message.online ? "hover:border-green-400 hover:bg-gray-200" : "hover:border-red-500 hover:bg-red-50"}`}>
+                                {userInfoData && (
+                                    <div className="sm:pl-4 pr-8 flex sm:items-center">
+                                        <img
+                                            src={userInfoData.profile_picture}
+                                            alt="Profile"
+                                            className="mr-3 w-8 sm:w-12 h-8 sm:h-12 rounded-full"
+                                        />
+                                        <div className="space-y-1">
+                                            <p className="text-3xl text-gray-700 font-bold tracking-wide">{userInfoData.first_name} {userInfoData.last_name}</p>
+                                            <p className="text-2xl text-gray-500 font-medium">{message.subject}</p>
+                                            <p className="text-xl text-gray-500 font-medium">{message.body}</p>
+                                        </div>
+                                    </div>
+                                )}
+                                <div className="pr-4 flex flex-col justify-between items-end">
+                                    <p className="text-lg text-gray-500 font-semibold">{message.datetime}</p>
+                                    <Link
+                                        to={`/messages/${message.id}`}
+                                        onClick={() => handleOpenMessage(message)}
+                                        className="text-lg text-gray-500 font-semibold hover:underline hover:text-gray-700"
+                                    >
+                                        Details
+                                    </Link>
+                                    <button
+                                        onClick={() => handleDelete(message.id)}
+                                        className="text-lg text-gray-500 font-semibold hover:underline hover:text-gray-700"
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div><Spotify /></div>
         </div>
-    );
+        );
 }
 
 export default MessagesList;

@@ -12,7 +12,7 @@ from authenticator import authenticator
 router = APIRouter()
 
 
-@router.post("/journals/", response_model=Union[JournalOut, Error])
+@router.post("/journals", response_model=Union[JournalOut, Error])
 async def create_journal(
     journal: JournalIn,
     response: Response,

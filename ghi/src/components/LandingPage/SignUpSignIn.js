@@ -12,7 +12,7 @@ export default function LandingForm() {
 switch (content) {
     case 0:
         context = (
-            <div style={{ fontFamily: "Short Stack, cursive", display: "flex", flexDirection: "column", alignItems: "center", height: "75%"}}>
+            <div style={{ fontFamily: "Short Stack, cursive", display: "flex", flexDirection: "column", alignItems: "center", height: "100%"}}>
                 <div className="signup-nav">
                     <p>Sign In</p> |
                     <p style={{ marginLeft: "8px" }} onClick={() => setContent(2)}>Sign Up</p>
@@ -33,7 +33,8 @@ switch (content) {
 
 return(
     <div className="landing-form">
-        <div className="signup-logo">Journal Jotter</div>
+        <div className="signup-logo">Journal</div>
+        <div className="signup-logo">Jotter</div>
         {/* <img src="../../../public/static/Journal Jotter.svg" alt="logo"></img> */}
         {context}
     </div>
