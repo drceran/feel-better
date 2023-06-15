@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import LoginForm from "../../authorization/LoginForm";
 import SignupForm from "../../authorization/SignupForm"
+import './index.css'
+// import "../../../public/static/JournalJotter.svg"
 
 export default function LandingForm() {
     const [content, setContent] = useState(0);
@@ -10,14 +12,13 @@ export default function LandingForm() {
 switch (content) {
     case 0:
         context = (
-            <>
-                <div>
-                    <p onClick={() => setContent(1)}>Sign In</p>
+            <div style={{ fontFamily: "Short Stack, cursive", display: "flex", flexDirection: "column", alignItems: "center", height: "75%"}}>
+                <div className="signup-nav">
+                    <p>Sign In</p> |
+                    <p style={{ marginLeft: "8px" }} onClick={() => setContent(2)}>Sign Up</p>
                 </div>
-                <div>
-                    <p onClick={() => setContent(2)}>Sign Up</p>
-                </div>
-            </>
+                <LoginForm />
+            </div>
         );
         break;
     case 1:
@@ -32,7 +33,9 @@ switch (content) {
 
 return(
     <div className="landing-form">
-        <div>{context}</div>
+        <div className="signup-logo">Journal Jotter</div>
+        {/* <img src="../../../public/static/Journal Jotter.svg" alt="logo"></img> */}
+        {context}
     </div>
 )
 }
