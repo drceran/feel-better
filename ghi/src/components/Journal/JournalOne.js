@@ -19,16 +19,17 @@ function JournalEntry() {
     }
 
     return (
-        <div class="p-6 bg-white rounded-lg shadow-lg">
-            <div class="flex space-x-4">
-                <p><Link to={`/home/`} class="text-blue-500 hover:text-blue-700 underline">Home</Link></p>
-                <p><Link to={`/journals/${id}/edit`} class="text-blue-500 hover:text-blue-700 underline">Edit</Link></p>
+        <div className="journals-form-div w-screen bg-opacity-0 border border-gray-300 rounded-lg">
+            <div className="mx-auto w-7/8 md:w-1/2 max-w-5xl p-6 rounded-lg shadow-lg">
+                <div className="flex space-x-4 text-base text-billow font-bold tracking-wide">
+                </div>
+                <h2 className="text-2xl mt-4 font-semibold text-billow">{journal.name} - {new Date(journal.date_time).toLocaleString()}</h2>
+                <p><Link to={`/journals/${id}/edit`} className="text-sheer hover:text-candy underline">Edit</Link></p>
+                <div className="p-4 mt-2 bg-gray-100 bg-opacity-50 rounded-md border border-gray-300 overflow-y-auto max-h-96">
+                    <p className="text-iron">{journal.body}</p>
+                </div>
+                <p className="mt-2 text-2xl font-semibold text-billow">Mood: {journal.mood}</p>
             </div>
-            <h2 class="text-2xl mt-4 font-semibold text-gray-700">{journal.name} - {new Date(journal.date_time).toLocaleString()}</h2>
-            <div class="p-4 mt-2 bg-gray-100 rounded-md border border-gray-200">
-                <p class="text-gray-600">{journal.body}</p>
-            </div>
-            <p class="mt-2 text-gray-500">Mood: {journal.mood}</p>
         </div>
 
     )
