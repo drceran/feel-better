@@ -24,7 +24,8 @@ import ProfileForm from "./authorization/ProfileForm";
 import MessagesEdit from "./MessagesEdit";
 import HomePage from "./HomePage";
 import Spotify from "./Spotify";
-import UpdateResource from "./components/Resources/UpdateResource";
+// import UpdateResource from "./components/UpdateResource";
+// import Hamburger_Menu from "./components/LandingPage";
 
 const domain = /https:\/\/[^/]+/;
 const basename = process.env.PUBLIC_URL.replace(domain, "");
@@ -55,7 +56,7 @@ function App() {
             <Route exact path="/pricing" element={<Pricing />} />
             <Route exact path="/resources" element={<ResourcesList />}></Route>
             <Route exact path="/resources/create" element={<ResourceForm />}></Route>
-            <Route exact path="/resources/:id/edit" element={<UpdateResource />}></Route>
+            {/* <Route exact path="/resources/:id/edit" element={<UpdateResource />}></Route> */}
             <Route exact path="/appointments" element={<AppointmentList />}></Route>
             <Route exact path="/appointments/create" element={<AppointmentForm />}></Route>
           </Routes >
