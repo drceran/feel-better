@@ -30,7 +30,7 @@ export const journalsApi = createApi({
         }),
         createJournal: builder.mutation({
             query: data => ({
-                url: '/journals/',
+                url: '/journals',
                 body: data,
                 method: 'post',
             }),
