@@ -13,8 +13,8 @@ import JournalList from "./components/JournalList";
 import JournalForm from "./components/JournalForm";
 import ResourcesList from "./components/Resources/ResourcesList";
 import ResourceForm from "./components/Resources/ResourceForm";
-import AppointmentList from "./components/AppointmentList";
-import AppointmentForm from "./components/AppointmentForm"
+import AppointmentList from "./components/Appointments/AppointmentList";
+import AppointmentForm from "./components/Appointments/AppointmentForm";
 import UserProfile from "./authorization/UserProfile";
 import Logout from "./authorization/Logout";
 import Pricing from "./Pricing";
@@ -32,7 +32,7 @@ const basename = process.env.PUBLIC_URL.replace(domain, "");
 
 function App() {
   return (
-    <div className="container">
+    <div className="container margin-0">
       <BrowserRouter basename={basename}>
         <Nav />
         <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
