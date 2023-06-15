@@ -27,7 +27,6 @@ import HomePage from "./HomePage";
 import Spotify from "./Spotify";
 import UpdateResource from "./components/UpdateResource";
 // import Hamburger_Menu from "./components/LandingPage";
-import Calendar from "./graph"
 
 const domain = /https:\/\/[^/]+/;
 const basename = process.env.PUBLIC_URL.replace(domain, "");
@@ -39,7 +38,6 @@ function App() {
         <Nav />
         <AuthProvider baseUrl={process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}>
           <Routes>
-            <Route exact path="/graph/" element={<Calendar />} />
             <Route exact path="/" element={<Main />} />
             <Route exact path="/spotify" element={<Spotify />} />
             <Route exact path="/home" element={<HomePage />} />

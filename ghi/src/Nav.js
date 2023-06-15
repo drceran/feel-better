@@ -52,12 +52,6 @@ export default function Nav() {
           current: true,
           destination: "/pricing/",
         },
-        {
-          name: "Mood",
-          href: "#",
-          current: true,
-          destination: "/graph/",
-        },
       ]);
     } else {
       setNavigation([]);
