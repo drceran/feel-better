@@ -25,6 +25,7 @@ import MessagesEdit from "./MessagesEdit";
 import HomePage from "./HomePage";
 import Spotify from "./Spotify";
 import UpdateResource from "./components/Resources/UpdateResource";
+import "./messages.css"
 
 const domain = /https:\/\/[^/]+/;
 const basename = process.env.PUBLIC_URL.replace(domain, "");

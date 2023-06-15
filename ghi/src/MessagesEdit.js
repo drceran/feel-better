@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import ErrorNotification from './ErrorNotification';
 import { useEditMessageMutation, useGetOneMessageQuery } from './store/messagesAPI';
 import { useGetTokenQuery, useGetTherapistsQuery } from './store/usersApi';
+import "./messages.css"
+
 
 function MessagesEdit() {
     const navigate = useNavigate();
@@ -57,59 +59,61 @@ function MessagesEdit() {
     }
 
     return (
-        <div className="max-w-md mx-auto">
-            {error && <ErrorNotification error={error} />}
-            <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                    <label htmlFor="subject" className="block mb-1">
-                        Subject:
-                    </label>
-                    <textarea
-                        id="subject"
-                        className="w-full p-2 border border-gray-300 rounded"
-                        value={subject}
-                        onChange={(e) => setSubject(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="body" className="block mb-1">
-                        Body:
-                    </label>
-                    <input
-                        type="text"
-                        id="body"
-                        className="w-full p-2 border border-gray-300 rounded"
-                        value={body}
-                        onChange={(e) => setBody(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="recipient" className="block mb-1">
-                        Recipient:
-                    </label>
-                    <select
-                        id="recipient"
-                        className="w-full p-2 border border-gray-300 rounded"
-                        value={recipient}
-                        onChange={(e) => setRecipient(e.target.value)}
-                        required
-                    >
-                        <option value="">Select a recipient</option>
-                        {therapists.map((therapists) => (
-                            <option key={therapists.id} value={therapists.id}>
-                                {therapists.first_name} {therapists.last_name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <button className="bg-sheer hover:bg-sheer text-billow font-bold py-1 px-4 rounded" style={{ backgroundColor: '#BEC6C3', color: '#626670' }}>
-                    Submit
-                </button>
-            </form>
+        <div className="messages-container">
+            <div className="max-w-md mx-auto">
+                {error && <ErrorNotification error={error} />}
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-4">
+                        <label htmlFor="subject" className="block mb-1">
+                            Subject:
+                        </label>
+                        <textarea
+                            id="subject"
+                            className="w-full p-2 border border-gray-300 rounded"
+                            value={subject}
+                            onChange={(e) => setSubject(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="body" className="block mb-1">
+                            Body:
+                        </label>
+                        <input
+                            type="text"
+                            id="body"
+                            className="w-full p-2 border border-gray-300 rounded"
+                            value={body}
+                            onChange={(e) => setBody(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="recipient" className="block mb-1">
+                            Recipient:
+                        </label>
+                        <select
+                            id="recipient"
+                            className="w-full p-2 border border-gray-300 rounded"
+                            value={recipient}
+                            onChange={(e) => setRecipient(e.target.value)}
+                            required
+                        >
+                            <option value="">Select a recipient</option>
+                            {therapists.map((therapists) => (
+                                <option key={therapists.id} value={therapists.id}>
+                                    {therapists.first_name} {therapists.last_name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <button className="bg-sheer hover:bg-sheer text-billow font-bold py-1 px-4 rounded" style={{ backgroundColor: '#BEC6C3', color: '#626670' }}>
+                        Submit
+                    </button>
+                </form>
+            </div>
         </div>
-    );
+        );
 }
 
 export default MessagesEdit;
