@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Short+Stack&display=swap');
+
+
+.appointment-container {
+    margin: 0;
+    padding-top: 100px;
+    background-image: url("../../../public/static/2.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
+    background-color: #E0D7D3;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+}

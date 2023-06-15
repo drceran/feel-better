@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useCreateAppointmentMutation } from "../store/appointmentsApi";
-import { useGetTherapistsQuery, useGetTokenQuery } from "../store/usersApi";
+import { useCreateAppointmentMutation } from "../../store/appointmentsApi";
+import { useGetTherapistsQuery, useGetTokenQuery } from "../../store/usersApi";
 import { useNavigate } from "react-router-dom";
 
 

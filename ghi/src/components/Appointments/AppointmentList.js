@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { useGetClientAppointmentsQuery, useDeleteAppointmentMutation, useGetTherapistAppointmentsQuery } from "../store/appointmentsApi";
-import { useGetTokenQuery, useGetTherapistDetailQuery, useGetClientDetailQuery } from "../store/usersApi";
+import { useGetClientAppointmentsQuery, useDeleteAppointmentMutation, useGetTherapistAppointmentsQuery } from "../../store/appointmentsApi";
+import { useGetTokenQuery, useGetTherapistDetailQuery, useGetClientDetailQuery } from "../../store/usersApi";
 import { useNavigate } from "react-router-dom";
+import './appointments.css'
 
 
 function Appointment({ appointment, handleCancelAppointment, handleRescheduleAppointment, data }) {
@@ -64,7 +65,7 @@ export default function AppointmentList() {
 
     if (data && data.access_token && data.account.type === "client") {
         return (
-            <div>
+            <div className="appointment-container">
                 <h2>My Appointments</h2>
                 {appointments?.map((appointment) =>
                     <Appointment
