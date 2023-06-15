@@ -60,8 +60,8 @@ function ResourcesList() {
     );
   } else if (data && data.access_token && data.account.type === "client") {
     return (
-      <div>
-        <h2>Resources</h2>
+      <div className="background-page">
+        <h1>Resources</h1>
         <Card />
         {resources && resources.map((resource) => (
           <div key={resource.id}>
@@ -84,7 +84,7 @@ function ResourcesList() {
   } else {
     return (
       <div>
-        <h2>Resources</h2>
+        <h1>Resources</h1>
         <Card />
         {resources && resources.map((resource) => (
           <div key={resource.id}>

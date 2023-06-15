@@ -19,13 +19,13 @@ const SignupForm = ({back}) => {
   }
 
   return (
-    <div style={{ fontFamily: "Short Stack" }} className="w-full max-w-xs">
+    <div style={{ fontFamily: "Short Stack" }} className="w-full ">
       <button style={{fontSize: '10px' }}
         onClick={back}>back</button>
       <form className="shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
-            className="block text-[#626670] text-md font-reg mb-2 text-center"
+            className="block text-[#626670] mb-2 text-4xl font-black"
             htmlFor="first_name"
           >
             First Name
@@ -40,7 +40,7 @@ const SignupForm = ({back}) => {
         </div>
         <div className="mb-4">
           <label
-            className="block text-[#626670] text-md font-reg mb-2 text-center"
+            className="block text-[#626670] text-4xl font-black mb-2"
             htmlFor="last_name"
           >
             Last Name
@@ -55,7 +55,7 @@ const SignupForm = ({back}) => {
         </div>
         <div className="mb-4">
           <label
-            className="block text-[#626670] text-md font-reg mb-2 text-center"
+            className="block text-[#626670] text-4xl font-black mb-2"
             htmlFor="email"
           >
             Email Address
@@ -70,7 +70,7 @@ const SignupForm = ({back}) => {
         </div>
         <div className="mb-4">
           <label
-            className="block text-[#626670] text-md font-reg mb-2 text-center"
+            className="block text-[#626670] text-4xl font-black mb-2"
             htmlFor="type"
           >
             I am a
@@ -86,7 +86,7 @@ const SignupForm = ({back}) => {
         </div>
         <div className="mb-6">
           <label
-            className="block text-[#626670] text-md font-reg mb-2 text-center"
+            className="block text-[#626670] text-4xl font-black mb-2"
             htmlFor="password"
           >
             Password
@@ -108,7 +108,7 @@ const SignupForm = ({back}) => {
         <input type="hidden" name="balance" value="0" />
         <div className="flex items-center justify-center">
           <button
-            className="bg-[#BEC6C3] hover:bg-green-900 text-[#626670] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center"
+            className="bg-[#BEC6C3] hover:bg-green-900 text-[#626670] text-5xl font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center"
             type="submit"
           >
             Sign Up
