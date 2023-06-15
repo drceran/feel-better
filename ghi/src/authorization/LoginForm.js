@@ -33,14 +33,14 @@ const LoginForm = () => {
   return (
     <div className="w-full h-full">
       <form className="shadow-md rounded px-8 pt-6 pb-8 mb-4 h-full flex flex-col justify-between" onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label style={{ fontFamily: "Short Stack, cursive", fontSize: '2rem', fontWeight: '900' }} className="block text-[#626670] text-md font-reg mb-2 text-center" htmlFor="email">
+        <div className="mb-8">
+          <label style={{ fontFamily: "Short Stack, cursive", fontSize: '1.5rem', fontWeight: '900' }} className="block text-[#626670] text-md font-reg mb-2 text-center" htmlFor="email">
             Email
           </label>
           <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" name="email" type="email" required />
         </div>
-        <div className="mb-6">
-          <label style={{ fontFamily: "Short Stack, cursive", fontSize: '2rem', fontWeight: '900' }} className="block text-[#626670] text-md font-reg mb-2 text-center" htmlFor="password">
+        <div className="mb-12">
+          <label style={{ fontFamily: "Short Stack, cursive", fontSize: '1.5rem', fontWeight: '900' }} className="block text-[#626670] text-md font-reg mb-2 text-center" htmlFor="password">
             Password
           </label>
           <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" name="password" type="password" required />
