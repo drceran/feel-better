@@ -2,6 +2,8 @@ import { useEditUserInfoMutation, useGetTokenQuery, useGetUserInfoQuery } from "
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
+import "./Profile.css"
 
 
 function ProfileForm() {
@@ -58,182 +60,374 @@ function ProfileForm() {
     return <progress className="progress is-primary" max="100"></progress>;
   }
 
-  if (userInfoData.type === "therapist") {
+  if (userInfoData?.type === "therapist") {
     return (
-      <div className="card text-bg-light mb-3">
-        <h5 className="card-header">Please edit your page</h5>
-        <div className="card-body"></div>
+      <div className="profile-form max-h-screen w-screen">
+        <form onSubmit={handleSubmit}>
 
-        <div className="card text-bg-light mb-3">
-          <div className="card-body">
-            <form onSubmit={handleSubmit}>
-              <div>
-                <label htmlFor="first_name">First Name:</label>
-                <input
+          <h2 className="text-base font-semibold leading-7 text-gray-900">Profile</h2>
+
+          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
+            <div className="col-span-full">
+              <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
+                About Me
+              </label>
+              <div className="mt-2">
+                <textarea
                   onChange={handleFormChange}
-                  type="text"
-                  id="first_name"
-                  name="first_name"
-                  value={formData.first_name || ''}
+                  id="about_me"
+                  name="about_me"
+                  value={formData?.about_me || ''}
+                  rows={3}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  defaultValue={''}
                 />
               </div>
-              <div>
-                <label htmlFor="last_name">Last Name:</label>
+              <p className="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about yourself.</p>
+            </div>
+
+            <div className="col-span-full">
+              <label htmlFor="photo" className="block text-sm font-medium leading-6 text-gray-900">
+                Photo
+              </label>
+              <input
+                onChange={handleFormChange}
+                type="text"
+                id="profile_picture"
+                name="profile_picture"
+                value={formData?.profile_picture || ''}
+              />
+              <div className="mt-2 flex items-center gap-x-3">
+                <UserCircleIcon className="h-12 w-12 text-gray-300" aria-hidden="true" />
+                <button
+                  type="button"
+                  className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                >
+                  Change
+                </button>
+              </div>
+            </div>
+
+            <div className="col-span-full">
+              <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
+                Cover photo
+              </label>
+              <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                <div className="text-center">
+                  <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
+                  <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                    <label
+                      htmlFor="file-upload"
+                      className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+                    >
+                      <span>Upload a file</span>
+                      <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+                    </label>
+                    <p className="pl-1">or drag and drop</p>
+                  </div>
+                  <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <h2 className="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
+
+          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div className="sm:col-span-3">
+              <label htmlFor="first_name" className="block text-sm font-medium leading-6 text-gray-900">
+                First name
+              </label>
+              <input
+                onChange={handleFormChange}
+                type="text"
+                id="first_name"
+                name="first_name"
+                value={formData?.first_name || ''}
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
+            </div>
+
+            <div className="sm:col-span-3">
+              <label htmlFor="last_name" className="block text-sm font-medium leading-6 text-gray-900">
+                Last name
+              </label>
+              <div className="mt-2">
                 <input
                   onChange={handleFormChange}
                   type="text"
                   id="last_name"
                   name="last_name"
-                  value={formData.last_name || ''}
+                  value={formData?.last_name || ''}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-              <div>
-                <label htmlFor="phone_number">Phone Number:</label>
+            </div>
+
+            <div className="sm:col-span-3">
+              <label htmlFor="phone_number" className="block text-sm font-medium leading-6 text-gray-900">
+                Phone Number
+              </label>
+              <div className="mt-2">
                 <input
-                  onChange={handleFormChange}
-                  type="text"
                   id="phone_number"
                   name="phone_number"
-                  value={formData.phone_number || ''}
-                />
-              </div>
-              <div>
-                <label htmlFor="certificates">Certificates:</label>
-                <input
-                  onChange={handleFormChange}
                   type="text"
-                  id="certificates"
-                  name="certificates"
-                  value={formData.certificates || ''}
+                  autoComplete="email"
+                  value={formData?.phone_number || ''}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-              <div>
-                <label htmlFor="graduated_college">Graduated College:</label>
+            </div>
+
+            <div className="sm:col-span-3">
+              <label htmlFor="state" className="block text-sm font-medium leading-6 text-gray-900">
+                State
+              </label>
+              <div className="mt-2">
                 <input
-                  onChange={handleFormChange}
                   type="text"
-                  id="graduated_college"
-                  name="graduated_college"
-                  value={formData.graduated_college || ''}
+                  id="state"
+                  name="state"
+                  onChange={handleFormChange}
+                  value={formData?.state || ''}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 />
               </div>
-              <div>
-                <label htmlFor="profile_picture">Profile Picture:</label>
-                <input
-                  onChange={handleFormChange}
-                  type="text"
-                  id="profile_picture"
-                  name="profile_picture"
-                  value={formData.profile_picture || ''}
-                />
-              </div>
-              <div>
-                <label htmlFor="city">City:</label>
+            </div>
+
+            <div className="sm:col-span-3">
+              <label htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
+                City
+              </label>
+              <div className="mt-2">
                 <input
                   type="text"
                   onChange={handleFormChange}
                   id="city"
                   name="city"
-                  value={formData.city || ''}
+                  value={formData?.city || ''}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 />
               </div>
-              <div>
-                <label htmlFor="state">State:</label>
+            </div>
+
+
+
+            <div className="sm:col-span-3">
+              <label htmlFor="graduated_college" className="block text-sm font-medium leading-6 text-gray-900">
+                Graduated College
+              </label>
+              <div className="mt-2">
                 <input
-                  type="text"
                   onChange={handleFormChange}
-                  id="state"
-                  name="state"
-                  value={formData.state || ''}
+                  type="text"
+                  id="graduated_college"
+                  name="graduated_college"
+                  value={formData?.graduated_college || ''}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 />
               </div>
-              <div>
-                <label htmlFor="about_me">About Me:</label>
+            </div>
+
+            <div className="col-span-full">
+              <label htmlFor="" className="block text-sm font-medium leading-6 text-gray-900">
+                Certificates
+              </label>
+              <div className="mt-2">
+                <textarea onChange={handleFormChange}
+                  type="text"
+                  id="certificates"
+                  name="certificates"
+                  value={formData?.certificates || ''}
+                  rows={3}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+              <p className="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about yourself.</p>
+            </div>
+
+            <div className="mt-6 flex items-center justify-end gap-x-6">
+              <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
+                Cancel
+              </button>
+              <button
+                type="submit"
+                value="Save Changes"
+                className="rounded-md bg-[#626670] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#626670] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bg-[#626670]"
+              >
+                Save
+              </button>
+            </div>
+
+          </div>
+
+        </form>
+      </div>
+    );
+  } else if (userInfoData?.type === "client") {
+    return (
+      <div className="profile-form max-h-screen w-screen">
+        <form onSubmit={handleSubmit}>
+          <h2 className="text-base font-semibold leading-7 text-gray-900">Profile</h2>
+
+          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
+            <div className="col-span-full">
+              <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
+                About Me
+              </label>
+              <div className="mt-2">
                 <textarea
                   onChange={handleFormChange}
                   id="about_me"
                   name="about_me"
-                  value={formData.about_me || ''}
+                  value={formData?.about_me || ''}
+                  rows={3}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  defaultValue={''}
                 />
               </div>
-              <div>
+              <p className="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about yourself.</p>
+            </div>
+
+            <div className="col-span-full">
+              <label htmlFor="photo" className="block text-sm font-medium leading-6 text-gray-900">
+                Photo
+              </label>
+              <input
+                onChange={handleFormChange}
+                type="text"
+                id="profile_picture"
+                name="profile_picture"
+                value={formData?.profile_picture || ''}
+              />
+              <div className="mt-2 flex items-center gap-x-3">
+                <UserCircleIcon className="h-12 w-12 text-gray-300" aria-hidden="true" />
                 <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                  type="submit"
-                  value="Save Changes"
+                  type="button"
+                  className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                 >
-                  Save Changes
+                  Change
                 </button>
               </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    );
-  } else if (userInfoData.type === "client") {
-    return (
-      <div className="card text-bg-light mb-3">
-        <h5 className="card-header">Please edit your page</h5>
-        <div className="card-body"></div>
-        <div className="card text-bg-light mb-3">
-          <div className="card-body">
-            <form onSubmit={handleSubmit}>
-              <div>
-                <label htmlFor="first_name">First Name:</label>
-                <input
-                  onChange={handleFormChange}
-                  type="text"
-                  id="first_name"
-                  name="first_name"
-                  value={formData.first_name || ''}
-                />
+            </div>
+
+            <div className="col-span-full">
+              <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
+                Cover photo
+              </label>
+              <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                <div className="text-center">
+                  <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
+                  <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                    <label
+                      htmlFor="file-upload"
+                      className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+                    >
+                      <span>Upload a file</span>
+                      <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+                    </label>
+                    <p className="pl-1">or drag and drop</p>
+                  </div>
+                  <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+                </div>
               </div>
-              <div>
-                <label htmlFor="last_name">Last Name:</label>
+            </div>
+          </div>
+
+          <h2 className="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
+
+          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div className="sm:col-span-3">
+              <label htmlFor="first_name" className="block text-sm font-medium leading-6 text-gray-900">
+                First name
+              </label>
+              <input
+                onChange={handleFormChange}
+                type="text"
+                id="first_name"
+                name="first_name"
+                value={formData?.first_name || ''}
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
+            </div>
+
+            <div className="sm:col-span-3">
+              <label htmlFor="last_name" className="block text-sm font-medium leading-6 text-gray-900">
+                Last name
+              </label>
+              <div className="mt-2">
                 <input
                   onChange={handleFormChange}
                   type="text"
                   id="last_name"
                   name="last_name"
-                  value={formData.last_name || ''}
+                  value={formData?.last_name || ''}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-              <div>
-                <label htmlFor="profile_picture">Profile Picture:</label>
+            </div>
+
+            <div className="sm:col-span-3">
+              <label htmlFor="state" className="block text-sm font-medium leading-6 text-gray-900">
+                State
+              </label>
+              <div className="mt-2">
                 <input
-                  onChange={handleFormChange}
                   type="text"
-                  id="profile_picture"
-                  name="profile_picture"
-                  value={formData.profile_picture || ''}
-                />
-              </div>
-              <div>
-                <label htmlFor="about_me">About Me:</label>
-                <textarea
+                  id="state"
+                  name="state"
                   onChange={handleFormChange}
-                  id="about_me"
-                  name="about_me"
-                  value={formData.about_me || ''}
+                  value={formData?.state || ''}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 />
               </div>
-              <div>
-                <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                  type="submit"
-                  value="Save Changes"
-                >
-                  Save Changes
-                </button>
+            </div>
+
+            <div className="sm:col-span-3">
+              <label htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
+                City
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  onChange={handleFormChange}
+                  id="city"
+                  name="city"
+                  value={formData?.city || ''}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                />
               </div>
-            </form>
+            </div>
+            <div className="mt-6 flex items-center justify-end gap-x-6">
+              <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
+                Cancel
+              </button>
+              <button
+                type="submit"
+                value="Save Changes"
+                className="rounded-md bg-[#626670] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#BEC6C3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bg-[#626670]"
+              >
+                Save
+              </button>
+            </div>
+
           </div>
-        </div>
+
+          <div className="border-b border-gray-900/10 pb-12">
+
+            <div className="mt-10 space-y-10">
+
+            </div>
+          </div>
+
+        </form>
       </div>
+
     );
   }
-
-
 };
-
 export default ProfileForm;
