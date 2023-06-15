@@ -4,6 +4,7 @@ import "./App.css";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import Nav from "./Nav";
 import Main from "./components/LandingPage/Main";
+import Main from "./components/LandingPage/Main";
 import SignupForm from "./authorization/SignupForm";
 import LoginForm from "./authorization/LoginForm";
 import MessagesForm from "./MessageForm";
@@ -24,6 +25,7 @@ import ProfileForm from "./authorization/ProfileForm";
 import MessagesEdit from "./MessagesEdit";
 import HomePage from "./HomePage";
 import Spotify from "./Spotify";
+import UpdateResource from "./components/Resources/UpdateResource";
 import UpdateResource from "./components/Resources/UpdateResource";
 
 const domain = /https:\/\/[^/]+/;
