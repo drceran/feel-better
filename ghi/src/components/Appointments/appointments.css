@@ -12,8 +12,25 @@
     height: 100vh;
     width: 100vw;
     background-color: #E0D7D3;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center horizontally */
-    justify-content: center; /* Center vertically */
+    justify-content: center;
+}
+
+
+.appt-title {
+    font-size: 5em;
+    font-weight: 900;
+}
+
+.appt-list, .appt-list * {
+    font-size: 3rem;
+}
+
+
+.shadow-md {
+    height: 60vh;
+    width: 30vw;
+}
+
+.schedule, .schedule * {
+    font-size: 3rem;
 }
