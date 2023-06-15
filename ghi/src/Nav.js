@@ -4,6 +4,7 @@ import { Bars3Icon, XMarkIcon, CurrencyDollarIcon } from "@heroicons/react/24/ou
 import { useGetTokenQuery } from "./store/usersApi";
 import { useNavigate } from "react-router-dom";
 import logo from './images/logo.png';
+import "./Nav.css";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -59,7 +60,7 @@ export default function Nav() {
   }, [data]);
 
   return (
-    <Disclosure as="nav" style={{ fontFamily: "Short Stack, cursive", fontSize: '20px'}} className="bg-[#8a7D80] w-screen">
+    <Disclosure as="nav" style={{ fontFamily: "Short Stack, cursive", fontSize: '20px' }} className="navbar bg-[#8a7D80] w-screen">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
