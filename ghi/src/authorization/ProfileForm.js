@@ -62,7 +62,7 @@ function ProfileForm() {
 
   if (userInfoData?.type === "therapist") {
     return (
-      <div className="profile-form max-h-screen w-screen">
+      <div className="profile-form max-h-screen w-screen relative z-50">
         <form onSubmit={handleSubmit}>
 
           <h2 className="text-base font-semibold leading-7 text-gray-900">Profile</h2>
