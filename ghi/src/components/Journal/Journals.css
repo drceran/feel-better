@@ -1,55 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Short+Stack&display=swap%27');
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Short+Stack&display=swap%27");
 
-*{
-    font-family: 'Nanum Pen Script', cursive;
+* {
+  font-family: "Nanum Pen Script", cursive;
 }
 
 html {
-    font-family: 'Nanum Pen Script', cursive;
-    font-size: 22px;
+  font-family: "Nanum Pen Script", cursive;
+  /* font-size: 22px; */
 }
 
-
 .journals-container {
-    background-image: url("../../../public/static/2.svg");
-    margin: 0;
-    /* padding-top: 10px; */
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    min-height: 100vh;
-    /* width: w-full; */
-    background-color: #E0D7D3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* justify-content: center; */
+  background-image: url("../../../public/static/2.svg");
+  margin: 0;
+  /* padding-top: 10px; */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  min-height: 100vh;
+  /* width: w-full; */
+  background-color: #e0d7d3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
 }
 
 .journals-form-div {
-    background-image: url("../../../public/static/2.svg");
-    margin: 0;
+  background-image: url("../../../public/static/2.svg");
+  margin: 0;
 
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    min-height: 100vh;
-    /* width: w-full; */
-    background-color: #E0D7D3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  min-height: 100vh;
+  /* width: w-full; */
+  background-color: #e0d7d3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .journal-form {
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    min-height: 100vh;
-    width: 50vw;
-    display: block;
-    flex-direction: column;
-    align-items: center; /* centers children vertically */
-    justify-content: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  min-height: 100vh;
+  width: 50vw;
+  display: block;
+  flex-direction: column;
+  align-items: center; /* centers children vertically */
+  justify-content: center;
 }
