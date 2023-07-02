@@ -1,7 +1,10 @@
 # JOURNAL JOTTER
+
 A platform to create personal diaries and schedule appointments with therapists.
 Project is deployed to: https://team-feeling-good.gitlab.io/module3-project-gamma/
+
 ## DEVELOPERS
+
 -Melody Oberg
 -Esra Ceran
 -Daniel Ahdoot
@@ -12,24 +15,20 @@ Journal Jotter is a wellness application to stay in touch yourself and professio
 This project is was built using FastApi for our backend and React/Redux Tool Kit to build our frontend.
 
 ##Wireframe
-![backend-wireframe](docs/backend-wireframe.png)
-
+![backend-wireframe](docs/project-wireframe.png)
 
 ## How To Run Our Application
+
 Open your docker application and do the following while it starts up:
 
 -Open terminal and git clone: https://gitlab.com/team-feeling-good/module3-project-gamma.
 -Change your directory to our project folder by running the command "cd module3-project-gamma"
--In the module3-project-gamma directory, run the following commands one by one:
-    - docker volume create postgres-data
-    - docker volume create pg-admin
-    - docker-compose build
-    - docker-compose up
+-In the module3-project-gamma directory, run the following commands one by one: - docker volume create postgres-data - docker volume create pg-admin - docker-compose build - docker-compose up
 
 Open your google chrome browser and type in localhost:3000/ to view our frontend and localhost:8000/docs to see FastAPI backend docs and please wait for the page to load.
 
-
 ## React Routers
+
 <details>
 <summary>Landing Page: http://localhost:3000/</summary>
 Gives a brief description of Journal Jotter's features.
@@ -78,8 +77,8 @@ As a therapist, you are able to see a list of resources and therapists, and can 
 As a client, you are able to see a list of packages to select to be able to communicate with therapists and set up appointments.
 </details>
 
-
 ## FastAPI Endpoints
+
 <details>
 <summary>Account & Authorization</summary>
 <details>
@@ -302,8 +301,8 @@ Execute
 </details>
 </details>
 
-
 ## Directories
+
 <details>
 <summary>Therapy</summary>
 
@@ -316,6 +315,7 @@ In our queries folder, we handle all CRUD operations for each of our models and 
 In our routers folder, we organize an endpoint for each operation.
 
 We have an authenticator file to handle authentication in our backend.
+
 </details>
 <details>
 <summary>GHI</summary>
@@ -323,4 +323,5 @@ We have an authenticator file to handle authentication in our backend.
 Our GHI directory handles our frontend.
 
 We have a src directory that holds all of our components, stores, and css.
+
 </details>
