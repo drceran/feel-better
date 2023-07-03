@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import Nav from "./Nav";
-// import { Main } from "./Main";
 import Main from "./Mainpage/Main";
 import SignupForm from "./authorization/SignupForm";
 import LoginForm from "./authorization/LoginForm";

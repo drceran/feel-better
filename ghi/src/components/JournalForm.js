@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCreateJournalMutation } from '../store/journalsAPI';
 import ErrorNotification from '../ErrorNotification';
 import { useGetTokenQuery } from '../store/usersApi';
+import Spotify from '../Spotify';
 
 function JournalForm() {
     const navigate = useNavigate();
@@ -56,41 +57,46 @@ function JournalForm() {
 
 
     return (
-        <div>
-            {error && <ErrorNotification error={error} />}
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Title:
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
-                </label>
-                <br />
-                <label>
-                    Body:
-                    <input type="text" value={body} onChange={(e) => setBody(e.target.value)} required />
-                </label>
-                <br />
-                <label>
-                    Date and Time:
-                    <input type="datetime-local" value={dateTime} onChange={(e) => setDateTime(e.target.value)} required />
-                </label>
-                <br />
-                <label>
-                    Privacy:
-                    <input type="checkbox" checked={privacy} onChange={(e) => setPrivacy(e.target.checked)} />
-                </label>
-                <br />
-                <label>
-                    Mood:
-                    <select value={mood} onChange={(e) => setMood(e.target.value)} required>
-                        {options.map((option, index) =>
-                            <option key={index} value={option}>{option}</option>
-                        )}
-                    </select>
-                </label>
-                <br />
-                <button type="submit" disabled={result.isLoading}>Submit</button>
-            </form>
-        </div>
+        <>
+            <div>
+                {error && <ErrorNotification error={error} />}
+                <form onSubmit={handleSubmit}>
+                    <label>
+                        Title:
+                        <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+                    </label>
+                    <br />
+                    <label>
+                        Body:
+                        <input type="text" value={body} onChange={(e) => setBody(e.target.value)} required />
+                    </label>
+                    <br />
+                    <label>
+                        Date and Time:
+                        <input type="datetime-local" value={dateTime} onChange={(e) => setDateTime(e.target.value)} required />
+                    </label>
+                    <br />
+                    <label>
+                        Privacy:
+                        <input type="checkbox" checked={privacy} onChange={(e) => setPrivacy(e.target.checked)} />
+                    </label>
+                    <br />
+                    <label>
+                        Mood:
+                        <select value={mood} onChange={(e) => setMood(e.target.value)} required>
+                            {options.map((option, index) =>
+                                <option key={index} value={option}>{option}</option>
+                            )}
+                        </select>
+                    </label>
+                    <br />
+                    <button type="submit" disabled={result.isLoading}>Submit</button>
+                </form>
+            </div>
+            <div>
+                <Spotify />
+            </div>
+        </>
     );
 }
 
