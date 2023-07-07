@@ -1,12 +1,14 @@
 // import LoginForm from "../authorization/LoginForm";
 // import useToken from "@galvanize-inc/jwtdown-for-react";
 import MainpageFooter from "./MainpageFooter";
+import MainPageCover from "./MainPageCover";
 
 function Main() {
   return (
     <>
       <div>
         <MainpageFooter />
+        <MainPageCover />
       </div>
     </>
   );
