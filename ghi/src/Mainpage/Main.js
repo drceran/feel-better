@@ -3,12 +3,14 @@
 import MainpageFooter from "./MainpageFooter";
 import MainPageCover from "./MainPageCover";
 
+
 function Main() {
   return (
     <>
       <div>
-        <MainpageFooter />
         <MainPageCover />
+        <MainPageArticles />
+        <MainpageFooter />
       </div>
     </>
   );
