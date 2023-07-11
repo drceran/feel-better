@@ -2,6 +2,7 @@
 // import useToken from "@galvanize-inc/jwtdown-for-react";
 import MainpageFooter from "./MainpageFooter";
 import MainPageCover from "./MainPageCover";
+import MainPageArticles from "./MainPageArticles";
 
 
 function Main() {
